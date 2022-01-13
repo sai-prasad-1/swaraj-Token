@@ -13,11 +13,13 @@ import metamask from "./assets/icons/download.svg";
 import wallet from "./assets/icons/wallet.svg";
 import balance from "./assets/icons/balance.svg";
 import trade from "./assets/icons/trade.svg";
+import decentralized from "./assets/features/decentralized.png";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
 import twitter from "./assets/social-media-icons/twitter.svg";
 import whatsapp from "./assets/social-media-icons/whatsapp.svg";
+import FeatureCards from "./components/FeatureCards";
 
 const phase1 = {
   title: "Phase 1",
@@ -94,6 +96,55 @@ function App() {
       <section className="daoSection">{/* Dao NFT etx */}</section>
       <section className="featuresSection">
         {/* Features of Swaraj World */}
+        <h1>Features Of Swaraj World</h1>
+        <div className="featuresContainer">
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+          <FeatureCards
+            text="Multi-utility token based on the concept of self-governance."
+            image={decentralized}
+            title="1. Decentralized"
+          ></FeatureCards>
+
+        </div>
       </section>
 
       <section className="instructionSection">
@@ -134,10 +185,12 @@ function App() {
               <img src={balance} alt="Metamask" />
               <h3>4. View $SWRJ Balance</h3>
               <p>
-                Visit Swarajcoin.com/buy and connect your MetaMask. Then trade your MATIC/BNB for $SWRJ tokens
+                Visit Swarajcoin.com/buy and connect your MetaMask. Then trade
+                your MATIC/BNB for $SWRJ tokens
               </p>
             </div>
           </div>
+          <button>More Detailed Instructions</button>
         </div>
       </section>
 
