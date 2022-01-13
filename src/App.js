@@ -1,6 +1,7 @@
 import logo from "./logo_swrj.png";
 import "./App.css";
 import NFTCards from "./components/NFTCards";
+import RoadMapCards from "./components/RoadMapCards";
 import a from "./assets/5.png";
 import b from "./assets/3.png";
 import c from "./assets/2.png";
@@ -8,12 +9,15 @@ import d from "./assets/1.png";
 import e from "./assets/6.png";
 import f from "./assets/7.png";
 import location from "./assets/icons/location.svg";
+import metamask from "./assets/icons/download.svg";
+import wallet from "./assets/icons/wallet.svg";
+import balance from "./assets/icons/balance.svg";
+import trade from "./assets/icons/trade.svg";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
 import twitter from "./assets/social-media-icons/twitter.svg";
 import whatsapp from "./assets/social-media-icons/whatsapp.svg";
-import RoadMapCards from "./components/RoadMapCards";
 
 const phase1 = {
   title: "Phase 1",
@@ -91,7 +95,52 @@ function App() {
       <section className="featuresSection">
         {/* Features of Swaraj World */}
       </section>
-      <section className="instructionSection">{/* Instructions */}</section>
+
+      <section className="instructionSection">
+        {/* Instructions */}
+        <div className="instructionContainer">
+          <h2>Follow These Steps</h2>
+          <div className="instructionFlex">
+            <div className="instructionStep">
+              <img src={metamask} alt="Metamask" />
+              <h3>1. Install MetaMask</h3>
+              <p>
+                On a desktop browser install the MetaMask wallet extension from
+                MetaMask.io
+              </p>
+            </div>
+            <div className="verticalLine"></div>
+
+            <div className="instructionStep">
+              <img src={wallet} alt="Metamask" />
+              <h3>2. Trasfer Matic or BNB to your MetaMask</h3>
+              <p>
+                You can buy Matic or BNB from any major cryptocurrency exchange
+                and then transfer them to your MetaMask.
+              </p>
+            </div>
+            <div className="verticalLine"></div>
+            <div className="instructionStep">
+              <img src={trade} alt="Metamask" />
+              <h3>3. Trade Matic/BNB for $SWRJ</h3>
+              <p>
+                Visit Swarajcoin.com/buy and connect your MetaMask. Then,trade
+                your MATIC/BNB for $SWRJ tokens
+              </p>
+            </div>
+            <div className="verticalLine"></div>
+
+            <div className="instructionStep">
+              <img src={balance} alt="Metamask" />
+              <h3>4. View $SWRJ Balance</h3>
+              <p>
+                Visit Swarajcoin.com/buy and connect your MetaMask. Then trade your MATIC/BNB for $SWRJ tokens
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="roadmapSection">
         {/* RoadMap */}
         <h2 className="roboto">The RoadMap</h2>

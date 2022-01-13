@@ -88,3 +88,47 @@ section {
   background-color: #a64af783;
   border-radius: 10px;
 }
+
+.instructionContainer{
+  background: linear-gradient(180deg, #17063c 0%, #1c0120 100%);
+  height: 400px;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 20px;
+  align-self: top;
+  text-align: center;
+  margin-bottom: 100px;
+}
+.instructionContainer > h2 {
+  font-size: 30px;
+}
+
+.instructionFlex {
+  display: flex;
+  flex-direction: row;
+}
+
+.verticalLine {
+  background-color: #a64af7;
+  width: 2px;
+  height: 150px;
+  margin: 10px;
+  margin-top: 50px;
+  border-radius: 5px;
+}
+.instructionStep {
+  flex: auto;
+  text-align: center;
+  width: 250px;
+  margin: 10px;
+}
+.instructionStep > p {
+  letter-spacing: 0em;
+  color: #aaa;
+}
+.instructionStep > h3 {
+  height: 70px;
+}
+.instructionStep > img {
+  height: 30px;
+}
