@@ -8,6 +8,12 @@ body {
   color: white;
   background-color: #000;
 }
+body::-webkit-scrollbar {
+  width: 0.5em;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #a64af7;
+}
 
 .roboto {
   font-family: "Roboto" sans-serif;
@@ -286,4 +292,99 @@ footer {
 .FeatureCard > p {
   color: #aaa;
   font-size: 15px;
+}
+
+@media screen and (max-width: 1020px) {
+
+}
+
+@media screen and (max-width: 800px) {
+
+}
+@media screen and (max-width: 600px) {
+  footer {
+    min-height: 300px;
+    text-align: center;
+    letter-spacing: 0em;
+  }
+  
+  .footerGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "flogo "
+      "flocation"
+      "fleft"
+      "fright"
+      "fsocial"
+      "fcopy" 
+      "fterms";
+    justify-items: center;
+    margin-bottom: 50px;
+  }
+  
+  .footerLogo {
+    grid-area: flogo;
+    margin: 30px;
+  }
+  .footerLogo > img {
+    height: 60px;
+  }
+  .footerLeft {
+    grid-area: fleft;
+    text-align: center;
+    margin: 10px;
+  }
+  .footerLocation {
+    grid-area: flocation;
+    margin-bottom: 40px;
+  }
+  .footerLocation > h3 {
+    margin-bottom: -10px;
+  }
+  .footerRight {
+    grid-area: fright;
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+  }
+  .footerRight > .leftCol {
+    margin-right: 15px;
+    text-align: left;
+    flex: auto;
+  }
+  .footerRight > .rightCol {
+    margin-left: 25px;
+    text-align: left;
+    flex: auto;
+  }
+  .footerCopyright {
+    grid-area: fcopy;
+    font-size: 13px;
+    text-align: left;
+  }
+  .footerSocial {
+    grid-area: fsocial;
+  }
+  
+  .footerSocial > img {
+    margin: 3px;
+  }
+  
+  .footerTerms {
+    grid-area: fterms;
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+  }
+  .footerTerms > .leftCol {
+    flex: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .footerTerms > .rightCol {
+    flex: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }

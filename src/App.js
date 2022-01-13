@@ -1,4 +1,6 @@
-import logo from "./logo_swrj.png";
+import ReactPlayer from "react-player";
+import { useWindowWidth } from "@react-hook/window-size";
+import logo from "./assets/icons/swaraj.png";
 import "./App.css";
 import NFTCards from "./components/NFTCards";
 import RoadMapCards from "./components/RoadMapCards";
@@ -34,6 +36,7 @@ const phase1 = {
 };
 
 function App() {
+  const screenWidth = useWindowWidth()
   return (
     <div className="App">
       <header className="App-header">
@@ -62,7 +65,15 @@ function App() {
           <div className="heroEmpty"></div>
         </div>
       </header>
-      <section className="videoSection">{/* Video */}</section>
+      <section className="videoSection">
+        {/* Video */}
+        <ReactPlayer
+          width={ screenWidth<600? screenWidth : 600}
+          className="video"
+          url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+        />
+        <p> Content under the video</p>
+      </section>
       <section align="center" className="assetSection">
         {/* Storyline missing assets */}
         <h2 className="roboto">STORYLINE MISSING ASSETS</h2>
@@ -143,7 +154,6 @@ function App() {
             image={decentralized}
             title="1. Decentralized"
           ></FeatureCards>
-
         </div>
       </section>
 
