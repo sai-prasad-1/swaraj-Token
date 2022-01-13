@@ -58,3 +58,33 @@ section {
 .partnerSection > h2 {
   font-size: 35px;
 }
+
+.roadmapSection{
+  text-align: center;
+}
+.roadmapSection > h2 {
+  font-size: 35px;
+}
+
+.RoadMapContainer {
+  display: flex;
+  flex-direction: row;
+}
+.RoadMapScroll{
+  overflow-x: scroll;
+  margin-bottom: 100px;
+
+}
+.RoadMapScroll::-webkit-scrollbar {
+  width: 1em;
+  height: 5px;
+}
+ 
+.RoadMapScroll::-webkit-scrollbar-track {
+
+}
+ 
+.RoadMapScroll::-webkit-scrollbar-thumb {
+  background-color: #a64af783;
+  border-radius: 10px;
+}

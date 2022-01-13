@@ -13,6 +13,19 @@ import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
 import twitter from "./assets/social-media-icons/twitter.svg";
 import whatsapp from "./assets/social-media-icons/whatsapp.svg";
+import RoadMapCards from "./components/RoadMapCards";
+
+const phase1 = {
+  title: "Phase 1",
+  status: "DONE",
+  tasks: [
+    { stat: "completed", text: "Conceptualization initial" },
+    { stat: "completed", text: "Coin Marketing" },
+    { stat: "completed", text: "Seed Sale" },
+    { stat: "completed", text: "Private Sale" },
+    { stat: "incomplete", text: "Website Launch" },
+  ],
+};
 
 function App() {
   return (
@@ -79,7 +92,20 @@ function App() {
         {/* Features of Swaraj World */}
       </section>
       <section className="instructionSection">{/* Instructions */}</section>
-      <section className="roadmapSection">{/* RoadMap */}</section>
+      <section className="roadmapSection">
+        {/* RoadMap */}
+        <h2 className="roboto">The RoadMap</h2>
+        <div className="RoadMapScroll">
+          <div className="RoadMapContainer">
+            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase1}></RoadMapCards>
+          </div>
+        </div>
+      </section>
       <section className="partnerSection">
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
@@ -101,7 +127,11 @@ function App() {
           <div className="footerLocation">
             <img src={location} className="location" alt="location" />
             <h3>SWARAJ HQ</h3>
-            <p>Bengaluru,<br/>India</p>
+            <p>
+              Bengaluru,
+              <br />
+              India
+            </p>
           </div>
           <div className="footerRight">
             <div className="leftCol">
@@ -125,12 +155,8 @@ function App() {
             <img src={whatsapp} className="socialIcons" alt="whatsapp" />
           </div>
           <div className="footerTerms">
-            <div className="leftCol">
-              Terms&conditions 
-            </div>
-            <div className="rightCol">
-              Privacy Policy 
-            </div>
+            <div className="leftCol">Terms&conditions</div>
+            <div className="rightCol">Privacy Policy</div>
           </div>
         </div>
       </footer>
