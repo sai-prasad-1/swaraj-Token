@@ -1,5 +1,6 @@
 import ReactPlayer from "react-player";
 import { useWindowWidth } from "@react-hook/window-size";
+import { useTitle } from 'react-use';
 import logo from "./assets/icons/swaraj.png";
 import "./App.css";
 import NFTCards from "./components/NFTCards";
@@ -16,6 +17,9 @@ import wallet from "./assets/icons/wallet.svg";
 import balance from "./assets/icons/balance.svg";
 import trade from "./assets/icons/trade.svg";
 import decentralized from "./assets/features/decentralized.png";
+import diagram1 from "./assets/features/G-tokens";
+import diagram2 from "./assets/features/61";
+import diagram3 from "./assets/features/62";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
@@ -36,6 +40,7 @@ const phase1 = {
 };
 
 function App() {
+  useTitle("Swaraj Coin")
   const screenWidth = useWindowWidth()
   return (
     <div className="App">
@@ -104,7 +109,12 @@ function App() {
         </div>
       </section>
       <section className="landscapeSection">{/* 3D Landscape */}</section>
-      <section className="daoSection">{/* Dao NFT etx */}</section>
+      <section className="daoSection">{/* Dao NFT etx */}
+        <img src={diagram1} className="diagram1" alt="diagram1" /><br/>
+        <img src={diagram2} className="diagram2" alt="diagram2" />
+        <img src={diagram3} className="diagram3" alt="diagram3" />
+      
+      </section>
       <section className="featuresSection">
         {/* Features of Swaraj World */}
         <h1>Features Of Swaraj World</h1>

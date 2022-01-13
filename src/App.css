@@ -163,7 +163,14 @@ section {
   width :600px;
   left: calc(50% - 300px);
 }
-
+.daoSection{
+  margin: 100px;
+  margin-top: 0px;
+}
+.daoSection> img{
+  height: 200px;
+  margin:  100px 0px 100px 0px;
+}
 @media screen and (max-width: 1020px) {
 
 }
@@ -214,5 +221,12 @@ section {
     height: 2px;
     width: 200px;
     left: calc(50% - 110px);
+  }
+  .daoSection{
+    margin: 10px;
+  }
+  .daoSection> img{
+    height: auto;
+    width: calc(100vw - 20px);
   }
 }
