@@ -51,3 +51,10 @@ section {
   justify-content: flex-end;
   align-content: flex-end;
 }
+
+.partnerSection{
+  text-align: center;
+}
+.partnerSection > h2 {
+  font-size: 35px;
+}

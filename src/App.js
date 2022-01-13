@@ -28,7 +28,7 @@ function App() {
             <span className="subText">
               A Truly Community Driven Metaverse Project,
               <br /> Built On The Concept Of
-              <a className="colorWhite"> Self Governance</a>.
+              <span className="colorWhite"> Self Governance</span>.
             </span>
             <p>
               <button> Freedom Paper V2.1 </button>
@@ -74,7 +74,9 @@ function App() {
       </section>
       <section className="instructionSection">{/* Instructions */}</section>
       <section className="roadmapSection">{/* RoadMap */}</section>
-      <section className="partnerSection">{/* Partners  */}</section>
+      <section className="partnerSection">{/* Partners  */}
+        <h2 className="roboto">Our Partners</h2>
+      </section>
       <footer>{/* Footer */}</footer>
     </div>
   );
