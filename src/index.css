@@ -140,3 +140,82 @@ button:hover:after {
 .characterContainer {
   margin-left: -25px;
 }
+
+footer {
+  min-height: 300px;
+  text-align: center;
+  letter-spacing: 0em;
+}
+
+.footerGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "flogo flogo flogo flogo flogo flogo"
+                      "fleft fleft flocation flocation fright fright"
+                      "fcopy fcopy fsocial fsocial fterms fterms"
+  ;
+  justify-items: center;
+  margin-bottom: 50px;
+}
+
+.footerLogo{
+  grid-area: flogo;
+  margin: 30px;
+}
+.footerLogo> img{
+  height: 60px;
+}
+.footerLeft{
+  grid-area: fleft;
+  width: 300px;
+  text-align: left;
+}
+.footerLocation{
+  grid-area: flocation;
+  margin-bottom: 40px;
+}
+.footerLocation > h3{
+  margin-bottom: -10px;
+}
+.footerRight{
+  grid-area: fright;
+  display: flex;
+  flex-direction: row;
+}
+.footerRight > .leftCol{
+  margin-right: 15px;
+  text-align: left;
+}
+.footerRight > .rightCol{
+  margin-left: 25px;
+  text-align: left;
+}
+.footerCopyright{
+  grid-area: fcopy;
+  font-size: 13px;
+  text-align: left;
+}
+.footerSocial{
+  grid-area: fsocial;
+}
+
+.footerSocial > img{
+  margin: 10px;
+}
+
+.footerTerms{
+  grid-area: fterms;
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+}
+.footerTerms > .leftCol {
+  flex: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.footerTerms > .rightCol {
+  flex: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
