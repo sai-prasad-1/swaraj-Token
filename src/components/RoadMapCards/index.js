@@ -5,7 +5,7 @@ function Status(props) {
   return (
     <div className="task">
       <img
-        src={props.stat == "completed" ? check : progress}
+        src={props.stat === "completed" ? check : progress}
         className="taskStat"
         alt="Check"
       />
