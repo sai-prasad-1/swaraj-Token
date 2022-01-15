@@ -296,6 +296,8 @@ footer {
 
 .connectButton {
   width: 300px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .connectContainer {
   position: relative;
@@ -432,6 +434,7 @@ footer {
   letter-spacing: normal;
   width: 50px;
   border: red 1px solid;
+  margin-left: 10px;
 }
 .disconnectButton:after{
   background: #00000000;
