@@ -74,8 +74,8 @@ function App() {
             <button> Contact Us </button>
           </div>
           <div className="mobileNav">
-            <img onClick={()=>toggleMenu(false)} style={{display:menuState?"block":"none"}} src={close} />
-            <img onClick={()=>toggleMenu(true)} style={{display:menuState?"none":"block"}} src={menu} />
+            <img alt="Close" onClick={()=>toggleMenu(false)} style={{display:menuState?"block":"none"}} src={close} />
+            <img alt="Menu" onClick={()=>toggleMenu(true)} style={{display:menuState?"none":"block"}} src={menu} />
             <div style={{display:menuState?"block":"none"}} className="menu">
               <div className="item">Home</div>
               <div className="item">Tokenomics</div>
