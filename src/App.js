@@ -1,7 +1,8 @@
 import ReactPlayer from "react-player";
+import { Helmet } from "react-helmet";
 import { useScrollData } from "scroll-data-hook";
 import { useWindowWidth } from "@react-hook/window-size";
-import { useTitle } from 'react-use';
+import { useTitle } from "react-use";
 import logo from "./assets/icons/swaraj.png";
 import "./App.css";
 import NFTCards from "./components/NFTCards";
@@ -41,29 +42,29 @@ const phase1 = {
 };
 
 function App() {
-  useTitle("Swaraj Coin")
-  const screenWidth = useWindowWidth()
-  const {
-    scrolling,
-    direction,
-  } = useScrollData({
+  useTitle("Swaraj Coin");
+  const screenWidth = useWindowWidth();
+  const { scrolling, direction } = useScrollData({
     onScrollStart: () => {
       console.log(direction);
     },
     onScrollEnd: () => {
       console.log(scrolling);
       // window.scrollTo(0,1000)
-    }
+    },
   });
-
 
   return (
     <div className="App">
+      <Helmet>
+        <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/708453/perlin.js"></script>
+      </Helmet>
+      <canvas className="canvas"></canvas>
       <header className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="navigationTopBar">
-            <button > Home </button>
+            <button> Home </button>
             <button> Tokenomics </button>
             <button> RoadMap </button>
             <button> Contact Us </button>
@@ -88,7 +89,7 @@ function App() {
       <section className="videoSection">
         {/* Video */}
         <ReactPlayer
-          width={ screenWidth<600? screenWidth : 600}
+          width={screenWidth < 600 ? screenWidth : 600}
           className="video"
           url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
         />
@@ -124,11 +125,12 @@ function App() {
         </div>
       </section>
       <section className="landscapeSection">{/* 3D Landscape */}</section>
-      <section className="daoSection">{/* Dao NFT etx */}
-        <img src={diagram1} className="diagram1" alt="diagram1" /><br/>
+      <section className="daoSection">
+        {/* Dao NFT etx */}
+        <img src={diagram1} className="diagram1" alt="diagram1" />
+        <br />
         <img src={diagram2} className="diagram2" alt="diagram2" />
         <img src={diagram3} className="diagram3" alt="diagram3" />
-      
       </section>
       <section className="featuresSection">
         {/* Features of Swaraj World */}
