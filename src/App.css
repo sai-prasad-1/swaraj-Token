@@ -1,5 +1,9 @@
+html {
+  scroll-behavior: smooth;
+}
 .App {
   text-align: justify;
+  height: 100vh;
 }
 
 .App-logo {
@@ -41,6 +45,7 @@
 }
 section {
   min-height: 300px;
+  scroll-snap-align: start;
 }
 .cardContainer {
   margin-top: 200px;
@@ -52,14 +57,14 @@ section {
   align-content: flex-end;
 }
 
-.partnerSection{
+.partnerSection {
   text-align: center;
 }
 .partnerSection > h2 {
   font-size: 35px;
 }
 
-.roadmapSection{
+.roadmapSection {
   text-align: center;
 }
 .roadmapSection > h2 {
@@ -70,26 +75,25 @@ section {
   display: flex;
   flex-direction: row;
 }
-.RoadMapScroll{
+.RoadMapScroll {
   overflow-x: scroll;
   margin-bottom: 100px;
-
 }
 .RoadMapScroll::-webkit-scrollbar {
   width: 1em;
   height: 5px;
 }
- 
+
 /* .RoadMapScroll::-webkit-scrollbar-track {
 
 } */
- 
+
 .RoadMapScroll::-webkit-scrollbar-thumb {
   background-color: #a64af783;
   border-radius: 10px;
 }
 
-.instructionContainer{
+.instructionContainer {
   background: linear-gradient(180deg, #17063c 0%, #1c0120 100%);
   height: auto;
   margin: 10px;
@@ -136,7 +140,7 @@ section {
   height: 30px;
 }
 
-.featuresSection{
+.featuresSection {
   text-align: center;
   letter-spacing: 0.1em;
 }
@@ -152,37 +156,35 @@ section {
   margin-bottom: 100px;
 }
 
-.videoSection{
+.videoSection {
   text-align: center;
   letter-spacing: 0.1em;
   margin-bottom: 200px;
 }
-.video{
+.video {
   text-align: center;
   position: relative;
-  width :600px;
+  width: 600px;
   left: calc(50% - 300px);
 }
-.daoSection{
+.daoSection {
   margin: 100px;
   margin-top: 0px;
 }
-.daoSection> img{
+.daoSection > img {
   height: 200px;
-  margin:  100px 0px 100px 0px;
+  margin: 100px 0px 100px 0px;
 }
 @media screen and (max-width: 1020px) {
-
 }
 
 @media screen and (max-width: 800px) {
   .navigationTopBar {
     display: none;
   }
-
 }
 @media screen and (max-width: 600px) {
-  .video{
+  .video {
     position: relative;
     left: 0;
   }
@@ -192,7 +194,7 @@ section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content:center;
+    justify-content: center;
     align-content: flex-end;
   }
 
@@ -203,29 +205,29 @@ section {
       "logo logo logo "
       "title title title";
   }
-  .App-logo{
-    margin:10px;
+  .App-logo {
+    margin: 10px;
     height: 50px;
     width: 48px;
-    margin-left: 20px
+    margin-left: 20px;
   }
   .heroTitleContainer {
     grid-area: title;
     text-align: center;
     margin-left: 5px;
     margin-top: 100px;
-    width:95vw;
+    width: 95vw;
   }
-  .verticalLine{
+  .verticalLine {
     position: relative;
     height: 2px;
     width: 200px;
     left: calc(50% - 110px);
   }
-  .daoSection{
+  .daoSection {
     margin: 10px;
   }
-  .daoSection> img{
+  .daoSection > img {
     height: auto;
     width: calc(100vw - 20px);
   }

@@ -1,4 +1,5 @@
 import ReactPlayer from "react-player";
+import { useScrollData } from "scroll-data-hook";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from 'react-use';
 import logo from "./assets/icons/swaraj.png";
@@ -42,13 +43,32 @@ const phase1 = {
 function App() {
   useTitle("Swaraj Coin")
   const screenWidth = useWindowWidth()
+  const {
+    scrolling,
+    time,
+    speed,
+    direction,
+    position,
+    relativeDistance,
+    totalDistance
+  } = useScrollData({
+    onScrollStart: () => {
+      console.log(direction);
+    },
+    onScrollEnd: () => {
+      console.log(scrolling);
+      // window.scrollTo(0,1000)
+    }
+  });
+
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="navigationTopBar">
-            <button> Home </button>
+            <button > Home </button>
             <button> Tokenomics </button>
             <button> RoadMap </button>
             <button> Contact Us </button>
