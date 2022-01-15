@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useScrollData } from "scroll-data-hook";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
+import { useState } from "react";
 import logo from "./assets/icons/swaraj.png";
 import "./App.css";
 import NFTCards from "./components/NFTCards";
@@ -15,6 +16,8 @@ import e from "./assets/6.png";
 import f from "./assets/7.png";
 import location from "./assets/icons/location.svg";
 import metamask from "./assets/icons/download.svg";
+import menu from "./assets/icons/menu.svg";
+import close from "./assets/icons/close.svg";
 import wallet from "./assets/icons/wallet.svg";
 import balance from "./assets/icons/balance.svg";
 import trade from "./assets/icons/trade.svg";
@@ -43,6 +46,7 @@ const phase1 = {
 
 function App() {
   useTitle("Swaraj Coin");
+  const [menuState, toggleMenu] = useState(false);
   const screenWidth = useWindowWidth();
   const { scrolling, direction } = useScrollData({
     onScrollStart: () => {
@@ -68,6 +72,16 @@ function App() {
             <button> Tokenomics </button>
             <button> RoadMap </button>
             <button> Contact Us </button>
+          </div>
+          <div className="mobileNav">
+            <img onClick={()=>toggleMenu(false)} style={{display:menuState?"block":"none"}} src={close} />
+            <img onClick={()=>toggleMenu(true)} style={{display:menuState?"none":"block"}} src={menu} />
+            <div style={{display:menuState?"block":"none"}} className="menu">
+              <div className="item">Home</div>
+              <div className="item">Tokenomics</div>
+              <div className="item">RoadMap</div>
+              <div className="item">Contact Us</div>
+            </div>
           </div>
           <div className="heroTitleContainer">
             <h1>

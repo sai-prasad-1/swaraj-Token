@@ -305,11 +305,11 @@ footer {
   margin-top: 300px;
   letter-spacing: 0em;
 }
-.connectContainer >span {
+.connectContainer > span {
   color: #aaa;
 }
 
-.progressBar{
+.progressBar {
   margin-top: 0px;
   margin-bottom: 0px;
   margin: 100px;
@@ -319,7 +319,7 @@ footer {
   border-radius: 10px;
   overflow: hidden;
 }
-.progressBar > div{
+.progressBar > div {
   width: calc(50%);
   height: 20px;
   background-color: #a64af7;
@@ -330,7 +330,7 @@ footer {
   background: -ms-linear-gradient(left, #a64af7 0%, #1daefd 100%);
   background: linear-gradient(to right, #a64af7 0%, #1daefd 100%);
 }
-.progressContainer{
+.progressContainer {
   position: absolute;
   height: 200px;
   width: calc(100% - 400px);
@@ -340,9 +340,8 @@ footer {
   padding-top: 10px;
   border-radius: 10px;
   z-index: 100;
-  
 }
-.progressContainer:before{
+.progressContainer:before {
   top: 0;
   left: 0;
   bottom: 0;
@@ -362,7 +361,6 @@ footer {
   background: -ms-linear-gradient(left, #a64af7 0%, #1daefd 100%);
   background: linear-gradient(to right, #a64af7 0%, #1daefd 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#503b9a', endColorstr='#269cc1',GradientType=1 );
-
 }
 .progressContainer:after {
   top: 2px;
@@ -399,33 +397,31 @@ footer {
   -webkit-text-fill-color: transparent; */
 }
 
-.web3StatusDisplay{
+.web3StatusDisplay {
   letter-spacing: 0em;
   position: absolute;
   right: 10px;
   top: 10px;
   background-color: #a64af766;
-  padding:5px;
-  padding-left:20px;
-  padding-right:20px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius: 20px;
 }
-.viewSeedBody{
+.viewSeedBody {
   position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
   background: radial-gradient(ellipse at bottom, #a64af733 -30%, #090a0f 100%);
-
 }
-.seedPageLogo{
+.seedPageLogo {
   position: absolute;
   left: calc(50% - 30px);
-  top:10px;
-  height:60px;
-
+  top: 10px;
+  height: 60px;
 }
-.disconnectButton{
+.disconnectButton {
   background-color: black;
   height: 23px;
   padding: 3px;
@@ -436,20 +432,52 @@ footer {
   border: red 1px solid;
   margin-left: 10px;
 }
-.disconnectButton:after{
+.disconnectButton:after {
   background: #00000000;
   display: none;
 }
-.disconnectButton:before{
+.disconnectButton:before {
   background: #00000000;
+  display: none;
+}
+.mobileNav {
   display: none;
 }
 @media screen and (max-width: 1020px) {
-
 }
 
 @media screen and (max-width: 800px) {
-
+  .mobileNav {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 1000;
+    display: block;
+  }
+  .mobileNav > img {
+    height: 50px;
+    position: fixed;
+    z-index: 1000;
+    right: 10px;
+    top: 10px;
+  }
+  .menu {
+    background-color: #0004;
+    width: 100vw;
+    margin-top: 0px;
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
+    animation: slide-up 0.4s ease;
+    backdrop-filter: blur(10px);
+  }
+  .menu > .item {
+    font-size: 25px;
+    letter-spacing: normal;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    animation: slide-up 0.4s ease;
+  }
 }
 @media screen and (max-width: 600px) {
   footer {
@@ -457,7 +485,7 @@ footer {
     text-align: center;
     letter-spacing: 0em;
   }
-  
+
   .footerGrid {
     display: grid;
     grid-template-columns: 1fr;
@@ -467,12 +495,12 @@ footer {
       "fleft"
       "fright"
       "fsocial"
-      "fcopy" 
+      "fcopy"
       "fterms";
     justify-items: center;
     margin-bottom: 50px;
   }
-  
+
   .footerLogo {
     grid-area: flogo;
     margin: 30px;
@@ -516,11 +544,11 @@ footer {
   .footerSocial {
     grid-area: fsocial;
   }
-  
+
   .footerSocial > img {
     margin: 3px;
   }
-  
+
   .footerTerms {
     grid-area: fterms;
     font-size: 13px;
@@ -537,7 +565,7 @@ footer {
     margin-left: 10px;
     margin-right: 10px;
   }
-   /* View Seed Page */
+  /* View Seed Page */
   .connectButton {
     width: 300px;
   }
@@ -547,11 +575,11 @@ footer {
     margin-top: 300px;
     letter-spacing: 0em;
   }
-  .connectContainer >span {
+  .connectContainer > span {
     color: #aaa;
   }
-  
-  .progressBar{
+
+  .progressBar {
     margin-top: 0px;
     margin-bottom: 0px;
     margin: 100px;
@@ -561,7 +589,7 @@ footer {
     border-radius: 10px;
     overflow: hidden;
   }
-  .progressBar > div{
+  .progressBar > div {
     width: calc(50%);
     height: 20px;
     background-color: #a64af7;
@@ -572,7 +600,7 @@ footer {
     background: -ms-linear-gradient(left, #a64af7 0%, #1daefd 100%);
     background: linear-gradient(to right, #a64af7 0%, #1daefd 100%);
   }
-  .progressContainer{
+  .progressContainer {
     position: absolute;
     height: 200px;
     width: calc(100% - 10px);
@@ -582,9 +610,8 @@ footer {
     padding-top: 10px;
     border-radius: 10px;
     z-index: 100;
-    
   }
-  .progressContainer:before{
+  .progressContainer:before {
     top: 0;
     left: 0;
     bottom: 0;
@@ -604,7 +631,6 @@ footer {
     background: -ms-linear-gradient(left, #a64af7 0%, #1daefd 100%);
     background: linear-gradient(to right, #a64af7 0%, #1daefd 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#503b9a', endColorstr='#269cc1',GradientType=1 );
-  
   }
   .progressContainer:after {
     top: 2px;
@@ -629,7 +655,7 @@ footer {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
   }
-  
+
   .progressContainer > label {
     letter-spacing: normal;
     font-weight: bolder;
@@ -640,32 +666,46 @@ footer {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
   }
-  
-  .web3StatusDisplay{
+
+  .web3StatusDisplay {
     letter-spacing: 0em;
     position: absolute;
     right: 10px;
     top: 10px;
     background-color: #a64af766;
-    padding:5px;
-    padding-left:20px;
-    padding-right:20px;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-radius: 20px;
     font-size: 10px;
   }
-  .viewSeedBody{
+  .viewSeedBody {
     position: absolute;
     top: 0;
     width: 100vw;
     height: 100vh;
-    background: radial-gradient(ellipse at bottom, #a64af733 -30%, #090a0f 100%);
-  
+    background: radial-gradient(
+      ellipse at bottom,
+      #a64af733 -30%,
+      #090a0f 100%
+    );
   }
-  .seedPageLogo{
+  .seedPageLogo {
     position: absolute;
     left: calc(50% - 30px);
-    top:10px;
-    height:60px;
+    top: 10px;
+    height: 60px;
+  }
   
+}
+
+@keyframes slidedown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
