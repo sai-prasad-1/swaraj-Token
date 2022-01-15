@@ -45,12 +45,7 @@ function App() {
   const screenWidth = useWindowWidth()
   const {
     scrolling,
-    time,
-    speed,
     direction,
-    position,
-    relativeDistance,
-    totalDistance
   } = useScrollData({
     onScrollStart: () => {
       console.log(direction);

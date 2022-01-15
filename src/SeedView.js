@@ -1,28 +1,26 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import React, { useState } from "react";
-import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import "./SeedView.css";
 import {
   disconnect,
   connectAsync,
   connectWalletConnect,
-  selectWeb3,
   selectWeb3Status,
   selectWeb3MinStatus,
 } from "./features/wallet/web3Slice";
 import logo from "./assets/icons/swaraj.png";
-function ProgressBar(props) {
-  const width = props.percent + "%";
-  return (
-    <div style={{ paddingTop: "1px" }} className="sd">
-      <div className="progressBar">
-        <div style={{ width: width }}> </div>
-      </div>
-    </div>
-  );
-}
+// function ProgressBar(props) {
+//   const width = props.percent + "%";
+//   return (
+//     <div style={{ paddingTop: "1px" }} className="sd">
+//       <div className="progressBar">
+//         <div style={{ width: width }}> </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 const APIURL =
   "https://api.thegraph.com/subgraphs/name/cryptomackenzie/preseed";
@@ -108,7 +106,7 @@ export function SeedView() {
             : { backgroundColor: "#a64af766" }
         }
       >
-        {web3MinStatus}
+        {web3MinStatus} {web3MinStatus2}
       </div>
       <div
         style={
