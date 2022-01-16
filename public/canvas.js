@@ -9,7 +9,7 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 const controls = new OrbitControls( camera, renderer.domElement );
-// controls.enabled = false;
+controls.enabled = false;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.6;
 var amplitude;
