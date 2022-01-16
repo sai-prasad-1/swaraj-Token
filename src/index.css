@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope&family=Roboto&display=swap");
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -10;
+}
 body {
   margin: 0;
   font-family: "Manrope", sans-serif;

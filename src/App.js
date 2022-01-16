@@ -60,10 +60,6 @@ function App() {
 
   return (
     <div className="App">
-      <Helmet>
-        <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/708453/perlin.js"></script>
-      </Helmet>
-      <canvas className="canvas"></canvas>
       <header className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />

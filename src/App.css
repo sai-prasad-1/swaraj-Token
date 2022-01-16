@@ -5,15 +5,6 @@ html {
   text-align: justify;
   height: 100vh;
 }
-
-.canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -10;
-}
 .App-logo {
   height: 90px;
   width: 80px;
