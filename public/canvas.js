@@ -2,11 +2,25 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
 
+import { EffectComposer } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { AfterimagePass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/AfterimagePass.js';
+import { ShaderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/ShaderPass.js';
+
+let bloomComposer, finalComposer;
+const ENTIRE_SCENE = 0, BLOOM_SCENE = 1, STAR_SCENE = 2;
+const darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
+const materials = {};
+const bloomLayer = new THREE.Layers();
+bloomLayer.set( BLOOM_SCENE );
+const starLayer = new THREE.Layers();
+starLayer.set( STAR_SCENE );
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById('bg'),
-    antialias: true
+    antialias: true,
 });
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enabled = false;
@@ -17,22 +31,65 @@ var height;
 var meshBlob1;
 var meshBlob2;
 
+const params = {
+  exposure: 0.1,
+  bloomStrength: 1.2,
+  bloomThreshold: 0,
+  bloomRadius: 0.5
+};
+
 init();
 requestAnimationFrame(animate);
 console.log("Working");
+
 function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.toneMapping = THREE.CineonToneMapping;
   camera.position.setZ(7);
   scene.add(camera);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+  scene.add(new THREE.AmbientLight(0xffffff, 1));
   camera.add(new THREE.PointLight(0xffffff, 1));
-  renderer.render(scene, camera);
+  // renderer.render(scene, camera);
   setAmplitude(2.0, 0.1);
+
+  const renderScene = new RenderPass( scene, camera );
+
+  const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+  bloomPass.threshold = params.bloomThreshold;
+  bloomPass.strength = params.bloomStrength;
+  bloomPass.radius = params.bloomRadius;
+
+  bloomComposer = new EffectComposer( renderer );
+  bloomComposer.renderToScreen = false;
+  bloomComposer.addPass( renderScene );
+  bloomComposer.addPass( bloomPass );
+
+  const afterimagePass = new AfterimagePass();
+  afterimagePass.uniforms[ 'damp' ].value = 0.95;
+
+  const finalPass = new ShaderPass(
+    new THREE.ShaderMaterial( {
+      uniforms: {
+        baseTexture: { value: null },
+        bloomTexture: { value: bloomComposer.renderTarget2.texture }
+      },
+      vertexShader: document.getElementById( 'vertexshader' ).textContent,
+      fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+      defines: {}
+    } ), "baseTexture"
+  );
+  finalPass.needsSwap = true;
+
+  finalComposer = new EffectComposer( renderer );
+  finalComposer.addPass( renderScene );
+  // finalComposer.addPass( bloomPass );
+  finalComposer.addPass( afterimagePass );
+  finalComposer.addPass( finalPass );
 
   addPano();
 
-  var blob1 = createSphereEx(); 
+  var blob1 = createSphereEx();
   
   const TextureLoader = new THREE.TextureLoader();
   const textureland = TextureLoader.load('/assets/land.png');
@@ -41,25 +98,33 @@ function init() {
   
   var material1 = new THREE.MeshPhysicalMaterial({
     envMap: new THREE.CubeTextureLoader().load(['/assets/px.png', '/assets/nx.png', '/assets/py.png', '/assets/ny.png', '/assets/pz.png', '/assets/nz.png']),
-    color: 0x57ddff,
+    color: 0x1cb2fd,
     metalness: 1,
-    emissive: 0x57ddff,
-    emissiveIntensity: 1,
+    emissive: 0x007aa6,
+    emissiveIntensity: 0.6,
     roughness: 0,
     opacity: 0.5,
     transparent: true,
     envMapIntensity: 10,
     premultipliedAlpha: true,
+    // flatShading: true,
     side: THREE.DoubleSide
   });  
   meshBlob1 = new THREE.Mesh(blob1, material1);
-  var blob2 = createSphereEx();
-  var material2 = new THREE.MeshBasicMaterial({color: 0x7c57f7, wireframe: true, wireframeLinewidth: 1});  
+  var blob2 = createSphereExTriangulated();
+  var material2 = new THREE.MeshStandardMaterial({
+    color: 0x7c21d7,
+    emissiveIntensity: 0,
+    emissive: 0x5829f2,
+    wireframe: true,
+    wireframeLinewidth: 3
+  });  
   meshBlob2 = new THREE.Mesh(blob2, material2);
 
   // blob1.morphAttributes.position[0] = new THREE.Float32BufferAttribute(landmass, 3);
 
   scene.add(meshBlob1);
+  meshBlob1.layers.enable( BLOOM_SCENE );
 
 
   var globesphere = new THREE.SphereGeometry(0.95, 128, 128);
@@ -87,22 +152,35 @@ function addPano() {
   const material = new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide});
   const starmesh = new THREE.Mesh(geometry, material);
   scene.add(starmesh);
+  starmesh.layers.enable( STAR_SCENE );
 }
 
 function addStar() {
-  var geometry = new THREE.SphereGeometry(0.05, 16, 16);
-  var material = new THREE.MeshPhongMaterial({color: 0xffffff, opacity: 0.5, transparent: true, blending: THREE.AdditiveBlending});
+  var geometry = new THREE.IcosahedronGeometry(0.05, 5);
+  var material = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
   var star = new THREE.Mesh(geometry, material);
   var [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
   star.position.set(x,y,z);
   scene.add(star);
+  star.layers.enable( STAR_SCENE );
 }
 
 function animate(a) {
   setNewPoints(a);
   requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
   controls.update();
-  renderer.render(scene, camera);
+  // scene.traverse( starTrail );
+  // starComposer.render();
+  // scene.traverse( restoreMaterial );
+  scene.traverse( darkenNonBloomed );
+  bloomComposer.render();
+  scene.traverse( restoreMaterial );
+  finalComposer.render();
+  // renderer.render(scene, camera);
 }
 
 function createSphereEx() {
@@ -123,6 +201,11 @@ function createSphereEx() {
   geometry.setAttribute("basePosition", new THREE.BufferAttribute().copy(geometry.attributes.position));
   // mergeVertices(geometry);
   console.log(geometry.attributes.position.count);
+  return geometry;
+}
+function createSphereExTriangulated() {
+  const geometry = new THREE.IcosahedronGeometry(1, 24);
+  geometry.setAttribute("basePosition", new THREE.BufferAttribute().copy(geometry.attributes.position));
   return geometry;
 }
 
@@ -146,19 +229,19 @@ function setNewPoints(a) {
       positionAttribute.setXYZ(vertexIndex, vertex.x, vertex.y, vertex.z);
   }
 
-  // const basePositionAttribute1 = meshBlob2.geometry.getAttribute("basePosition");
-  // const positionAttribute1 = meshBlob2.geometry.getAttribute( 'position' );
-  // const vertex1 = new THREE.Vector3();
-  // for ( let vertexIndex = 0; vertexIndex < positionAttribute1.count; vertexIndex++ ) {
-  //     vertex1.fromBufferAttribute( basePositionAttribute1, vertexIndex );
-  //     var perlin = noise.simplex3(
-  //         vertex1.x * (amplitude / 2) + a * 0.0002,
-  //         vertex1.y * (amplitude / 2) + a * 0.0005,
-  //         vertex1.z * (amplitude / 2) );
-  //     var ratio = perlin * 0.1 + 1;
-  //     vertex1.multiplyScalar(ratio);
-  //     positionAttribute1.setXYZ(vertexIndex, vertex1.x, vertex1.y, vertex1.z);
-  // }
+  const basePositionAttribute1 = meshBlob2.geometry.getAttribute("basePosition");
+  const positionAttribute1 = meshBlob2.geometry.getAttribute( 'position' );
+  const vertex1 = new THREE.Vector3();
+  for ( let vertexIndex = 0; vertexIndex < positionAttribute1.count; vertexIndex++ ) {
+      vertex1.fromBufferAttribute( basePositionAttribute1, vertexIndex );
+      var perlin = noise.simplex3(
+          vertex1.x * (amplitude / 2) + a * 0.0002,
+          vertex1.y * (amplitude / 2) + a * 0.0005,
+          vertex1.z * (amplitude / 2) );
+      var ratio = perlin * 0.1 + 1;
+      vertex1.multiplyScalar(ratio);
+      positionAttribute1.setXYZ(vertexIndex, vertex1.x, vertex1.y, vertex1.z);
+  }
 
   meshBlob2.geometry.computeVertexNormals();
   meshBlob1.geometry.computeVertexNormals();
@@ -173,6 +256,36 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
+  bloomComposer.setSize( window.innerWidth, window.innerHeight );
+  starComposer.setSize( window.innerWidth, window.innerHeight );
+  finalComposer.setSize( window.innerWidth, window.innerHeight );
+}
+
+function darkenNonBloomed( obj ) {
+
+  if ( obj.isMesh && bloomLayer.test( obj.layers ) === false ) {
+    materials[ obj.uuid ] = obj.material;
+    obj.material = darkMaterial;
+  }
+
+}
+
+function starTrail( obj ) {
+
+  if ( obj.isMesh && starLayer.test( obj.layers ) === false ) {
+    materials[ obj.uuid ] = obj.material;
+    obj.material = darkMaterial;
+  }
+
+}
+
+function restoreMaterial( obj ) {
+
+  if ( materials[ obj.uuid ] ) {
+    obj.material = materials[ obj.uuid ];
+    delete materials[ obj.uuid ];
+  }
+
 }
 
 function mergeVertices(geo) {
