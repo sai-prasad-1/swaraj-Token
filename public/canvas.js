@@ -9,13 +9,15 @@ import { AfterimagePass } from 'https://cdn.skypack.dev/three@0.136.0/examples/j
 import { ShaderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/ShaderPass.js';
 
 let bloomComposer, finalComposer;
-const ENTIRE_SCENE = 0, BLOOM_SCENE = 1, STAR_SCENE = 2;
+const ENTIRE_SCENE = 0, BLOOM_SCENE = 1, STAR_SCENE = 2, OCCLUSION_SCENE = 3, DOTS_SCENE = 4;
 const darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
 const materials = {};
 const bloomLayer = new THREE.Layers();
 bloomLayer.set( BLOOM_SCENE );
 const starLayer = new THREE.Layers();
 starLayer.set( STAR_SCENE );
+const occlusionLayer = new THREE.Layers();
+occlusionLayer.set( OCCLUSION_SCENE );
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
@@ -23,13 +25,30 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true,
 });
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.enabled = false;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.6;
+controls.enabled = true;
+controls.enablePan = true;
+controls.enableZoom = true;
+// controls.autoRotate = true;
+controls.screenSpacePanning = true;
+controls.keypanSpeed = 7;
+controls.autoRotateSpeed = 0.7;
+controls.keys = {
+  LEFT: 'ArrowRight',
+  RIGHT: 'ArrowLeft',
+  UP: 'NumpadAdd',
+  BOTTOM: 'NumpadSubtract'
+};
+controls.listenToKeyEvents(window);
 var amplitude;
 var height;
 var meshBlob1;
 var meshBlob2;
+var meshBlob3;
+var dots;
+var dotsCount = 0;
+var rotatingVector;
+var incrementingangle = 0;
+var cameraangle = 0;
 
 const params = {
   exposure: 0.1,
@@ -43,6 +62,16 @@ requestAnimationFrame(animate);
 console.log("Working");
 
 function init() {
+
+  // document.onscroll += function() {
+  //   for (let i = 0; i < document.getElementsByClassName("section").length; i++) {
+  //     var element = document.getElementsByClassName("section")[i];
+  //     if (this.scrollY >= element.offsetTop - window.innerHeight / 2 && this.scrollY < element.offsetTop + element.offsetHeight - window.innerHeight / 2) {
+  //       console.log(element);
+  //     }
+  //   }
+  // };
+
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.CineonToneMapping;
@@ -111,7 +140,7 @@ function init() {
     side: THREE.DoubleSide
   });  
   meshBlob1 = new THREE.Mesh(blob1, material1);
-  var blob2 = createSphereExTriangulated();
+  var blob2 = createSphereExTriangulated(24);
   var material2 = new THREE.MeshStandardMaterial({
     color: 0x7c21d7,
     emissiveIntensity: 0,
@@ -121,16 +150,15 @@ function init() {
   });  
   meshBlob2 = new THREE.Mesh(blob2, material2);
 
-  // blob1.morphAttributes.position[0] = new THREE.Float32BufferAttribute(landmass, 3);
-
   scene.add(meshBlob1);
   meshBlob1.layers.enable( BLOOM_SCENE );
 
 
-  var globesphere = new THREE.SphereGeometry(0.95, 128, 128);
+  var globesphere = createSphereExTriangulated(24);
   var materialglobe = new THREE.MeshStandardMaterial({
-    // envMap: new THREE.CubeTextureLoader().load(['/assets/px.png', '/assets/nx.png', '/assets/py.png', '/assets/ny.png', '/assets/pz.png', '/assets/nz.png']),
-    color: 0x7c57f7,
+    color: 0x7c21d7,
+    emissiveIntensity: 0,
+    emissive: 0x5829f2,
     displacementMap: textureland,
     displacementScale: 0.15,
     wireframe: true,
@@ -140,6 +168,21 @@ function init() {
   // scene.add(meshglobe);
   // meshBlob2 = new THREE.Mesh(blob2, materialglobe);
   scene.add(meshBlob2);
+
+  var blob3 = createSphereExTriangulated(1);
+  var material3 = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    emissiveIntensity: 1,
+    emissive: 0xffffff,
+    wireframe: true,
+    wireframeLinewidth: 3
+  });
+  meshBlob3 = new THREE.Mesh(blob3, material3);
+  // scene.add(meshBlob3);
+
+  rotatingVector = new THREE.Vector3(0,1,0);
+  dots = new THREE.Group();
+  dots.name = "dotsgroup";
 
   Array(1000).fill().forEach(addStar);
   window.addEventListener( 'resize', onWindowResize );
@@ -156,16 +199,20 @@ function addPano() {
 }
 
 function addStar() {
-  var geometry = new THREE.IcosahedronGeometry(0.05, 5);
+  var geometry = new THREE.IcosahedronGeometry(0.05, 1);
   var material = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
   var star = new THREE.Mesh(geometry, material);
-  var [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
+  var [x,y,z] = Array(3).fill().map(() => (THREE.MathUtils.randFloatSpread(100) + 10));
   star.position.set(x,y,z);
   scene.add(star);
   star.layers.enable( STAR_SCENE );
 }
 
 function animate(a) {
+  camera.position.x = Math.sin(cameraangle) * 8;
+  camera.position.z = Math.cos(cameraangle) * 8;
+  camera.lookAt(scene.position);
+  cameraangle += 0.001;
   setNewPoints(a);
   requestAnimationFrame(animate);
   render();
@@ -203,8 +250,8 @@ function createSphereEx() {
   console.log(geometry.attributes.position.count);
   return geometry;
 }
-function createSphereExTriangulated() {
-  const geometry = new THREE.IcosahedronGeometry(1, 24);
+function createSphereExTriangulated(r) {
+  const geometry = new THREE.IcosahedronGeometry(1, r);
   geometry.setAttribute("basePosition", new THREE.BufferAttribute().copy(geometry.attributes.position));
   return geometry;
 }
@@ -213,6 +260,7 @@ function setAmplitude(a,h) {
   amplitude = a;
   height = h;
 }
+
 
 function setNewPoints(a) {
   const basePositionAttribute = meshBlob1.geometry.getAttribute("basePosition");
@@ -243,13 +291,52 @@ function setNewPoints(a) {
       positionAttribute1.setXYZ(vertexIndex, vertex1.x, vertex1.y, vertex1.z);
   }
 
+  // meshBlob3.rotateOnAxis(new THREE.Vector3(0,1,0), 0.1);
+  const basePositionAttribute3 = meshBlob3.geometry.getAttribute("basePosition");
+  const positionAttribute3 = meshBlob3.geometry.getAttribute( 'position' );
+  const vertex3 = new THREE.Vector3();
+  incrementingangle += Math.PI / 360;
+  dots.rotation.x = incrementingangle;
+  dots.rotation.z = incrementingangle * 2;
+  for ( let vertexIndex = 0; vertexIndex < positionAttribute3.count; vertexIndex++ ) {
+      vertex3.fromBufferAttribute( basePositionAttribute3, vertexIndex );
+      var perlin = noise.simplex3(
+          vertex3.x * (amplitude / 5) + a * 0.0002,
+          vertex3.y * (amplitude / 10) + a * 0.0005,
+          vertex3.z * (amplitude / 5) );
+      var ratio = perlin * 1 + 1;
+      vertex3.multiplyScalar(ratio);
+      positionAttribute3.setXYZ(vertexIndex, vertex3.x, vertex3.y, vertex3.z);
+
+      if (dotsCount < positionAttribute3.count) {
+        var g = new THREE.IcosahedronGeometry(0.01, 1);
+        var m = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
+        var dot = new THREE.Mesh(g, m);
+        dot.name = "dot" + vertexIndex;
+        dot.position.set(vertex3.x, vertex3.y, vertex3.z);
+        dots.add(dot);
+        dotsCount++;
+        dot.layers.enable(DOTS_SCENE);
+      } else {
+        // console.log(dots);
+        dots.getObjectByName("dot" + vertexIndex).position.set(vertex3.x, vertex3.y, vertex3.z);
+      }
+  }
+
+  if (!scene.getObjectByName("dotsgroup")) {
+    scene.add(dots);
+  }
+
   meshBlob2.geometry.computeVertexNormals();
   meshBlob1.geometry.computeVertexNormals();
+  meshBlob3.geometry.computeVertexNormals();
 
   meshBlob2.geometry.attributes.position.needsUpdate = true; // required after the first render
   meshBlob2.geometry.computeBoundingSphere();
   meshBlob1.geometry.attributes.position.needsUpdate = true; // required after the first render
   meshBlob1.geometry.computeBoundingSphere();
+  meshBlob3.geometry.attributes.position.needsUpdate = true; // required after the first render
+  meshBlob3.geometry.computeBoundingSphere();
 }
 
 function onWindowResize() {
