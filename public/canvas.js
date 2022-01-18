@@ -18,7 +18,7 @@ var height;
 var meshBlob1;
 var meshBlob2;
 var meshBlob3;
-var dots;
+let dots, starsGroup, AIGroup;
 var dotsCount = 0;
 var incrementingangle = 0;
 var cameraangle = 0;
@@ -107,6 +107,8 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   //ADD SCENE OBJECTS
 
+  AIGroup = new THREE.Group();
+  AIGroup.name = "AIGroup";
   ///////////////////////////////////////////////////////////////////////////////
   //BLOB 1
   var blob1 = createSphereEx();
@@ -125,7 +127,8 @@ function init() {
     side: THREE.DoubleSide
   });
   meshBlob1 = new THREE.Mesh(blob1, material1);
-  scene.add(meshBlob1);
+  // scene.add(meshBlob1);
+  AIGroup.add(meshBlob1);
   meshBlob1.layers.enable( BLOOM_SCENE );
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -135,26 +138,16 @@ function init() {
     color: 0x7c21d7,
     emissiveIntensity: 0,
     emissive: 0x5829f2,
+    displacementMap: textureland,
+    displacementScale: 0,
     wireframe: true,
     wireframeLinewidth: 3
   });  
   meshBlob2 = new THREE.Mesh(blob2, material2);
-  scene.add(meshBlob2);
+  // scene.add(meshBlob2);
+  AIGroup.add(meshBlob2);
 
-  ///////////////////////////////////////////////////////////////////////////////
-  //GLOBE BLOB
-  var globesphere = createSphereExTriangulated(24);
-  var materialglobe = new THREE.MeshStandardMaterial({
-    color: 0x7c21d7,
-    emissiveIntensity: 0,
-    emissive: 0x5829f2,
-    displacementMap: textureland,
-    displacementScale: 0.15,
-    wireframe: true,
-    wireframeLinewidth: 3
-  });
-  var meshglobe = new THREE.Mesh(globesphere, materialglobe);
-  // scene.add(meshglobe);
+  scene.add(AIGroup);
 
   ///////////////////////////////////////////////////////////////////////////////
   //BLOB 3 (For Dots)
@@ -167,7 +160,6 @@ function init() {
     wireframeLinewidth: 3
   });
   meshBlob3 = new THREE.Mesh(blob3, material3);
-  // scene.add(meshBlob3);
 
   ///////////////////////////////////////////////////////////////////////////////
   //HELPERS For Dots
@@ -176,8 +168,11 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   //STARS AND PANORAMA
+  starsGroup = new THREE.Group();
+  starsGroup.name = "starsgroup";
   addPano();
   Array(500).fill().forEach(addStar);
+  scene.add(starsGroup);
 
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener( 'resize', onWindowResize );
@@ -243,7 +238,9 @@ function addPano() {
   const texture = new THREE.TextureLoader().load('/assets/pano.jpg');
   const material = new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide});
   const panomesh = new THREE.Mesh(geometry, material);
-  scene.add(panomesh);
+  panomesh.name = "panomesh";
+  // scene.add(panomesh);
+  starsGroup.add(panomesh);
   panomesh.layers.enable( STAR_SCENE );
 }
 
@@ -254,17 +251,21 @@ function addStar() {
   var star = new THREE.Mesh(geometry, material);
   var [x,y,z] = Array(3).fill().map(() => (THREE.MathUtils.randFloatSpread(100)));
   star.position.set(x,y,z);
-  scene.add(star);
+  // scene.add(star);
+  starsGroup.add(star);
   star.layers.enable( STAR_SCENE );
 }
 
 //Animate Function
 function animate(a) {
+  //Stars Rotation
+  starsGroup.rotation.y -= 0.0015;
+
   //Camera Rotation
-  camera.position.x = Math.sin(cameraangle) * 8;
-  camera.position.z = Math.cos(cameraangle) * 8;
-  camera.lookAt(scene.position);
-  cameraangle += 0.001;
+  // camera.position.x = Math.sin(cameraangle) * 8;
+  // camera.position.z = Math.cos(cameraangle) * 8;
+  // camera.lookAt(scene.position);
+  // cameraangle += 0.001;
 
   //Animate Blobs
   AnimateBlobs(a);
