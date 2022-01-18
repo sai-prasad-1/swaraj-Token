@@ -48,19 +48,17 @@ function App() {
   useTitle("Swaraj Coin");
   const [menuState, toggleMenu] = useState(false);
   const screenWidth = useWindowWidth();
+  const [activeSection, setSection] = useState(0);
   const { scrolling, direction } = useScrollData({
     onScrollStart: () => {
-      console.log(direction);
     },
     onScrollEnd: () => {
-      console.log(scrolling);
-      // window.scrollTo(0,1000)
+      window["callSection"]("new One");
     },
   });
-
   return (
     <div className="App">
-      <header className="App-header">
+      <header id="section1" className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="navigationTopBar">
@@ -96,7 +94,7 @@ function App() {
           <div className="heroEmpty"></div>
         </div>
       </header>
-      <section className="videoSection">
+      <section id="section2" className="videoSection">
         {/* Video */}
         <ReactPlayer
           width={screenWidth < 600 ? screenWidth : 600}
@@ -105,7 +103,7 @@ function App() {
         />
         <p> Content under the video</p>
       </section>
-      <section align="center" className="assetSection">
+      <section id="section3" align="center" className="assetSection">
         {/* Storyline missing assets */}
         <h2 className="roboto">STORYLINE MISSING ASSETS</h2>
         <div className="cardContainer">
@@ -134,7 +132,7 @@ function App() {
           </NFTCards>
         </div>
       </section>
-      <section className="landscapeSection">{/* 3D Landscape */}</section>
+      <section id="section4" className="landscapeSection">{/* 3D Landscape */}</section>
       <section className="daoSection">
         {/* Dao NFT etx */}
         <img src={diagram1} className="diagram1" alt="diagram1" />
@@ -142,7 +140,7 @@ function App() {
         <img src={diagram2} className="diagram2" alt="diagram2" />
         <img src={diagram3} className="diagram3" alt="diagram3" />
       </section>
-      <section className="featuresSection">
+      <section id="section5" className="featuresSection">
         {/* Features of Swaraj World */}
         <h1>Features Of Swaraj World</h1>
         <div className="featuresContainer">
@@ -194,7 +192,7 @@ function App() {
         </div>
       </section>
 
-      <section className="instructionSection">
+      <section id="section6" className="instructionSection">
         {/* Instructions */}
         <div className="instructionContainer">
           <h2>Follow These Steps</h2>
@@ -241,7 +239,7 @@ function App() {
         </div>
       </section>
 
-      <section className="roadmapSection">
+      <section id="section7" className="roadmapSection">
         {/* RoadMap */}
         <h2 className="roboto">The RoadMap</h2>
         <div className="RoadMapScroll">
@@ -255,11 +253,11 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="partnerSection">
+      <section id="section8" className="partnerSection">
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
       </section>
-      <footer>
+      <footer id="section9">
         {/* Footer */}
         <div className="footerGrid">
           <div className="footerLogo">

@@ -159,6 +159,7 @@ footer {
   min-height: 300px;
   text-align: center;
   letter-spacing: 0em;
+  background-color: black;
 }
 
 .footerGrid {
