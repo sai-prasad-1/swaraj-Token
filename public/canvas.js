@@ -23,6 +23,7 @@ var dotsCount = 0;
 var incrementingangle = 0;
 var cameraangle = 0;
 const darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
+const dotsMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
 const materials = {};
 const bloomParams = {
   exposure: 0.2,
@@ -111,7 +112,13 @@ function init() {
   AIGroup.name = "AIGroup";
   ///////////////////////////////////////////////////////////////////////////////
   //BLOB 1
-  var blob1 = createSphereEx();
+  var blob1;
+  if (isMobile()) {
+    console.log("Reduced Resolution");
+    blob1 = createSphereEx(8);
+  } else {
+    blob1 = createSphereEx(32);
+  }
   var material1 = new THREE.MeshPhysicalMaterial({
     envMap: new THREE.CubeTextureLoader().load(['/assets/px.png', '/assets/nx.png', '/assets/py.png', '/assets/ny.png', '/assets/pz.png', '/assets/nz.png']),
     color: 0x1cb2fd,
@@ -133,7 +140,13 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   //BLOB 2
-  var blob2 = createSphereExTriangulated(18);
+  var blob2;
+  if (isMobile()) {
+    console.log("Reduced Resolution");
+    blob2 = createSphereExTriangulated(12);
+  } else {
+    blob2 = createSphereExTriangulated(16);
+  }
   var material2 = new THREE.MeshStandardMaterial({
     color: 0x7c21d7,
     emissiveIntensity: 0,
@@ -151,7 +164,13 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   //BLOB 3 (For Dots)
-  var blob3 = createSphereExTriangulated(1);
+  var blob3;
+  if (isMobile()) {
+    console.log("Reduced Resolution");
+    blob3 = createSphereExTriangulated(0);
+  } else {
+    blob3 = createSphereExTriangulated(1);
+  }
   var material3 = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     emissiveIntensity: 1,
@@ -171,12 +190,18 @@ function init() {
   starsGroup = new THREE.Group();
   starsGroup.name = "starsgroup";
   addPano();
-  Array(500).fill().forEach(addStar);
+  if (!isMobile()) {
+    console.log("Adding Stars");
+    Array(1000).fill().forEach(addStar);
+  }
   scene.add(starsGroup);
 
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener( 'resize', onWindowResize );
   console.log( renderer.info );
+
+  animate();
+  scene.add(dots);
 }
 
 //Setup Renderer Function
@@ -232,9 +257,21 @@ function SetupRenderer() {
   ///////////////////////////////////////////////////////////////////////////////
 }
 
+//detect whether page is open in mobile or desktop
+function isMobile() {
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    console.log("Running on Mobile! Will reduce quality! Switch to a desktop browser for best results!");
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
 //Add Panorama Function
 function addPano() {
-  const geometry = new THREE.SphereGeometry(750, 60, 40);
+  const geometry = new THREE.SphereGeometry(750, 30, 20);
   const texture = new THREE.TextureLoader().load('/assets/pano.jpg');
   const material = new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide});
   const panomesh = new THREE.Mesh(geometry, material);
@@ -246,7 +283,7 @@ function addPano() {
 
 //Add Star Function
 function addStar() {
-  var geometry = new THREE.IcosahedronGeometry(0.05, 1);
+  var geometry = new THREE.IcosahedronGeometry(0.05, 0);
   var material = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
   var star = new THREE.Mesh(geometry, material);
   var [x,y,z] = Array(3).fill().map(() => (THREE.MathUtils.randFloatSpread(100)));
@@ -260,6 +297,7 @@ function addStar() {
 function animate(a) {
   //Stars Rotation
   starsGroup.rotation.y -= 0.0015;
+  AIGroup.rotation.y += 0.0015;
 
   //Camera Rotation
   // camera.position.x = Math.sin(cameraangle) * 8;
@@ -288,8 +326,8 @@ function render() {
 }
 
 //Create Quad Sphere Function
-function createSphereEx() {
-  const geometry = new THREE.BoxGeometry( 2, 2, 2, 32, 32, 32 );
+function createSphereEx(resolution) {
+  const geometry = new THREE.BoxGeometry( 2, 2, 2, resolution, resolution, resolution );
   const positionAttribute = geometry.attributes.position;
   const spherePositions = [];
   for ( let i = 0; i < positionAttribute.count; i ++ ) {
@@ -321,11 +359,9 @@ function setAmplitude(a,h) {
   height = h;
 }
 
+
 //Animate Blobs Function
 function AnimateBlobs(a) {
-  
-  PerlinNoiseScatter(meshBlob1, a, amplitude, height);
-  PerlinNoiseScatter(meshBlob2, a, (amplitude / 2), 0.1);
 
   //Orbiting Dots
   const basePositionAttribute3 = meshBlob3.geometry.getAttribute("basePosition");
@@ -345,28 +381,22 @@ function AnimateBlobs(a) {
       positionAttribute3.setXYZ(vertexIndex, vertex3.x, vertex3.y, vertex3.z);
 
       if (dotsCount < positionAttribute3.count) {
-        var g = new THREE.IcosahedronGeometry(0.015, 1);
-        var m = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
-        var dot = new THREE.Mesh(g, m);
+        var dot = new THREE.Mesh(new THREE.IcosahedronGeometry(0.015, 0), dotsMaterial);
         dot.name = "dot" + vertexIndex;
         dot.position.set(vertex3.x, vertex3.y, vertex3.z);
         dots.add(dot);
         dotsCount++;
-        dot.layers.enable(DOTS_SCENE);
       } else {
         dots.getObjectByName("dot" + vertexIndex).position.set(vertex3.x, vertex3.y, vertex3.z);
       }
   }
-  if (!scene.getObjectByName("dotsgroup")) {
-    scene.add(dots);
-  }
-  meshBlob3.geometry.computeVertexNormals();
-  meshBlob3.geometry.attributes.position.needsUpdate = true; // required after the first render
-  meshBlob3.geometry.computeBoundingSphere();
+  
+  PerlinNoiseScatter(meshBlob1, a, amplitude, height, true);
+  PerlinNoiseScatter(meshBlob2, a, (amplitude / 2), 0.1);
 }
 
 //Perlin Noise Mesh Vertex Scatter Function
-function PerlinNoiseScatter(mesh, a, amp , h) {
+function PerlinNoiseScatter(mesh, a, amp , h, computeNormals = false) {
   const basePositionAttribute = mesh.geometry.getAttribute("basePosition");
   const positionAttribute = mesh.geometry.getAttribute( 'position' );
   const vertex = new THREE.Vector3();
@@ -380,9 +410,8 @@ function PerlinNoiseScatter(mesh, a, amp , h) {
       vertex.multiplyScalar(ratio);
       positionAttribute.setXYZ(vertexIndex, vertex.x, vertex.y, vertex.z);
   }
-  mesh.geometry.computeVertexNormals();
+  if (computeNormals) { mesh.geometry.computeVertexNormals(); }
   mesh.geometry.attributes.position.needsUpdate = true;
-  mesh.geometry.computeBoundingSphere();
 }
 
 function onWindowResize() {
