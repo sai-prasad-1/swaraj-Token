@@ -7,6 +7,7 @@ import { RenderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/p
 import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { AfterimagePass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/AfterimagePass.js';
 import { ShaderPass } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/ShaderPass.js';
+import { RGBShiftShader } from 'https://cdn.skypack.dev/three@0.136.0/examples//jsm/shaders/RGBShiftShader.js';
 
 ///////////////////////////////////////////////////////////////////////////////
 //DEFINE VARIABLES
@@ -21,7 +22,6 @@ var meshBlob3;
 let dots, starsGroup, AIGroup;
 var dotsCount = 0;
 var incrementingangle = 0;
-var cameraangle = 0;
 const darkMaterial = new THREE.MeshBasicMaterial( { color: "black" } );
 const dotsMaterial = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 10});
 const materials = {};
@@ -43,21 +43,21 @@ const renderer = new THREE.WebGLRenderer({
 ///////////////////////////////////////////////////////////////////////////////
 //CAMERA CONTROLS
 ///////////////////////////////////////////////////////////////////////////////
-const controls = new OrbitControls( camera, renderer.domElement );
-controls.enabled = true;
-controls.enablePan = true;
-controls.enableZoom = false;
-// controls.autoRotate = true;
-controls.screenSpacePanning = true;
-controls.keypanSpeed = 7;
-controls.autoRotateSpeed = 0.7;
-controls.keys = {
-  LEFT: 'ArrowRight',
-  RIGHT: 'ArrowLeft',
-  UP: 'NumpadAdd',
-  BOTTOM: 'NumpadSubtract'
-};
-controls.listenToKeyEvents(window);
+// const controls = new OrbitControls( camera, renderer.domElement );
+// controls.enabled = true;
+// controls.enablePan = true;
+// controls.enableZoom = false;
+// // controls.autoRotate = true;
+// controls.screenSpacePanning = true;
+// controls.keypanSpeed = 7;
+// controls.autoRotateSpeed = 0.7;
+// controls.keys = {
+//   LEFT: 'ArrowRight',
+//   RIGHT: 'ArrowLeft',
+//   UP: 'NumpadAdd',
+//   BOTTOM: 'NumpadSubtract'
+// };
+// controls.listenToKeyEvents(window);
 
 //LAYERS SETUP
 const ENTIRE_SCENE = 0, BLOOM_SCENE = 1, STAR_SCENE = 2, OCCLUSION_SCENE = 3, DOTS_SCENE = 4;
@@ -72,7 +72,6 @@ occlusionLayer.set( OCCLUSION_SCENE );
 init();
 requestAnimationFrame(animate);
 console.log("Scene Started");
-
 
 ///////////////////////////////////////////////////////////////////////////////
 //INITIALIZE SCENE
@@ -198,10 +197,12 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener( 'resize', onWindowResize );
+  window.addEventListener( 'keydown', onKeyDown );
+  window.addEventListener('scroll', onScroll, { passive: false });
   console.log( renderer.info );
 
   animate();
-  scene.add(dots);
+  AIGroup.add(dots);
 }
 
 //Setup Renderer Function
@@ -233,6 +234,13 @@ function SetupRenderer() {
   bloomPass2.strength = 0.3;
   bloomPass2.radius = bloomParams.bloomRadius * 2;
 
+  const aberrationPass = new ShaderPass( RGBShiftShader );
+  aberrationPass.uniforms[ 'amount' ].value = 0.003;
+  if (isMobile()) {
+    console.log("Increasing Aberration");
+    aberrationPass.uniforms[ 'amount' ].value = 0.008;
+  }
+
   //Final Pass
   const finalPass = new ShaderPass(
     new THREE.ShaderMaterial( {
@@ -252,6 +260,7 @@ function SetupRenderer() {
   finalComposer.addPass( renderScene );
   finalComposer.addPass( afterimagePass );
   finalComposer.addPass( bloomPass2 );
+  finalComposer.addPass( aberrationPass );
   finalComposer.addPass( finalPass );
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -266,8 +275,6 @@ function isMobile() {
     return false;
   }
 }
-
-
 
 //Add Panorama Function
 function addPano() {
@@ -297,7 +304,7 @@ function addStar() {
 function animate(a) {
   //Stars Rotation
   starsGroup.rotation.y -= 0.0015;
-  AIGroup.rotation.y += 0.0015;
+  // AIGroup.rotation.y += 0.0015;
 
   //Camera Rotation
   // camera.position.x = Math.sin(cameraangle) * 8;
@@ -314,10 +321,7 @@ function animate(a) {
 
 //Render Scene Function
 function render() {
-  controls.update();
-  // scene.traverse( starTrail );
-  // starComposer.render();
-  // scene.traverse( restoreMaterial );
+  // controls.update();
   scene.traverse( darkenNonBloomed );
   bloomComposer.render();
   scene.traverse( restoreMaterial );
@@ -342,7 +346,7 @@ function createSphereEx(resolution) {
   }
   geometry.attributes.position.set( spherePositions );
   geometry.setAttribute("basePosition", new THREE.BufferAttribute().copy(geometry.attributes.position));
-  console.log(geometry.attributes.position.count);
+  // console.log(geometry.attributes.position.count);
   return geometry;
 }
 
@@ -358,7 +362,6 @@ function setAmplitude(a,h) {
   amplitude = a;
   height = h;
 }
-
 
 //Animate Blobs Function
 function AnimateBlobs(a) {
@@ -419,7 +422,6 @@ function onWindowResize() {
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
   bloomComposer.setSize( window.innerWidth, window.innerHeight );
-  starComposer.setSize( window.innerWidth, window.innerHeight );
   finalComposer.setSize( window.innerWidth, window.innerHeight );
 }
 
@@ -441,5 +443,67 @@ function restoreMaterial( obj ) {
   if ( materials[ obj.uuid ] ) {
     obj.material = materials[ obj.uuid ];
     delete materials[ obj.uuid ];
+  }
+}
+
+//get the scroll position
+function getScrollPos() {
+  return window.pageYOffset || document.documentElement.scrollTop;
+}
+
+function onScroll() {
+  console.log(getScrollPos());
+}
+
+function onKeyDown( event ) {
+  switch ( event.keyCode ) {
+    case 87: // w
+    {
+      console.log(AIGroup.position.y);
+      AIGroup.position.y += 0.1;
+      break;
+    }
+    case 65: // a
+    {
+      console.log(AIGroup.position.x);
+      AIGroup.position.x -= 0.1;
+      break;
+    }
+    case 83: // s
+    {
+      console.log(AIGroup.position.y);
+      AIGroup.position.y -= 0.1;
+      break;
+    }
+    case 68: // d
+    {
+      console.log(AIGroup.position.x);
+      AIGroup.position.x += 0.1;
+      break;
+    }
+    case 81: // q
+    {
+      console.log(AIGroup.position.z);
+      AIGroup.position.z -= 0.1;
+      break;
+    }
+    case 69: // e
+    {
+      console.log(AIGroup.position.z);
+      AIGroup.position.z += 0.1;
+      break;
+    }
+    // case 90: // z
+    // {
+    //   console.log(AIGroup.rotation.x);
+    //   AIGroup.rotation.x += 0.01;
+    //   break;
+    // }
+    // case 67: // c
+    // {
+    //   console.log(AIGroup.rotation.x);
+    //   AIGroup.rotation.x -= 0.01;
+    //   break;
+    // }
   }
 }
