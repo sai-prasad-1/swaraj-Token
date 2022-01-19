@@ -341,6 +341,7 @@ function init() {
 
   animate();
   AIGroup.add(dots);
+  if (!isMobile()) AIGroup.position.x = 4;
 }
 
 //Setup Renderer Function
@@ -634,17 +635,16 @@ function restoreMaterial(obj) {
 }
 
 //get the scroll position
-function getScrollPos() {
-  
+function getScrollPos() {  
   return document.getElementsByClassName("App")[0].scrollTop;
 }
 
 function onScroll() {
   // console.log(getScrollPos());
-  setAIPosition();
+  setAIState();
 }
 
-function setAIPosition() {
+function setAIState() {
   const scrollPos = getScrollPos();
   const sectionIndex = window.activeSectionIndex();
   if (!sectionInfo[sectionIndex]) return;
@@ -671,7 +671,7 @@ function initSectionInfo() {
       start: getTop(`section${i}`),
       end: getTop(`section${i + 1}`),
     };
-    if (s.end == null) { s.end = document.body.scrollHeight; }
+    if (s.end == null) { s.end = document.getElementsByClassName("App")[0].scrollHeight; }
     sectionInfo.push(s);
   }
   console.log(sectionInfo);
