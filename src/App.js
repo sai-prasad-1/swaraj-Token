@@ -1,6 +1,4 @@
 import ReactPlayer from "react-player";
-import { Helmet } from "react-helmet";
-import { useScrollData } from "scroll-data-hook";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
 import { useState } from "react";
@@ -48,14 +46,6 @@ function App() {
   useTitle("Swaraj Coin");
   const [menuState, toggleMenu] = useState(false);
   const screenWidth = useWindowWidth();
-  const [activeSection, setSection] = useState(0);
-  const { scrolling, direction } = useScrollData({
-    onScrollStart: () => {
-    },
-    onScrollEnd: () => {
-      window["callSection"]("new One");
-    },
-  });
   return (
     <div className="App">
       <header id="section1" className="App-header">
