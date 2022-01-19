@@ -31,14 +31,133 @@ import whatsapp from "./assets/social-media-icons/whatsapp.svg";
 import FeatureCards from "./components/FeatureCards";
 
 const phase1 = {
-  title: "Phase 1",
+  title: "Phase 1: 2021",
   status: "DONE",
   tasks: [
-    { stat: "completed", text: "Conceptualization initial" },
-    { stat: "completed", text: "Coin Marketing" },
+    { stat: "completed", text: "Conceptualization" },
+    { stat: "completed", text: "Team Building" },
+    { stat: "completed", text: "Whitepaper v1" },
     { stat: "completed", text: "Seed Sale" },
+    { stat: "completed", text: "Investor Relatations" },
+    { stat: "incomplete", text: "Website Launch v1" },
+  ],
+};
+
+const phase2 = {
+  title: "Phase 2: 2022 Q1",
+  status: "DONE",
+  tasks: [
+    { stat: "completed", text: "Initial Coin Marketing" },
+    { stat: "completed", text: "Game Studio Partnership" },
     { stat: "completed", text: "Private Sale" },
-    { stat: "incomplete", text: "Website Launch" },
+    { stat: "incomplete", text: "Website Launch v2" },
+    { stat: "completed", text: "Code audit Completed" },
+    { stat: "completed", text: "The Deviants NFT Drop" },
+    { stat: "completed", text: "Presale" },
+    { stat: "completed", text: "Coin Gecko & CoinMarketCap listing" },
+    { stat: "incomplete", text: "Launch Pad Sale" },
+  ],
+};
+
+const phase3 = {
+  title: "Phase 3: 2022 Q2",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "LP Locked & Ownership Renounced" },
+    { stat: "incomplete", text: "Orion's Realm Land NFTs Drop" },
+    { stat: "incomplete", text: "Gameplay Teaser" },
+    { stat: "incomplete", text: "Listing on CEX" },
+    { stat: "incomplete", text: "Listing on Swaps" },
+    { stat: "incomplete", text: "Aditional Game Studio Partnerships" },
+    { stat: "incomplete", text: "Dedicated wallet for charity" },
+    {
+      stat: "incomplete",
+      text: "Debuit NFT Collaboration with top crypto influencers",
+    },
+    { stat: "incomplete", text: "First Minigame launch" },
+    { stat: "incomplete", text: "Release Swaraj Bazinga" },
+    { stat: "incomplete", text: "Metaverse - Unreal Engine Development" },
+  ],
+};
+const phase4 = {
+  title: "Phase 4: 2022 Q3",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "NFT sentinel series auction drop" },
+    { stat: "incomplete", text: "NFT marketplace Launch" },
+    { stat: "incomplete", text: "More Minigames launches" },
+    { stat: "incomplete", text: "Additional Game Studio Partnerships" },
+    { stat: "incomplete", text: "DeFi features(Staking & Farming" },
+  ],
+};
+const phase5 = {
+  title: "Phase 5: 2022 Q4",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "Alpha metaverse testing" },
+    { stat: "incomplete", text: "New marketing contents" },
+    { stat: "incomplete", text: "1st charity funds release" },
+    { stat: "incomplete", text: "Branded merchandise" },
+  ],
+};
+
+const phase6 = {
+  title: "Phase 6: 2023 Q1",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "Metaverse Beta version" },
+    {
+      stat: "incomplete",
+      text: "Swaraj army reaching milestones & burn event",
+    },
+    { stat: "incomplete", text: "Building swaraj ecosystem" },
+    { stat: "incomplete", text: "Voting rights to the people- G Token" },
+    { stat: "incomplete", text: "Implement 1% Burn Tax on transactions" },
+    { stat: "incomplete", text: "Swaraj Go Green Movement" },
+  ],
+};
+
+const phase7 = {
+  title: "Phase 7: 2023 Q2",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "NFT upgrades/ accessories drop" },
+    { stat: "incomplete", text: "Swaraj army reaching milestones" },
+    { stat: "incomplete", text: "Listing on more exchanges" },
+    { stat: "incomplete", text: "Raising funds for major exchange listings" },
+  ],
+};
+
+const phase8 = {
+  title: "Phase 8: 2023 Q3",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "AI training platform for Sentinel Series" },
+    { stat: "incomplete", text: "SWARAJ Launchpad" },
+    { stat: "incomplete", text: "2nd Charity Funds Release" },
+  ],
+};
+
+const phase9 = {
+  title: "Phase 9: 2023 Q4",
+  status: "DONE",
+  tasks: [
+    { stat: "incomplete", text: "Swaraj DEX" },
+    { stat: "incomplete", text: "Swaraj wallet/app" },
+    { stat: "incomplete", text: "New products and services included in app" },
+  ],
+};
+
+const phase10 = {
+  title: "Phase 10: 2024 Q1",
+  status: "DONE",
+  tasks: [
+    {
+      stat: "incomplete",
+      text: "Integration with payment services for eCommerce, etc.",
+    },
+    { stat: "incomplete", text: "Listing on more exchanges" },
+    { stat: "incomplete", text: "Corporate endorsement and sponsorships" },
   ],
 };
 
@@ -58,9 +177,22 @@ function App() {
             <button> Contact Us </button>
           </div>
           <div className="mobileNav">
-            <img alt="Close" onClick={()=>toggleMenu(false)} style={{display:menuState?"block":"none"}} src={close} />
-            <img alt="Menu" onClick={()=>toggleMenu(true)} style={{display:menuState?"none":"block"}} src={menu} />
-            <div style={{display:menuState?"block":"none"}} className="menu">
+            <img
+              alt="Close"
+              onClick={() => toggleMenu(false)}
+              style={{ display: menuState ? "block" : "none" }}
+              src={close}
+            />
+            <img
+              alt="Menu"
+              onClick={() => toggleMenu(true)}
+              style={{ display: menuState ? "none" : "block" }}
+              src={menu}
+            />
+            <div
+              style={{ display: menuState ? "block" : "none" }}
+              className="menu"
+            >
               <div className="item">Home</div>
               <div className="item">Tokenomics</div>
               <div className="item">RoadMap</div>
@@ -95,7 +227,28 @@ function App() {
       </section>
       <section id="section3" align="center" className="assetSection">
         {/* Storyline missing assets */}
-        <h2 className="roboto">STORYLINE MISSING ASSETS</h2>
+        <h2 className="roboto">The Story of Orion</h2>
+        <div class="storyContainer">
+          <p>
+            Some years ago, amid our own ongoing problems, a crisis of
+            unforeseen magnitude arrived in our world. Driven away from their
+            home by their own magical calamity, the Elves and their peoples
+            invaded our world instead. They seized control of a landmass and
+            refused all the feeble attempts at diplomacy, defending to the death
+            their new home. They were determined to control this "new world" the
+            way they did theirs. We retaliated, of course, trying to regain the
+            land that they stole from us. As powerful as I am, I felt I could
+            not sit back and do nothing. I tried to reason with both sides. Even
+            used threats. I warned them of my premonitions. Nothing worked.
+            Politicians and leaders on both sides were determined to use this
+            conflict for their own agendas. War could not be prevented. A vivid
+            dream came to me many times now, and I am convinced the threat is
+            real. There is something worse coming, much worse. If we do not stop
+            this pointless fighting, if we do not unite and learn to live in
+            peace, not a single one of us will survive this threat. Humans,
+            Elves, Trolls, Fairies, we will all be wiped out.
+          </p>
+        </div>
         <div className="cardContainer">
           <NFTCards
             title="Deviants Series NFT"
@@ -122,7 +275,9 @@ function App() {
           </NFTCards>
         </div>
       </section>
-      <section id="section4" className="landscapeSection">{/* 3D Landscape */}</section>
+      <section id="section4" className="landscapeSection">
+        {/* 3D Landscape */}
+      </section>
       <section className="daoSection">
         {/* Dao NFT etx */}
         <img src={diagram1} className="diagram1" alt="diagram1" />
@@ -235,11 +390,15 @@ function App() {
         <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase1}></RoadMapCards>
+            <RoadMapCards phase={phase2}></RoadMapCards>
+            <RoadMapCards phase={phase3}></RoadMapCards>
+            <RoadMapCards phase={phase4}></RoadMapCards>
+            <RoadMapCards phase={phase5}></RoadMapCards>
+            <RoadMapCards phase={phase6}></RoadMapCards>
+            <RoadMapCards phase={phase7}></RoadMapCards>
+            <RoadMapCards phase={phase8}></RoadMapCards>
+            <RoadMapCards phase={phase9}></RoadMapCards>
+            <RoadMapCards phase={phase10}></RoadMapCards>
           </div>
         </div>
       </section>
