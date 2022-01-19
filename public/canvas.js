@@ -12,14 +12,28 @@ import { RGBShiftShader } from "https://cdn.skypack.dev/three@0.136.0/examples//
 ///////////////////////////////////////////////////////////////////////////////
 //Global Functions : Section Trigers
 ///////////////////////////////////////////////////////////////////////////////
-window.getTop = (el) =>
-  el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
+const numberOfSections = 9;
+
+window.getTop = (el) => {
+  var element = document.getElementById(el);
+  if (!element) return null;
+  return (element.offsetTop + (element.offsetParent && getTop(element.offsetParent)));
+}
 window.activeSection = () => {
   const pos = getScrollPos();
-  for (let i = 9; i >= 1; i--) {
-    if (pos > getTop(document.getElementById(`section${i}`))) {
-      console.log(`section${i}`);
+  for (let i = numberOfSections; i >= 1; i--) {
+    if (pos > getTop(`section${i}`)) {
+      // console.log(`section${i}`);
+      return `section${i}`;
       break;
+    }
+  }
+};
+window.activeSectionIndex = () => {
+  const pos = getScrollPos();
+  for (let i = numberOfSections; i >= 1; i--) {
+    if (pos > getTop(`section${i}`)) {
+      return (i - 1);
     }
   }
 };
@@ -35,6 +49,7 @@ var meshBlob3;
 let dots, starsGroup, AIGroup;
 var dotsCount = 0;
 var incrementingangle = 0;
+let sectionInfo;
 const darkMaterial = new THREE.MeshBasicMaterial({ color: "black" });
 const dotsMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
@@ -94,6 +109,23 @@ starLayer.set(STAR_SCENE);
 const occlusionLayer = new THREE.Layers();
 occlusionLayer.set(OCCLUSION_SCENE);
 
+const keyframes = {
+  section1 : {
+    start : {
+      x : 4,
+      y : 0,
+      z : 0,
+      displacement : 0,
+      emission : 0,
+      morph : 1,
+      coin : 0,
+    }
+  }
+}
+
+//Get Section Start and End Positions
+initSectionInfo();
+
 //START SCENE
 init();
 requestAnimationFrame(animate);
@@ -104,6 +136,8 @@ console.log("Scene Started");
 ///////////////////////////////////////////////////////////////////////////////
 
 function init() {
+
+
   //SETUP RENDERER
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -520,13 +554,6 @@ function darkenNonBloomed(obj) {
   }
 }
 
-function starTrail(obj) {
-  if (obj.isMesh && starLayer.test(obj.layers) === false) {
-    materials[obj.uuid] = obj.material;
-    obj.material = darkMaterial;
-  }
-}
-
 function restoreMaterial(obj) {
   if (materials[obj.uuid]) {
     obj.material = materials[obj.uuid];
@@ -540,45 +567,65 @@ function getScrollPos() {
 }
 
 function onScroll() {
-  console.log(getScrollPos());
-  window.activeSection();
+  setAIPosition();
 }
 
+function setAIPosition() {
+  const scrollPos = getScrollPos();
+  const sectionIndex = window.activeSectionIndex();
+  
+}
+
+function initSectionInfo() {
+  sectionInfo = [];
+  for (let i = 1; i <= numberOfSections; i++) {
+    var s = {
+      start: getTop(`section${i}`),
+      end: getTop(`section${i + 1}`),
+    };
+    if (s.end == null) { s.end = document.body.scrollHeight; }
+    sectionInfo.push(s);
+  }
+  console.log(sectionInfo);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//HELPER FUNCTION !!!!!!!!!!!! COMMENT THIS OUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function onKeyDown(event) {
   switch (event.keyCode) {
     case 87: {
       // w
-      console.log(AIGroup.position.y);
+      console.log("y=" + AIGroup.position.y);
       AIGroup.position.y += 0.1;
       break;
     }
     case 65: {
       // a
-      console.log(AIGroup.position.x);
+      console.log("x=" + AIGroup.position.x);
       AIGroup.position.x -= 0.1;
       break;
     }
     case 83: {
       // s
-      console.log(AIGroup.position.y);
+      console.log("y=" + AIGroup.position.y);
       AIGroup.position.y -= 0.1;
       break;
     }
     case 68: {
       // d
-      console.log(AIGroup.position.x);
+      console.log("x=" + AIGroup.position.x);
       AIGroup.position.x += 0.1;
       break;
     }
     case 81: {
       // q
-      console.log(AIGroup.position.z);
+      console.log("z=" + AIGroup.position.z);
       AIGroup.position.z -= 0.1;
       break;
     }
     case 69: {
       // e
-      console.log(AIGroup.position.z);
+      console.log("z=" + AIGroup.position.z);
       AIGroup.position.z += 0.1;
       break;
     }
@@ -596,3 +643,4 @@ function onKeyDown(event) {
     // }
   }
 }
+///////////////////////////////////////////////////////////////////////////////
