@@ -264,7 +264,7 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("scroll", onScroll, { passive: false });
+  document.getElementsByClassName("App")[0].addEventListener("scroll", onScroll, { passive: false });
   console.log(renderer.info);
 
   animate();
