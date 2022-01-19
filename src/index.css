@@ -16,12 +16,6 @@ body {
   color: white;
   background-color: #000;
 }
-body::-webkit-scrollbar {
-  width: 0.5em;
-}
-body::-webkit-scrollbar-thumb {
-  background-color: #a64af7;
-}
 
 .roboto {
   font-family: "Roboto" sans-serif;

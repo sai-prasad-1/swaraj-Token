@@ -3,7 +3,29 @@ html {
 }
 .App {
   text-align: justify;
-  height: 100vh;
+  /* height: 100vh; */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  flex-basis: 50%;
+  height: 100%;
+  position: absolute;
+  width:100%;
+}
+.App::-webkit-scrollbar {
+  width: 0.5em;
+}
+.App::-webkit-scrollbar-thumb {
+  background-color: #a64af7;
+}
+
+section {
+  scroll-snap-align: center;
+}
+header{
+  scroll-snap-align: start;
+}
+footer{
+  scroll-snap-align:end;
 }
 .App-logo {
   height: 90px;
