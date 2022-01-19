@@ -110,18 +110,90 @@ const occlusionLayer = new THREE.Layers();
 occlusionLayer.set(OCCLUSION_SCENE);
 
 const keyframes = {
-  section1 : {
-    start : {
-      x : 4,
-      y : 0,
-      z : 0,
-      displacement : 0,
-      emission : 0,
-      morph : 1,
-      coin : 0,
+  "sectionKeyframes": [
+    {
+      "x": 4.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": -5.4,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 3.0,
+      "displacement": 0.0,
+      "emission": 0.7,
+      "morph": 0.2,
+      "coin": 0.0
+    },
+    {
+      "x": 4.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 1.0,
+      "emission": 0.5,
+      "morph": 0.05,
+      "coin": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.6,
+      "morph": 0.5,
+      "coin": 0.0
+    },
+    {
+      "x": -4.0,
+      "y": 0.0,
+      "z": 0.0,
+      "displacement": 0.0,
+      "emission": 0.0,
+      "morph": 0.0,
+      "coin": 1.0
     }
-  }
-}
+  ]
+};
 
 //Get Section Start and End Positions
 initSectionInfo();
@@ -264,7 +336,7 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("scroll", onScroll, { passive: false });
+  window.addEventListener("scroll", onScroll);
   console.log(renderer.info);
 
   animate();
@@ -567,13 +639,28 @@ function getScrollPos() {
 }
 
 function onScroll() {
+  // console.log(getScrollPos());
   setAIPosition();
 }
 
 function setAIPosition() {
   const scrollPos = getScrollPos();
   const sectionIndex = window.activeSectionIndex();
-  
+  if (!sectionInfo[sectionIndex]) return;
+  var multiplier = (scrollPos / (sectionInfo[sectionIndex + 1].start - sectionInfo[sectionIndex].start)) - sectionIndex;
+  applyKeyframe(sectionIndex, multiplier);
+}
+
+function applyKeyframe(index, position) {
+  // console.log(keyframes.sectionKeyframes[index]);
+  console.log(position);
+  AIGroup.position.x = lerp(keyframes.sectionKeyframes[index].x, keyframes.sectionKeyframes[index + 1].x, position);
+  AIGroup.position.y = lerp(keyframes.sectionKeyframes[index].y, keyframes.sectionKeyframes[index + 1].y, position);
+  AIGroup.position.z = lerp(keyframes.sectionKeyframes[index].z, keyframes.sectionKeyframes[index + 1].z, position);
+}
+
+function lerp (start, end, amt){
+  return (1-amt)*start+amt*end
 }
 
 function initSectionInfo() {
