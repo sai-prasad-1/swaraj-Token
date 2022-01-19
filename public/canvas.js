@@ -563,7 +563,8 @@ function restoreMaterial(obj) {
 
 //get the scroll position
 function getScrollPos() {
-  return window.pageYOffset || document.documentElement.scrollTop;
+  
+  return document.getElementsByClassName("App")[0].scrollTop;
 }
 
 function onScroll() {
