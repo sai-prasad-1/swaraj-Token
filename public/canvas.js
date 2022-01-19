@@ -12,27 +12,16 @@ import { RGBShiftShader } from "https://cdn.skypack.dev/three@0.136.0/examples//
 ///////////////////////////////////////////////////////////////////////////////
 //Global Functions : Section Trigers
 ///////////////////////////////////////////////////////////////////////////////
-window.getTop = (el) => el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
-window.callSection = (section) => {
-  const section1 = getTop(document.getElementById("section1"));
-  const section2 = getTop(document.getElementById("section2"));
-  const section3 = getTop(document.getElementById("section3"));
-  const section4 = getTop(document.getElementById("section4"));
-  const section5 = getTop(document.getElementById("section5"));
-  const section6 = getTop(document.getElementById("section6"));
-  const section7 = getTop(document.getElementById("section7"));
-  const section8 = getTop(document.getElementById("section8"));
-  const section9 = getTop(document.getElementById("section9"));
+window.getTop = (el) =>
+  el.offsetTop + (el.offsetParent && getTop(el.offsetParent));
+window.activeSection = () => {
   const pos = getScrollPos();
-  if(pos < section2) console.log("Section1")
-  else if(pos > section9) console.log("Section9")
-  else if(pos > section8) console.log("Section8")
-  else if(pos > section7) console.log("Section7")
-  else if(pos > section6) console.log("Section6")
-  else if(pos > section5) console.log("Section5")
-  else if(pos > section4) console.log("Section4")
-  else if(pos > section3) console.log("Section3")
-  else if(pos > section2) console.log("Section2")
+  for (let i = 9; i >= 1; i--) {
+    if (pos > getTop(document.getElementById(`section${i}`))) {
+      console.log(`section${i}`);
+      break;
+    }
+  }
 };
 ///////////////////////////////////////////////////////////////////////////////
 //DEFINE VARIABLES
@@ -552,6 +541,7 @@ function getScrollPos() {
 
 function onScroll() {
   console.log(getScrollPos());
+  window.activeSection();
 }
 
 function onKeyDown(event) {
