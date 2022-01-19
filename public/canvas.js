@@ -336,7 +336,7 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("scroll", onScroll);
+  document.getElementsByClassName("App")[0].addEventListener("scroll", onScroll, { passive: false });
   console.log(renderer.info);
 
   animate();
@@ -635,7 +635,8 @@ function restoreMaterial(obj) {
 
 //get the scroll position
 function getScrollPos() {
-  return window.pageYOffset || document.documentElement.scrollTop;
+  
+  return document.getElementsByClassName("App")[0].scrollTop;
 }
 
 function onScroll() {
