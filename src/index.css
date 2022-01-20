@@ -129,7 +129,11 @@ button:hover:after {
   font-weight: 600;
   font-size: 15px;
 }
-
+.glitchVideo{
+  height:220px;
+  margin-left: 20px;
+  margin-bottom: -10px;
+}
 .characterMiddle {
   height: 220px;
   position: absolute;

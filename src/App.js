@@ -12,6 +12,7 @@ import c from "./assets/2.png";
 import d from "./assets/1.png";
 import e from "./assets/6.png";
 import f from "./assets/7.png";
+import glitch from "./assets/glitch.mp4";
 import location from "./assets/icons/location.svg";
 // import metamask from "./assets/icons/download.svg";
 import menu from "./assets/icons/menu.svg";
@@ -256,7 +257,9 @@ function App() {
           className="video"
           url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
         />
-        <h2>The Story of Orion</h2>
+      </section>
+      <section className="storySection">
+        <h2>Story So Far</h2>
         <div class="storyContainer">
           <p>
             Some years ago, amid our own ongoing problems, a crisis of
@@ -285,20 +288,18 @@ function App() {
             be wiped out.
           </p>
         </div>
+        <button>Prologue</button>
       </section>
       <section id="section3" align="center" className="assetSection">
         {/* Storyline missing assets */}
         <div className="cardContainer">
-          <NFTCards
-            title="Deviants Series NFT"
-            characters={{ a: a, b: b, c: c }}
-          >
+          <NFTCards title="Deviants Series" characters={{ a: a, b: b, c: c }}>
             They are Cute, but vicious. These 10,000 animated characters NFTs
             would be the avatars in the metaverse with certain perks which can
             be customized and upgraded.
           </NFTCards>
           <NFTCards
-            title="Orion Realm Land Series NFT"
+            title="Orion Realm Land Series"
             characters={{ a: f, b: d, c: e }}
           >
             Large Regions of devided into 5000 Virtual Land NFTs consisting of
@@ -306,10 +307,7 @@ function App() {
             develop multilevel games, construct structures, hold events and
             social gatherings and engage in commercial ventures such as..
           </NFTCards>
-          <NFTCards
-            title="Sentinel Series NFT"
-            characters={{ a: f, b: d, c: e }}
-          >
+          <NFTCards title="Sentinel Series" glitch={glitch}>
             100 Smart NFTs with AI capabilites. They possess governing rights
             thus making them "Councilor" of certain areas in the metaverse. Also
             these highly intelligent beings can be trained to interact with
@@ -321,6 +319,7 @@ function App() {
         {/* 3D Landscape */}
       </section>
       <section className="daoSection">
+        <h2>Features of Swaraj Coin</h2>
         {/* Dao NFT etx */}
         <div className="horizontalFlex">
           <div className="diagramFrame">
@@ -334,7 +333,7 @@ function App() {
         </div>
       </section>
       <section id="section5" className="featuresSection">
-        <h1>Features Of Swaraj World</h1>
+        <h1>Features Of Swaraj Coin</h1>
         <div className="featuresContainer">
           <FeatureCards
             text="Multi-utility token based on the concept of self-governance."
