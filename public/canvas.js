@@ -43,8 +43,7 @@ window.activeSectionIndex = () => {
 //DEFINE VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 let bloomComposer, finalComposer;
-var amplitude;
-var height;
+var amplitude, height, displacement, emission, coinTransparency;
 var meshBlob1;
 var meshBlob2;
 var meshBlob3;
@@ -52,6 +51,7 @@ let dots, starsGroup, AIGroup;
 var dotsCount = 0;
 var incrementingangle = 0;
 let sectionInfo;
+let material2;
 const darkMaterial = new THREE.MeshBasicMaterial({ color: "black" });
 const dotsMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
@@ -154,8 +154,8 @@ const keyframes = {
       y: 0.0,
       z: 0.0,
       displacement: 1.0,
-      emission: 0.5,
-      morph: 0.05,
+      emission: 0.2,
+      morph: 0,
       coin: 0.0,
     },
     {
@@ -284,7 +284,7 @@ function init() {
   } else {
     blob2 = createSphereExTriangulated(16);
   }
-  var material2 = new THREE.MeshStandardMaterial({
+  material2 = new THREE.MeshStandardMaterial({
     color: 0x7c21d7,
     emissiveIntensity: 0,
     emissive: 0x5829f2,
@@ -468,8 +468,8 @@ function addStar() {
 //Animate Function
 function animate(a) {
   //Stars Rotation
-  starsGroup.rotation.y -= 0.0015;
-  // AIGroup.rotation.y += 0.0015;
+  // starsGroup.rotation.y -= 0.0015;
+  AIGroup.rotation.y += 0.002;
 
   //Camera Rotation
   // camera.position.x = Math.sin(cameraangle) * 8;
@@ -640,7 +640,7 @@ function getScrollPos() {
 }
 
 function onScroll() {
-  console.log(getScrollPos());
+  // console.log(getScrollPos());
   setAIState();
 }
 
@@ -674,6 +674,23 @@ function applyKeyframe(index, position) {
       position
     );
   }
+  amplitude = 4.0 * lerp(
+    keyframes.sectionKeyframes[index].morph,
+    keyframes.sectionKeyframes[index + 1].morph,
+    position
+  );
+  displacement = 0.2 * lerp(
+    keyframes.sectionKeyframes[index].displacement,
+    keyframes.sectionKeyframes[index + 1].displacement,
+    position
+  );
+  material2.displacementScale = displacement;
+  emission = lerp(
+    keyframes.sectionKeyframes[index].emission,
+    keyframes.sectionKeyframes[index + 1].emission,
+    position
+  );
+  material2.emissiveIntensity = emission;
 }
 
 function lerp(start, end, amt) {
