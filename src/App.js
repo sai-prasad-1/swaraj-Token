@@ -322,7 +322,7 @@ function App() {
       </section>
       <section className="daoSection">
         <h2 class="roboto">Features of Swaraj Coin</h2>
-        <div className="RoadMapScroll">
+        <div style={{marginBottom:"500px"}} className="RoadMapScroll">
           <div className="RoadMapContainer">
             <FeatureCards2
               icon={entertainment}
