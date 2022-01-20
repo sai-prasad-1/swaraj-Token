@@ -84,6 +84,16 @@ section {
   letter-spacing: normal;
   text-align: justify;
   font-size: 25px;
+  display: flex;
+  flex-direction: row
+}
+.storyContainer > p{
+  width:50%;
+  margin:10px;
+  color: #a64af7
+}
+.storyContainer > p > strong {
+  color:white;
 }
 
 .roadmapSection {
@@ -244,6 +254,23 @@ section {
     position: relative;
     left: 0;
   }
+  .horizontalFlex {
+    align-content: center;
+    display: block;
+    width:100%;
+  }
+  .diagramFrame{
+  background-color: #000;
+  height: auto;
+  text-align: center;
+}
+.diagramFrame > img {
+  width:100%;
+}
+.diagram1{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
   .cardContainer {
     margin-top: 200px;
     margin-right: 0px;
