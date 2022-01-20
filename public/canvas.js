@@ -386,7 +386,7 @@ function SetupRenderer() {
   bloomPass2.radius = bloomParams.bloomRadius * 2;
 
   const aberrationPass = new ShaderPass(RGBShiftShader);
-  aberrationPass.uniforms["amount"].value = 0.003;
+  aberrationPass.uniforms["amount"].value = 0.001;
   if (isMobile()) {
     console.log("Increasing Aberration");
     aberrationPass.uniforms["amount"].value = 0.008;
@@ -666,21 +666,23 @@ function setAIState() {
 
 function applyKeyframe(index, position) {
   // console.log(keyframes.sectionKeyframes[index]);
-  AIGroup.position.x = lerp(
-    keyframes.sectionKeyframes[index].x,
-    keyframes.sectionKeyframes[index + 1].x,
-    position
-  );
-  AIGroup.position.y = lerp(
-    keyframes.sectionKeyframes[index].y,
-    keyframes.sectionKeyframes[index + 1].y,
-    position
-  );
-  AIGroup.position.z = lerp(
-    keyframes.sectionKeyframes[index].z,
-    keyframes.sectionKeyframes[index + 1].z,
-    position
-  );
+  if (!isMobile()) {
+    AIGroup.position.x = lerp(
+      keyframes.sectionKeyframes[index].x,
+      keyframes.sectionKeyframes[index + 1].x,
+      position
+    );
+    AIGroup.position.y = lerp(
+      keyframes.sectionKeyframes[index].y,
+      keyframes.sectionKeyframes[index + 1].y,
+      position
+    );
+    AIGroup.position.z = lerp(
+      keyframes.sectionKeyframes[index].z,
+      keyframes.sectionKeyframes[index + 1].z,
+      position
+    );
+  }
 }
 
 function lerp(start, end, amt) {
