@@ -25,7 +25,7 @@ window.activeSection = () => {
   const pos = getScrollPos();
   for (let i = numberOfSections; i >= 1; i--) {
     if (pos > getTop(`section${i}`)) {
-      // console.log(`section${i}`);
+      console.log(`section${i}`);
       return `section${i}`;
       break;
     }
@@ -336,9 +336,7 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("keydown", onKeyDown);
-  document
-    .getElementsByClassName("App")[0]
-    .addEventListener("scroll", onScroll, { passive: false });
+  window.addEventListener("scroll", onScroll, { passive: false });
   console.log(renderer.info);
 
   animate();
@@ -638,11 +636,11 @@ function restoreMaterial(obj) {
 
 //get the scroll position
 function getScrollPos() {
-  return document.getElementsByClassName("App")[0].scrollTop;
+  return window.pageYOffset || document.documentElement.scrollTop;
 }
 
 function onScroll() {
-  // console.log(getScrollPos());
+  console.log(getScrollPos());
   setAIState();
 }
 
@@ -650,17 +648,10 @@ function setAIState() {
   const scrollPos = getScrollPos();
   const sectionIndex = window.activeSectionIndex();
   if (!sectionInfo[sectionIndex]) return;
-  var relScrollPos = scrollPos - sectionInfo[sectionIndex].start
-  var height = sectionInfo[sectionIndex + 1].start - sectionInfo[sectionIndex].start
-
-  var multiplier = relScrollPos/height
-  // var multiplier =sectionInfo[sectionIndex + 1].start
-  //   scrollPos /
-  //     (sectionInfo[sectionIndex + 1].start - sectionInfo[sectionIndex].start) -
-  //   sectionIndex;
-    if(multiplier>0)console.log(multiplier)
-    if(multiplier<0)console.log("below zero")
-    if(multiplier>1)console.log("above one")
+  var relScrollPos = scrollPos - sectionInfo[sectionIndex].start; // position relative to the current section
+  var height =
+    sectionInfo[sectionIndex + 1].start - sectionInfo[sectionIndex].start;
+  var multiplier = relScrollPos / height;
   applyKeyframe(sectionIndex, multiplier);
 }
 
@@ -697,7 +688,7 @@ function initSectionInfo() {
       end: getTop(`section${i + 1}`),
     };
     if (s.end == null) {
-      s.end = document.getElementsByClassName("App")[0].scrollHeight;
+      s.end = window.scrollHeight;
     }
     sectionInfo.push(s);
   }
