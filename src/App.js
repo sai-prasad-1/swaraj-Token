@@ -20,7 +20,7 @@ import close from "./assets/icons/close.svg";
 // import wallet from "./assets/icons/wallet.svg";
 // import balance from "./assets/icons/balance.svg";
 // import trade from "./assets/icons/trade.svg";
-import decentralized from "./assets/features/decentralized.png";
+// import decentralized from "./assets/features/decentralized.png";
 import feature1 from "./assets/features/01.png";
 import feature2 from "./assets/features/02.png";
 import feature3 from "./assets/features/03.png";
