@@ -29,7 +29,11 @@ import facebook from "./assets/social-media-icons/facebook.svg";
 import twitter from "./assets/social-media-icons/twitter.svg";
 import whatsapp from "./assets/social-media-icons/whatsapp.svg";
 import FeatureCards from "./components/FeatureCards";
-
+import yahoofin from "./assets/News/Yahoo-Finance.png";
+import yahoonews from "./assets/News/yahoo-news-logo.png";
+import newsbtc from "./assets/News/newsbtc-logo.jpg";
+import cryptonews from "./assets/News/Cryptonews.png";
+import cointelegrah from "./assets/News/cointelegraph.png";
 const phase1 = {
   title: "Phase 1: 2021",
   status: "DONE",
@@ -52,6 +56,13 @@ const phase2 = {
     { stat: "completed", text: "Private Sale" },
     { stat: "incomplete", text: "Website Launch v2" },
     { stat: "completed", text: "Code audit Completed" },
+  ],
+};
+
+const phase2continued = {
+  title: "Phase 2: Continued",
+  status: "DONE",
+  tasks: [
     { stat: "completed", text: "The Deviants NFT Drop" },
     { stat: "completed", text: "Presale" },
     { stat: "completed", text: "Coin Gecko & CoinMarketCap listing" },
@@ -69,6 +80,12 @@ const phase3 = {
     { stat: "incomplete", text: "Listing on CEX" },
     { stat: "incomplete", text: "Listing on Swaps" },
     { stat: "incomplete", text: "Aditional Game Studio Partnerships" },
+  ],
+};
+const phase3continued = {
+  title: "Phase 3: Continued",
+  status: "DONE",
+  tasks: [
     { stat: "incomplete", text: "Dedicated wallet for charity" },
     {
       stat: "incomplete",
@@ -111,6 +128,13 @@ const phase6 = {
       text: "Swaraj army reaching milestones & burn event",
     },
     { stat: "incomplete", text: "Building swaraj ecosystem" },
+  ],
+};
+
+const phase6continued = {
+  title: "Phase 6: Continued",
+  status: "DONE",
+  tasks: [
     { stat: "incomplete", text: "Voting rights to the people- G Token" },
     { stat: "incomplete", text: "Implement 1% Burn Tax on transactions" },
     { stat: "incomplete", text: "Swaraj Go Green Movement" },
@@ -224,9 +248,6 @@ function App() {
           url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
         />
         <p> Content under the video</p>
-      </section>
-      <section id="section3" align="center" className="assetSection">
-        {/* Storyline missing assets */}
         <h2 className="roboto">The Story of Orion</h2>
         <div class="storyContainer">
           <p>
@@ -249,6 +270,9 @@ function App() {
             Elves, Trolls, Fairies, we will all be wiped out.
           </p>
         </div>
+      </section>
+      <section id="section3" align="center" className="assetSection">
+        {/* Storyline missing assets */}
         <div className="cardContainer">
           <NFTCards
             title="Deviants Series NFT"
@@ -280,13 +304,18 @@ function App() {
       </section>
       <section className="daoSection">
         {/* Dao NFT etx */}
-        <img src={diagram1} className="diagram1" alt="diagram1" />
-        <br />
-        <img src={diagram2} className="diagram2" alt="diagram2" />
-        <img src={diagram3} className="diagram3" alt="diagram3" />
+        <div className="horizontalFlex">
+          <div className="diagramFrame">
+            <img src={diagram2} className="diagram1" alt="diagram2" />
+            <h3>$SWRJ</h3>
+          </div>
+          <div className="diagramFrame">
+            <img src={diagram3} className="diagram2" alt="diagram3" />
+            <h3>$G-TKN</h3>
+          </div>
+        </div>
       </section>
       <section id="section5" className="featuresSection">
-        {/* Features of Swaraj World */}
         <h1>Features Of Swaraj World</h1>
         <div className="featuresContainer">
           <FeatureCards
@@ -337,8 +366,7 @@ function App() {
         </div>
       </section>
 
-      <section id="section6" className="instructionSection">
-        {/* Instructions */}
+      {/* <section id="section6" className="instructionSection">
         <div className="instructionContainer">
           <h2>Follow These Steps</h2>
           <div className="instructionFlex">
@@ -382,7 +410,7 @@ function App() {
           </div>
           <button>More Detailed Instructions</button>
         </div>
-      </section>
+      </section> */}
 
       <section id="section7" className="roadmapSection">
         {/* RoadMap */}
@@ -391,10 +419,13 @@ function App() {
           <div className="RoadMapContainer">
             <RoadMapCards phase={phase1}></RoadMapCards>
             <RoadMapCards phase={phase2}></RoadMapCards>
+            <RoadMapCards phase={phase2continued}></RoadMapCards>
             <RoadMapCards phase={phase3}></RoadMapCards>
+            <RoadMapCards phase={phase3continued}></RoadMapCards>
             <RoadMapCards phase={phase4}></RoadMapCards>
             <RoadMapCards phase={phase5}></RoadMapCards>
             <RoadMapCards phase={phase6}></RoadMapCards>
+            <RoadMapCards phase={phase6continued}></RoadMapCards>
             <RoadMapCards phase={phase7}></RoadMapCards>
             <RoadMapCards phase={phase8}></RoadMapCards>
             <RoadMapCards phase={phase9}></RoadMapCards>
@@ -405,6 +436,26 @@ function App() {
       <section id="section8" className="partnerSection">
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
+      </section>
+      <section className="featuredSection">
+        <h2 className="roboto">Featured On</h2>
+        <div className="featuredOnLinks">
+          <a href="https://finance.yahoo.com/news/swaraj-set-launch-metaverse-gaming-142500745.html">
+            <img src={yahoofin} alt="Yahoo Finance" />
+          </a>
+          <a href="https://news.yahoo.com/swaraj-set-launch-metaverse-gaming-142500745.html">
+            <img src={yahoonews} alt="Yahoo News" />
+          </a>
+          <a href="https://cryptonews.com/news/swaraj-set-launch-its-metaverse-gaming-ecosystem.htm">
+            <img src={cryptonews} alt="Crypto News" />
+          </a>
+          <a href="https://www.newsbtc.com/press-releases/swaraj-announces-the-launch-of-a-new-metaverse-gaming-project-and-its-token/">
+            <img src={newsbtc} alt="NewsBTC" />
+          </a>
+          <a href="https://cointelegraph.com/press-releases/swaraj-to-launch-their-metaverse-multi-utility-token-shortly">
+            <img src={cointelegrah} alt="Cointelegraph" />
+          </a>
+        </div>
       </section>
       <footer id="section9">
         {/* Footer */}
