@@ -25,7 +25,7 @@ window.activeSection = () => {
   const pos = getScrollPos();
   for (let i = numberOfSections; i >= 1; i--) {
     if (pos > getTop(`section${i}`)) {
-      // console.log(`section${i}`);
+      console.log(`section${i}`);
       return `section${i}`;
       break;
     }
@@ -636,11 +636,11 @@ function restoreMaterial(obj) {
 
 //get the scroll position
 function getScrollPos() {
-  return window.scrollTop;
+  return window.pageYOffset || document.documentElement.scrollTop;
 }
 
 function onScroll() {
-  // console.log(getScrollPos());
+  console.log(getScrollPos());
   setAIState();
 }
 

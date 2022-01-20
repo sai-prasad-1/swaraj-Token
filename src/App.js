@@ -412,7 +412,7 @@ function App() {
         </div>
       </section> */}
 
-      <section id="section7" className="roadmapSection">
+      <section id="section6" className="roadmapSection">
         {/* RoadMap */}
         <h2 className="roboto">The RoadMap</h2>
         <div className="RoadMapScroll">
@@ -433,11 +433,11 @@ function App() {
           </div>
         </div>
       </section>
-      <section id="section8" className="partnerSection">
+      <section id="section7" className="partnerSection">
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
       </section>
-      <section className="featuredSection">
+      <section id="section8" className="featuredSection">
         <h2 className="roboto">Featured On</h2>
         <div className="featuredOnLinks">
           <a href="https://finance.yahoo.com/news/swaraj-set-launch-metaverse-gaming-142500745.html">
