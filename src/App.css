@@ -213,13 +213,11 @@ section {
   left: calc(50% - 300px);
 }
 .daoSection {
-  margin: 100px;
   margin-top: 0px;
   text-align: center;
 }
 .daoSection >h2{
   font-size: 30px;
-  margin-bottom: 300px;
 }
 .diagramFrame{
   background-color: #000c;
@@ -231,7 +229,7 @@ section {
   text-align: center;
 }
 .diagramFrame > img {
-  width:calc(50vw - 100px);
+  width:calc(50vw - 20px);
 }
 .diagram1{
   margin-top: 50px;
@@ -265,6 +263,18 @@ section {
 @media screen and (max-width: 800px) {
   .navigationTopBar {
     display: none;
+  }
+  .storyContainer{
+    margin-left: 10px;
+    margin-right: 10px;
+    letter-spacing: normal;
+    text-align: justify;
+    font-size: 25px;
+    display: block;
+  }
+  .storyContainer > p{
+    width:calc(100% - 20px);
+    color: #a64af7
   }
 }
 @media screen and (max-width: 600px) {

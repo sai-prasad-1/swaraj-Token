@@ -3,7 +3,9 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
 import { useState } from "react";
 import logo from "./assets/icons/swaraj.png";
+import entertainment from "./assets/icons/entertainment.svg";
 import "./App.css";
+import FeatureCards2 from "./components/FeatureCard2";
 import NFTCards from "./components/NFTCards";
 import RoadMapCards from "./components/RoadMapCards";
 import a from "./assets/5.png";
@@ -319,7 +321,41 @@ function App() {
         {/* 3D Landscape */}
       </section>
       <section className="daoSection">
-        <h2>Features of Swaraj Coin</h2>
+        <h2 class="roboto">Features of Swaraj Coin</h2>
+        <div className="RoadMapScroll">
+          <div className="RoadMapContainer">
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+            <FeatureCards2
+              icon={entertainment}
+              title="Entertainment"
+              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+            ></FeatureCards2>
+          </div>
+        </div>
         {/* Dao NFT etx */}
         <div className="horizontalFlex">
           <div className="diagramFrame">
