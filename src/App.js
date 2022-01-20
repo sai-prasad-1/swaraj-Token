@@ -20,6 +20,15 @@ import close from "./assets/icons/close.svg";
 // import balance from "./assets/icons/balance.svg";
 // import trade from "./assets/icons/trade.svg";
 import decentralized from "./assets/features/decentralized.png";
+import feature1 from "./assets/features/01.png";
+import feature2 from "./assets/features/02.png";
+import feature3 from "./assets/features/03.png";
+import feature4 from "./assets/features/04.png";
+import feature5 from "./assets/features/05.png";
+import feature6 from "./assets/features/06.png";
+import feature7 from "./assets/features/07.png";
+import feature8 from "./assets/features/08.png";
+import feature9 from "./assets/features/09.png";
 // import diagram1 from "./assets/features/G-tokens";
 import diagram2 from "./assets/features/61";
 import diagram3 from "./assets/features/62";
@@ -247,27 +256,33 @@ function App() {
           className="video"
           url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
         />
-        <p> Content under the video</p>
-        <h2 className="roboto">The Story of Orion</h2>
+        <h2>The Story of Orion</h2>
         <div class="storyContainer">
           <p>
             Some years ago, amid our own ongoing problems, a crisis of
-            unforeseen magnitude arrived in our world. Driven away from their
-            home by their own magical calamity, the Elves and their peoples
-            invaded our world instead. They seized control of a landmass and
+            unforeseen <strong>magnitude</strong> arrived in our world. Driven
+            away from their home by their own magical calamity,{" "}
+            <strong>the Elves</strong> and their peoples invaded our world
+            instead. They seized control of a <strong>landmass</strong> and
             refused all the feeble attempts at diplomacy, defending to the death
-            their new home. They were determined to control this "new world" the
-            way they did theirs. We retaliated, of course, trying to regain the
-            land that they stole from us. As powerful as I am, I felt I could
-            not sit back and do nothing. I tried to reason with both sides. Even
-            used threats. I warned them of my premonitions. Nothing worked.
-            Politicians and leaders on both sides were determined to use this
-            conflict for their own agendas. War could not be prevented. A vivid
-            dream came to me many times now, and I am convinced the threat is
-            real. There is something worse coming, much worse. If we do not stop
-            this pointless fighting, if we do not unite and learn to live in
-            peace, not a single one of us will survive this threat. Humans,
-            Elves, Trolls, Fairies, we will all be wiped out.
+            their new home. They were determined to control this{" "}
+            <strong>"new world"</strong> the way they did theirs. We retaliated,
+            of course, trying to regain the land that they{" "}
+            <strong>stole</strong> from us. As powerful as I am, I felt I could
+            not sit back and do nothing.
+          </p>
+          <p>
+            {" "}
+            I tried to reason with both sides. Even used threats. I warned them
+            of my <strong>premonitions</strong>. Nothing worked. Politicians and
+            leaders on both sides were determined to use this conflict for their
+            own agendas. War could not be prevented.{" "}
+            <strong>A vivid dream</strong> came to me many times now, and I am
+            convinced the threat is real. There is something worse coming, much
+            worse. If we do not stop this pointless fighting, if we do not unite
+            and learn to live in peace, not a single one of us will survive this
+            threat. <strong>Humans, Elves, Trolls, Fairies</strong>, we will all
+            be wiped out.
           </p>
         </div>
       </section>
@@ -283,6 +298,15 @@ function App() {
             be customized and upgraded.
           </NFTCards>
           <NFTCards
+            title="Orion Realm Land Series NFT"
+            characters={{ a: f, b: d, c: e }}
+          >
+            Large Regions of devided into 5000 Virtual Land NFTs consisting of
+            cities, forests, farmlands etc. They will be used to advertise,
+            develop multilevel games, construct structures, hold events and
+            social gatherings and engage in commercial ventures such as..
+          </NFTCards>
+          <NFTCards
             title="Sentinel Series NFT"
             characters={{ a: f, b: d, c: e }}
           >
@@ -290,12 +314,6 @@ function App() {
             thus making them "Councilor" of certain areas in the metaverse. Also
             these highly intelligent beings can be trained to interact with
             people, excecute specific commandsoutside the metaverse.
-          </NFTCards>
-          <NFTCards title="Orion Series NFT" characters={{ a: f, b: d, c: e }}>
-            Large Regions of devided into 5000 Virtual Land NFTs consisting of
-            cities, forests, farmlands etc. They will be used to advertise,
-            develop multilevel games, construct structures, hold events and
-            social gatherings and engage in commercial ventures such as..
           </NFTCards>
         </div>
       </section>
@@ -320,48 +338,48 @@ function App() {
         <div className="featuresContainer">
           <FeatureCards
             text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
+            image={feature1}
             title="1. Decentralized"
           ></FeatureCards>
           <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
+            text="A dedicated token called G-Token, which contains various uses such as voting on goverance issues, rewards, tipping features and participating in lotteries.All these features pave the way for a future DAO."
+            image={feature2}
+            title="2. Governance Token"
+          ></FeatureCards>
+          <FeatureCards
+            text="Earn rewards while playing games and comleting quests in the form of $SWRJ. $GTKN and NFTs."
+            image={feature3}
+            title="3. P2P&PvP"
+          ></FeatureCards>
+          <FeatureCards
+            text="A collection of 100 Smart NFTs called the Sentinels with AI trained NFT upgrades, launched on our dedicated platfrom."
+            image={feature4}
+            title="4. Smart-NFTs With AI Capabilities"
+          ></FeatureCards>
+          <FeatureCards
+            text="NFT Drops of 5000 Orion's Realm blocks, 10,000 Deviants, 100 Sentinel series characters and finally upgrades and power-ups, which would be part of the Metaverse with its dedcated marketplace."
+            image={feature5}
+            title="5. NFT Marketplace"
+          ></FeatureCards>
+          <FeatureCards
+            text="A world with endless opertunites where you can create, monetize, earn, socialize, explore, play, and personalize."
+            image={feature6}
+            title="6. Swaraj Metaverse"
+          ></FeatureCards>
+          <FeatureCards
+            text="The virtual Lands in the Orion Realm will be administered by a council comprised of sentinels, landowners, and the top holders of G-Tokens. Councilors might collaborate with landowners to organize regional events and competitions."
+            image={feature7}
+            title="7. Metaverse Council"
+          ></FeatureCards>
+          <FeatureCards
+            text="A comprehensive ecosystem, containing a plethora of distinct staking pools for tokens and NFTs through which rewards are distributed in MATIC, SWARAJ and G-Token."
+            image={feature8}
+            title="8. Staking Pool"
           ></FeatureCards>
           <FeatureCards
             text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
-          ></FeatureCards>
-          <FeatureCards
-            text="Multi-utility token based on the concept of self-governance."
-            image={decentralized}
-            title="1. Decentralized"
+            image={feature9}
+            title="9. Anti-Dump"
           ></FeatureCards>
         </div>
       </section>
