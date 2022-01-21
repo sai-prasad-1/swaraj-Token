@@ -4,6 +4,11 @@ import { useTitle } from "react-use";
 import { useState } from "react";
 import logo from "./assets/icons/swaraj.png";
 import entertainment from "./assets/icons/entertainment.svg";
+import monetize from "./assets/icons/monetize.svg";
+import develop from "./assets/icons/develop.svg";
+import gameplay from "./assets/icons/gameplay.svg";
+import explore from "./assets/icons/explore.svg";
+import personalization from "./assets/icons/personalization.svg";
 import "./App.css";
 import FeatureCards2 from "./components/FeatureCard2";
 import NFTCards from "./components/NFTCards";
@@ -330,29 +335,29 @@ function App() {
               text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
             ></FeatureCards2>
             <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+              icon={monetize}
+              title="Monetize"
+              text="Metaverse also provides an extensive array of mediums for advertising and provides opportunities to generate and trade NFTs in the marketplace or hold the NFTs as long-term assets."
             ></FeatureCards2>
             <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+              icon={develop}
+              title="Develop"
+              text="Users can develop games, make artworks, build their own cities, and dream houses with easy-to-use built-in tools. Furthermore, professionals can used the pro-toolkit to enhance their development."
             ></FeatureCards2>
             <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+              icon={gameplay}
+              title="Game Play"
+              text="Users can play PvP& P2E games & host game tournaments created by users as well as the games created by the community developers."
             ></FeatureCards2>
             <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+              icon={explore}
+              title="Explore"
+              text="Discover the vast Metaverse by taking the journey of your lifetime.Get lost in a variety of settings, including jungles, seas, and more as you wander across the world."
             ></FeatureCards2>
             <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
+              icon={personalization}
+              title="Personalization"
+              text="Players can  be whoever they want to be and personalize their avatar and their lands by constructing whatever they envision."
             ></FeatureCards2>
           </div>
         </div>
@@ -517,7 +522,7 @@ function App() {
             <img src={logo} className="logo" alt="logo" />
             <h2>SWARAJ COIN</h2>
           </div>
-          <div className="footerLeft">
+          {/* <div className="footerLeft">
             <h4>Our Mission</h4>
             <p>
               To accelerate mass adoption of crypto by bringing the next 10M
@@ -543,7 +548,7 @@ function App() {
               <p>Tokenomics</p>
               <p>Contact Us</p>
             </div>
-          </div>
+          </div> */}
           <div className="footerCopyright">
             SWARAJ COIN ©2022 All Rights Reserved
           </div>
