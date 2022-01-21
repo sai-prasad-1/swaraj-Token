@@ -257,6 +257,22 @@ section {
   height: 50px;
   margin-top: 20px;
 }
+.partnerContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.partnerContainer > .empty {
+  width: 50%;
+}
+.partnerLogos{
+  display: flex;
+  flex-direction: column;
+}
+.partnerLogos > img {
+  width: 300px;
+}
+
 @media screen and (max-width: 1020px) {
 }
 
@@ -278,6 +294,24 @@ section {
   }
 }
 @media screen and (max-width: 600px) {
+  .partnerContainer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+  .partnerContainer > .empty {
+    width: 100%;
+    height: 300px;
+  }
+  .partnerLogos{
+    display: flex;
+    flex-direction: column;
+  }
+  .partnerLogos > img {
+    width: 250px;
+    margin-left: calc(50% - 125px);
+  }
+  
   .video {
     position: relative;
     left: 0;

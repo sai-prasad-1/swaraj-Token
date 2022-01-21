@@ -1,4 +1,5 @@
 import ReactPlayer from "react-player";
+import { Link } from "react-router-dom";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
 import { useState } from "react";
@@ -8,6 +9,8 @@ import monetize from "./assets/icons/monetize.svg";
 import develop from "./assets/icons/develop.svg";
 import gameplay from "./assets/icons/gameplay.svg";
 import explore from "./assets/icons/explore.svg";
+import polygon from "./assets/icons/polygon.png";
+import infivr from "./assets/icons/infivr.png";
 import personalization from "./assets/icons/personalization.svg";
 import "./App.css";
 import FeatureCards2 from "./components/FeatureCard2";
@@ -20,7 +23,6 @@ import d from "./assets/1.png";
 import e from "./assets/6.png";
 import f from "./assets/7.png";
 import glitch from "./assets/glitch.mp4";
-import location from "./assets/icons/location.svg";
 // import metamask from "./assets/icons/download.svg";
 import menu from "./assets/icons/menu.svg";
 import close from "./assets/icons/close.svg";
@@ -66,7 +68,7 @@ const phase1 = {
 
 const phase2 = {
   title: "Phase 2: 2022 Q1",
-  status: "DONE",
+  status: "IN-PROGRESS",
   tasks: [
     { stat: "completed", text: "Initial Coin Marketing" },
     { stat: "completed", text: "Game Studio Partnership" },
@@ -78,7 +80,7 @@ const phase2 = {
 
 const phase2continued = {
   title: "Phase 2: Continued",
-  status: "DONE",
+  status: "IN-PROGRESS",
   tasks: [
     { stat: "completed", text: "The Deviants NFT Drop" },
     { stat: "completed", text: "Presale" },
@@ -89,7 +91,7 @@ const phase2continued = {
 
 const phase3 = {
   title: "Phase 3: 2022 Q2",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "LP Locked & Ownership Renounced" },
     { stat: "incomplete", text: "Orion's Realm Land NFTs Drop" },
@@ -101,7 +103,7 @@ const phase3 = {
 };
 const phase3continued = {
   title: "Phase 3: Continued",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "Dedicated wallet for charity" },
     {
@@ -115,7 +117,7 @@ const phase3continued = {
 };
 const phase4 = {
   title: "Phase 4: 2022 Q3",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "NFT sentinel series auction drop" },
     { stat: "incomplete", text: "NFT marketplace Launch" },
@@ -126,7 +128,7 @@ const phase4 = {
 };
 const phase5 = {
   title: "Phase 5: 2022 Q4",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "Alpha metaverse testing" },
     { stat: "incomplete", text: "New marketing contents" },
@@ -137,7 +139,7 @@ const phase5 = {
 
 const phase6 = {
   title: "Phase 6: 2023 Q1",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "Metaverse Beta version" },
     {
@@ -150,7 +152,7 @@ const phase6 = {
 
 const phase6continued = {
   title: "Phase 6: Continued",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "Voting rights to the people- G Token" },
     { stat: "incomplete", text: "Implement 1% Burn Tax on transactions" },
@@ -160,7 +162,7 @@ const phase6continued = {
 
 const phase7 = {
   title: "Phase 7: 2023 Q2",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "NFT upgrades/ accessories drop" },
     { stat: "incomplete", text: "Swaraj army reaching milestones" },
@@ -171,7 +173,7 @@ const phase7 = {
 
 const phase8 = {
   title: "Phase 8: 2023 Q3",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "AI training platform for Sentinel Series" },
     { stat: "incomplete", text: "SWARAJ Launchpad" },
@@ -181,7 +183,7 @@ const phase8 = {
 
 const phase9 = {
   title: "Phase 9: 2023 Q4",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     { stat: "incomplete", text: "Swaraj DEX" },
     { stat: "incomplete", text: "Swaraj wallet/app" },
@@ -191,7 +193,7 @@ const phase9 = {
 
 const phase10 = {
   title: "Phase 10: 2024 Q1",
-  status: "DONE",
+  status: "WAIT FOR IT",
   tasks: [
     {
       stat: "incomplete",
@@ -295,7 +297,9 @@ function App() {
             be wiped out.
           </p>
         </div>
-        <button>Prologue</button>
+        <Link to="/prologue">
+          <button>Prologue</button>
+        </Link>
       </section>
       <section id="section3" align="center" className="assetSection">
         {/* Storyline missing assets */}
@@ -327,7 +331,7 @@ function App() {
       </section>
       <section className="daoSection">
         <h2 class="roboto">Features of Swaraj Coin</h2>
-        <div style={{marginBottom:"500px"}} className="RoadMapScroll">
+        <div style={{ marginBottom: "500px" }} className="RoadMapScroll">
           <div className="RoadMapContainer">
             <FeatureCards2
               icon={entertainment}
@@ -494,6 +498,13 @@ function App() {
       <section id="section7" className="partnerSection">
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
+        <div className="partnerContainer">
+          <div className="empty"></div>
+          <div className="partnerLogos">
+            <img src={polygon} alt="polygon" />
+            <img src={infivr} alt="infiVR" />
+          </div>
+        </div>
       </section>
       <section id="section8" className="featuredSection">
         <h2 className="roboto">Featured On</h2>
