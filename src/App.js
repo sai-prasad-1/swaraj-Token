@@ -346,7 +346,7 @@ function App() {
         <img src={run_gif} alt="run" />
       </section>
       <section className="daoSection">
-        <h2 class="roboto">Features of Swaraj Coin</h2>
+        <h2 class="roboto">Features of Swaraj World</h2>
         <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <FeatureCards2
@@ -382,7 +382,7 @@ function App() {
           </div>
         </div>
         {/* Dao NFT etx */}
-        <div style={{ marginBottom: "500px" }} className="horizontalFlex">
+        <div style={{ marginBottom: "300px" }} className="horizontalFlex">
           <div className="diagramFrame">
             <img src={diagram2} className="diagram1" alt="diagram2" />
             <h3>$SWRJ</h3>
