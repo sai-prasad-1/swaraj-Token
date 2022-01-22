@@ -305,21 +305,18 @@ function init() {
   ///////////////////////////////////////////////////////////////////////////////
   //COIN
   //coinGeometry is a plane
-  var coinGeometry = new THREE.PlaneGeometry(1, 1);
+  var coinGeometry = new THREE.CircleGeometry(0.5, 32);
   var coinTexture = new THREE.TextureLoader().load("/assets/coin.png");
-  var coinTextureOpacity = new THREE.TextureLoader().load("/assets/coin.png");
-  coinTextureOpacity.encoding = THREE.sRGBEncoding;
   coinMaterial = new THREE.MeshStandardMaterial({
     map: coinTexture,
-    // color: 0xffffff,
-    // emissive: 0x007aa6,
-    // emissiveIntensity: 0.5,
-    transparent: true,
-    alphaMap: coinTextureOpacity,
-    opacity: 1,
+    color: 0x1cb2fd,
+    emissive: 0x007aa6,
+    emissiveIntensity: 10,
+    emissiveMap: coinTexture,
     side: THREE.DoubleSide
   });
   meshCoin = new THREE.Mesh(coinGeometry, coinMaterial);
+  meshCoin.rotation.set(-0.5, 0, 0);
   AIGroup.add(meshCoin);
 
   scene.add(AIGroup);
@@ -369,7 +366,9 @@ function init() {
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: false });
   //on mouse down event capture
-  window.addEventListener("mousedown", onMouseDown, false);
+  if (!isMobile()) {
+    window.addEventListener("mousedown", onMouseDown, false);
+  }
   console.log(renderer.info);
 
   animate();
@@ -503,6 +502,8 @@ function addStar() {
 function animate(a) {
   //AI Rotation
   AIGroup.rotation.y += 0.002;
+  meshCoin.rotation.y -= 0.004;
+  meshCoin.rotation.x -= 0.002;
 
   //Twinkle Stars
   // var starind = 0;
@@ -698,21 +699,23 @@ function getScrollPos() {
 var scrollpos;
 
 function onScroll() {
-  //Star trails on scroll
-  if (scrollpos == null) {
-    scrollpos = getScrollPos();
-  } else {
-    if (getScrollPos() > scrollpos) {
-      starsGroup.rotation.x -= 0.002;
+  if (!isMobile) {
+    //Star trails on scroll
+    if (scrollpos == null) {
+      scrollpos = getScrollPos();
     } else {
-      starsGroup.rotation.x += 0.002;
+      if (getScrollPos() > scrollpos) {
+        starsGroup.rotation.x -= 0.002;
+      } else {
+        starsGroup.rotation.x += 0.002;
+      }
+      scrollpos = getScrollPos();
     }
-    scrollpos = getScrollPos();
-  }
-  if(document.getElementById("orbClickInfo")){
-    setTimeout(()=>{
-      document.getElementById("orbClickInfo").outerHTML="";
-    },4000)
+    if(document.getElementById("orbClickInfo")){
+      setTimeout(()=>{
+        document.getElementById("orbClickInfo").outerHTML="";
+      },4000)
+    }
   }
   // console.log(getScrollPos());
   setAIState();
@@ -775,8 +778,10 @@ function applyKeyframe(index, position) {
     position
   );
   material1.opacity = 0.5 * (1 - opacity);
-  // var scale2 = (1 / (1 - opacity));
+  var scale2 = (1 / (1 - opacity));
+  if (scale2 > 1.6) { scale2 = 1.6; }
   meshBlob2.material.opacity = (1 - opacity);
+  meshCoin.scale.set(scale2, scale2, scale2);
 }
 
 function lerp(start, end, amt) {
