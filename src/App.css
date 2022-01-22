@@ -40,7 +40,7 @@ footer{
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
   "logo logo logo logo logo logo  navigation navigation"
-    "title title  title title title title heroEmpty heroEmpty";
+    "title title  title title title heroEmpty heroEmpty heroEmpty";
 }
 .navigationTopBar {
   grid-area: navigation;
