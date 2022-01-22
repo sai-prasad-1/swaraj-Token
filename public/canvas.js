@@ -368,7 +368,7 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
-  window.addEventListener("keydown", onKeyDown);
+  // window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: false });
   //on mouse down event capture
   if (!isMobile()) {
@@ -705,7 +705,7 @@ function getScrollPos() {
 var scrollpos;
 
 function onScroll() {
-  if (!isMobile) {
+  if (!isMobile()) {
     //Star trails on scroll
     if (scrollpos == null) {
       scrollpos = getScrollPos();
@@ -823,56 +823,56 @@ function onMouseDown(event) {
 
 ///////////////////////////////////////////////////////////////////////////////
 //HELPER FUNCTION !!!!!!!!!!!! COMMENT THIS OUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-function onKeyDown(event) {
-  switch (event.keyCode) {
-    case 87: {
-      // w
-      console.log("y=" + AIGroup.position.y);
-      AIGroup.position.y += 0.1;
-      break;
-    }
-    case 65: {
-      // a
-      console.log("x=" + AIGroup.position.x);
-      AIGroup.position.x -= 0.1;
-      break;
-    }
-    case 83: {
-      // s
-      console.log("y=" + AIGroup.position.y);
-      AIGroup.position.y -= 0.1;
-      break;
-    }
-    case 68: {
-      // d
-      console.log("x=" + AIGroup.position.x);
-      AIGroup.position.x += 0.1;
-      break;
-    }
-    case 81: {
-      // q
-      console.log("z=" + AIGroup.position.z);
-      AIGroup.position.z -= 0.1;
-      break;
-    }
-    case 69: {
-      // e
-      console.log("z=" + AIGroup.position.z);
-      AIGroup.position.z += 0.1;
-      break;
-    }
-    // case 90: // z
-    // {
-    //   console.log(AIGroup.rotation.x);
-    //   AIGroup.rotation.x += 0.01;
-    //   break;
-    // }
-    // case 67: // c
-    // {
-    //   console.log(AIGroup.rotation.x);
-    //   AIGroup.rotation.x -= 0.01;
-    //   break;
-    // }
-  }
-}
+// function onKeyDown(event) {
+//   switch (event.keyCode) {
+//     case 87: {
+//       // w
+//       console.log("y=" + AIGroup.position.y);
+//       AIGroup.position.y += 0.1;
+//       break;
+//     }
+//     case 65: {
+//       // a
+//       console.log("x=" + AIGroup.position.x);
+//       AIGroup.position.x -= 0.1;
+//       break;
+//     }
+//     case 83: {
+//       // s
+//       console.log("y=" + AIGroup.position.y);
+//       AIGroup.position.y -= 0.1;
+//       break;
+//     }
+//     case 68: {
+//       // d
+//       console.log("x=" + AIGroup.position.x);
+//       AIGroup.position.x += 0.1;
+//       break;
+//     }
+//     case 81: {
+//       // q
+//       console.log("z=" + AIGroup.position.z);
+//       AIGroup.position.z -= 0.1;
+//       break;
+//     }
+//     case 69: {
+//       // e
+//       console.log("z=" + AIGroup.position.z);
+//       AIGroup.position.z += 0.1;
+//       break;
+//     }
+//     // case 90: // z
+//     // {
+//     //   console.log(AIGroup.rotation.x);
+//     //   AIGroup.rotation.x += 0.01;
+//     //   break;
+//     // }
+//     // case 67: // c
+//     // {
+//     //   console.log(AIGroup.rotation.x);
+//     //   AIGroup.rotation.x -= 0.01;
+//     //   break;
+//     // }
+//   }
+// }
 ///////////////////////////////////////////////////////////////////////////////
