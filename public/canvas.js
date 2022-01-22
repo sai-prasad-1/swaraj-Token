@@ -43,15 +43,19 @@ window.activeSectionIndex = () => {
 //DEFINE VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 let bloomComposer, finalComposer;
-var amplitude, height, displacement, emission, coinTransparency;
+var amplitude, height, displacement, emission;
+let clickcapacitor = 0;
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
 var meshBlob1;
 var meshBlob2;
 var meshBlob3;
+var meshCoin;
 let dots, starsGroup, AIGroup;
 var dotsCount = 0;
 var incrementingangle = 0;
 let sectionInfo;
-let material2;
+let material1, material2, starmaterial, coinMaterial;
 const darkMaterial = new THREE.MeshBasicMaterial({ color: "black" });
 const dotsMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
@@ -118,7 +122,7 @@ const keyframes = {
       y: 0.0,
       z: 0.0,
       displacement: 0.0,
-      emission: 0.6,
+      emission: 0.7,
       morph: 0.5,
       coin: 0.0,
     },
@@ -132,9 +136,9 @@ const keyframes = {
       coin: 0.0,
     },
     {
-      x: -5.4,
+      x: -3.0,
       y: 0.0,
-      z: 0.0,
+      z: 3.0,
       displacement: 0.0,
       emission: 0.6,
       morph: 0.5,
@@ -145,7 +149,7 @@ const keyframes = {
       y: 0.0,
       z: 3.0,
       displacement: 0.0,
-      emission: 0.7,
+      emission: 0.8,
       morph: 0.2,
       coin: 0.0,
     },
@@ -162,31 +166,31 @@ const keyframes = {
       x: 0.0,
       y: 0.0,
       z: 0.0,
-      displacement: 0.0,
-      emission: 0.6,
-      morph: 0.5,
-      coin: 0.0,
+      displacement: 1.0,
+      emission: 0.2,
+      morph: 0.0,
+      coin: 0.5,
     },
     {
       x: 0.0,
       y: 0.0,
       z: 0.0,
-      displacement: 0.0,
-      emission: 0.6,
+      displacement: 1.0,
+      emission: 0.3,
       morph: 0.5,
-      coin: 0.0,
+      coin: 1.0,
     },
     {
       x: 0.0,
       y: 0.0,
       z: 0.0,
-      displacement: 0.0,
-      emission: 0.6,
+      displacement: 1.0,
+      emission: 0.15,
       morph: 0.5,
-      coin: 0.0,
+      coin: 1.0,
     },
     {
-      x: -4.0,
+      x: 0.0,
       y: 0.0,
       z: 0.0,
       displacement: 0.0,
@@ -249,7 +253,7 @@ function init() {
   } else {
     blob1 = createSphereEx(32);
   }
-  var material1 = new THREE.MeshPhysicalMaterial({
+  material1 = new THREE.MeshPhysicalMaterial({
     envMap: new THREE.CubeTextureLoader().load([
       "/assets/px.png",
       "/assets/nx.png",
@@ -290,12 +294,30 @@ function init() {
     emissive: 0x5829f2,
     displacementMap: textureland,
     displacementScale: 0,
+    transparent: true,
     wireframe: true,
     wireframeLinewidth: 3,
   });
   meshBlob2 = new THREE.Mesh(blob2, material2);
   // scene.add(meshBlob2);
   AIGroup.add(meshBlob2);
+
+  ///////////////////////////////////////////////////////////////////////////////
+  //COIN
+  //coinGeometry is a plane
+  var coinGeometry = new THREE.PlaneGeometry(1, 1);
+  var coinTexture = new THREE.TextureLoader().load("/assets/coin.png");
+  coinMaterial = new THREE.MeshStandardMaterial({
+    map: coinTexture,
+    color: 0xffffff,
+    // emissive: 0xffffff,
+    // emissiveIntensity: 0.5,
+    // transparent: true,
+    // opacityMap: coinTexture,
+    side: THREE.DoubleSide
+  });
+  meshCoin = new THREE.Mesh(coinGeometry, coinMaterial);
+  AIGroup.add(meshCoin);
 
   scene.add(AIGroup);
 
@@ -324,6 +346,11 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   //STARS AND PANORAMA
+  starmaterial = new THREE.MeshStandardMaterial({
+    color: 0x000000,
+    emissive: 0xffffff,
+    emissiveIntensity: 10,
+  });
   starsGroup = new THREE.Group();
   starsGroup.name = "starsgroup";
   addPano();
@@ -333,10 +360,13 @@ function init() {
   }
   scene.add(starsGroup);
 
+
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: false });
+  //on mouse down event capture
+  window.addEventListener("mousedown", onMouseDown, false);
   console.log(renderer.info);
 
   animate();
@@ -450,15 +480,16 @@ function addPano() {
 //Add Star Function
 function addStar() {
   var geometry = new THREE.IcosahedronGeometry(0.05, 0);
-  var material = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
-    emissive: 0xffffff,
-    emissiveIntensity: 10,
-  });
-  var star = new THREE.Mesh(geometry, material);
+  var star = new THREE.Mesh(geometry, starmaterial);
   var [x, y, z] = Array(3)
     .fill()
     .map(() => THREE.MathUtils.randFloatSpread(100));
+  //get magnitude of vector of x y z
+  if (Math.sqrt(x * x + y * y + z * z) < 20) {
+    x = x * 20;
+    y = y * 20;
+    z = z * 20;
+  }
   star.position.set(x, y, z);
   // scene.add(star);
   starsGroup.add(star);
@@ -467,9 +498,31 @@ function addStar() {
 
 //Animate Function
 function animate(a) {
-  //Stars Rotation
-  // starsGroup.rotation.y -= 0.0015;
+  //AI Rotation
   AIGroup.rotation.y += 0.002;
+
+  //Twinkle Stars
+  // var starind = 0;
+  // starsGroup.children.forEach((star) => {
+  //   // console.log(THREE.MathUtils.seededRandom(starind));
+  //   var rnd = new Math.seedrandom();
+  //   if (rnd.quick() > 0.8) {
+  //     star.material.emission = 0xffffff;
+  //     star.material.emissiveIntensity = 10 * rnd.quick();
+  //   } else {
+  //     star.material.emission = 0x000000;
+  //     star.material.emissiveIntensity = 0;
+  //   }
+  //   starind++;
+  // });
+  // starsGroup.children.forEach((star) => {
+  //   //oscillate star.material.emissiveIntensity
+  //   Math.seedrandom();
+  //   var m = Math.random() - 0.8;
+  //   if (m < 0) { star.material.emission = 0x000000; }
+  //   else { star.material.emission = 0xffffff; }
+  //   star.material.emissiveIntensity = m * 10;
+  // });
 
   //Camera Rotation
   // camera.position.x = Math.sin(cameraangle) * 8;
@@ -639,8 +692,20 @@ function getScrollPos() {
   return window.pageYOffset || document.documentElement.scrollTop;
 }
 
+var scrollpos;
+
 function onScroll() {
-  // console.log(getScrollPos());
+  //Star trails on scroll
+  if (scrollpos == null) {
+    scrollpos = getScrollPos();
+  } else {
+    if (getScrollPos() > scrollpos) {
+      starsGroup.rotation.x -= 0.002;
+    } else {
+      starsGroup.rotation.x += 0.002;
+    }
+    scrollpos = getScrollPos();
+  }
   setAIState();
 }
 
@@ -656,7 +721,8 @@ function setAIState() {
 }
 
 function applyKeyframe(index, position) {
-  // console.log(keyframes.sectionKeyframes[index]);
+  console.log(index);
+  console.log(keyframes.sectionKeyframes[index]);
   if (!isMobile()) {
     AIGroup.position.x = lerp(
       keyframes.sectionKeyframes[index].x,
@@ -685,12 +751,23 @@ function applyKeyframe(index, position) {
     position
   );
   material2.displacementScale = displacement;
+  var scale = (displacement + 1) / 2 * 1.95;
+  meshBlob1.scale.set(scale, scale, scale);
   emission = lerp(
     keyframes.sectionKeyframes[index].emission,
     keyframes.sectionKeyframes[index + 1].emission,
     position
   );
+  material1.emissiveIntensity = emission;
   material2.emissiveIntensity = emission;
+  var opacity = lerp(
+    keyframes.sectionKeyframes[index].coin,
+    keyframes.sectionKeyframes[index + 1].coin,
+    position
+  );
+  material1.opacity = 0.5 * (1 - opacity);
+  // var scale2 = (1 / (1 - opacity));
+  meshBlob2.material.opacity = (1 - opacity);
 }
 
 function lerp(start, end, amt) {
@@ -710,6 +787,10 @@ function initSectionInfo() {
     sectionInfo.push(s);
   }
   console.log(sectionInfo);
+}
+
+function onMouseDown() {
+  console.log("clicked");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
