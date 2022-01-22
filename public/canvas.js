@@ -705,7 +705,7 @@ function getScrollPos() {
 var scrollpos;
 
 function onScroll() {
-  if (!isMobile) {
+  if (!isMobile()) {
     //Star trails on scroll
     if (scrollpos == null) {
       scrollpos = getScrollPos();
