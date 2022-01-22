@@ -368,7 +368,7 @@ function init() {
 
   ///////////////////////////////////////////////////////////////////////////////
   window.addEventListener("resize", onWindowResize);
-  window.addEventListener("keydown", onKeyDown);
+  // window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: false });
   //on mouse down event capture
   if (!isMobile()) {
