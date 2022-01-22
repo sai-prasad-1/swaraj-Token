@@ -17,7 +17,7 @@ function NFTCards(props) {
       <div className="NFTCard">
         <div>
           <div className="characterContainer">
-            <img className="image" src ={props.image}/>
+            <img className="image" src ={props.image} alt="img"/>
           </div>
           <h3>{props.title}</h3>
           <p>{props.children}</p>
