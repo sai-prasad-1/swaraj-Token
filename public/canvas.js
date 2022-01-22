@@ -307,13 +307,16 @@ function init() {
   //coinGeometry is a plane
   var coinGeometry = new THREE.PlaneGeometry(1, 1);
   var coinTexture = new THREE.TextureLoader().load("/assets/coin.png");
+  var coinTextureOpacity = new THREE.TextureLoader().load("/assets/coin.png");
+  coinTextureOpacity.encoding = THREE.sRGBEncoding;
   coinMaterial = new THREE.MeshStandardMaterial({
     map: coinTexture,
-    color: 0xffffff,
-    // emissive: 0xffffff,
+    // color: 0xffffff,
+    // emissive: 0x007aa6,
     // emissiveIntensity: 0.5,
-    // transparent: true,
-    // opacityMap: coinTexture,
+    transparent: true,
+    alphaMap: coinTextureOpacity,
+    opacity: 1,
     side: THREE.DoubleSide
   });
   meshCoin = new THREE.Mesh(coinGeometry, coinMaterial);
