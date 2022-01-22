@@ -640,6 +640,11 @@ function getScrollPos() {
 }
 
 function onScroll() {
+  if(document.getElementById("orbClickInfo")){
+    setTimeout(()=>{
+      document.getElementById("orbClickInfo").outerHTML="";
+    },4000)
+  }
   // console.log(getScrollPos());
   setAIState();
 }
