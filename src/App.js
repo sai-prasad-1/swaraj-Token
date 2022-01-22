@@ -42,6 +42,7 @@ import feature9 from "./assets/features/09.png";
 // import diagram1 from "./assets/features/G-tokens";
 import diagram2 from "./assets/features/61";
 import diagram3 from "./assets/features/62";
+import run_gif from "./assets/run.gif";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
@@ -210,14 +211,21 @@ function App() {
   const screenWidth = useWindowWidth();
   return (
     <div className="App">
+      <div id="orbClickInfo" class="clickOnOrb">Click on the Orb <br/> ⮟</div>
       <header id="section1" className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="navigationTopBar">
             <button> Home </button>
             <button> Tokenomics </button>
-            <button onClick={() => window.location.href="#roadmap"}> RoadMap </button>
-            <button onClick={() => window.location.href="#contactUs"}> Contact Us </button>
+            <button onClick={() => (window.location.href = "#roadmap")}>
+              {" "}
+              RoadMap{" "}
+            </button>
+            <button onClick={() => (window.location.href = "#contactUs")}>
+              {" "}
+              Contact Us{" "}
+            </button>
           </div>
           <div className="mobileNav">
             <img
@@ -238,10 +246,18 @@ function App() {
             >
               <div className="item">Home</div>
               <div className="item">Tokenomics</div>
-              <div onClick={() => window.location.href="#roadmap"} className="item">
+              <div
+                onClick={() => (window.location.href = "#roadmap")}
+                className="item"
+              >
                 RoadMap
               </div>
-              <div onClick={() => window.location.href="#contactUs"} className="item">Contact Us</div>
+              <div
+                onClick={() => (window.location.href = "#contactUs")}
+                className="item"
+              >
+                Contact Us
+              </div>
             </div>
           </div>
           <div className="heroTitleContainer">
@@ -330,10 +346,11 @@ function App() {
       </section>
       <section id="section4" className="landscapeSection">
         {/* 3D Landscape */}
+        <img src={run_gif} alt="run" />
       </section>
       <section className="daoSection">
         <h2 class="roboto">Features of Swaraj Coin</h2>
-        <div style={{ marginBottom: "500px" }} className="RoadMapScroll">
+        <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <FeatureCards2
               icon={entertainment}
@@ -368,7 +385,7 @@ function App() {
           </div>
         </div>
         {/* Dao NFT etx */}
-        <div className="horizontalFlex">
+        <div style={{ marginBottom: "500px" }} className="horizontalFlex">
           <div className="diagramFrame">
             <img src={diagram2} className="diagram1" alt="diagram2" />
             <h3>$SWRJ</h3>
@@ -478,7 +495,9 @@ function App() {
 
       <section id="section6" className="roadmapSection">
         {/* RoadMap */}
-        <h2 id="roadmap" className="roboto">The RoadMap</h2>
+        <h2 id="roadmap" className="roboto">
+          The RoadMap
+        </h2>
         <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <RoadMapCards phase={phase1}></RoadMapCards>
@@ -501,9 +520,11 @@ function App() {
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
         <div className="partnerContainer">
+        <div className="partnerLogos">
+            <img src={polygon} alt="polygon" />
+          </div>
           <div className="empty"></div>
           <div className="partnerLogos">
-            <img src={polygon} alt="polygon" />
             <img src={infivr} alt="infiVR" />
           </div>
         </div>
@@ -530,7 +551,7 @@ function App() {
       </section>
       <footer id="section9">
         {/* Footer */}
-        <div  className="footerGrid">
+        <div className="footerGrid">
           <div className="footerLogo">
             <img src={logo} className="logo" alt="logo" />
             <h2>SWARAJ COIN</h2>

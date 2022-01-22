@@ -706,6 +706,12 @@ function onScroll() {
     }
     scrollpos = getScrollPos();
   }
+  if(document.getElementById("orbClickInfo")){
+    setTimeout(()=>{
+      document.getElementById("orbClickInfo").outerHTML="";
+    },4000)
+  }
+  // console.log(getScrollPos());
   setAIState();
 }
 
