@@ -1,11 +1,8 @@
-import "./polyfill";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import { store } from './app/store';
 import Prologue from "./Prologue";
 import reportWebVitals from "./reportWebVitals";
 
@@ -23,9 +20,7 @@ function SwarajCoin() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
       <SwarajCoin />
-    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
