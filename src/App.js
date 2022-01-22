@@ -23,6 +23,7 @@ import d from "./assets/1.png";
 import e from "./assets/6.png";
 import f from "./assets/7.png";
 import glitch from "./assets/glitch.mp4";
+import orion from "./assets/Orions_realm.png";
 // import metamask from "./assets/icons/download.svg";
 import menu from "./assets/icons/menu.svg";
 import close from "./assets/icons/close.svg";
@@ -211,7 +212,6 @@ function App() {
   const screenWidth = useWindowWidth();
   return (
     <div className="App">
-      <div id="orbClickInfo" class="clickOnOrb">Click on the Orb <br/> ⮟</div>
       <header id="section1" className="App-header">
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
@@ -272,6 +272,9 @@ function App() {
             </span>
             <p>
               <button> Freedom Paper V2.1 </button>
+              <div id="orbClickInfo" class="clickOnOrb">
+                Click on the Orb ⮞
+              </div>
             </p>
           </div>
           <div className="heroEmpty"></div>
@@ -329,7 +332,7 @@ function App() {
           </NFTCards>
           <NFTCards
             title="Orion Realm Land Series"
-            characters={{ a: f, b: d, c: e }}
+            image={orion}
           >
             Large Regions of devided into 5000 Virtual Land NFTs consisting of
             cities, forests, farmlands etc. They will be used to advertise,
@@ -520,7 +523,7 @@ function App() {
         {/* Partners  */}
         <h2 className="roboto">Our Partners</h2>
         <div className="partnerContainer">
-        <div className="partnerLogos">
+          <div className="partnerLogos">
             <img src={polygon} alt="polygon" />
           </div>
           <div className="empty"></div>
