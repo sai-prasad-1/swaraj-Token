@@ -18,10 +18,17 @@
   margin-left: calc(50% - 400px);
   margin-bottom: 200px;
   margin-top: 200px;
+  color: #b568f8
 }
 .TopLogo {
   height: 50px;
   margin: 10px;
+}
+strong {
+  color: white
+}
+h1 {
+  color: white;
 }
 
 @media screen and (max-width: 600px) {
