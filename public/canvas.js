@@ -43,7 +43,7 @@ window.activeSectionIndex = () => {
 //DEFINE VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 let bloomComposer, finalComposer;
-var amplitude, height, displacement, emission;
+var amplitude, height, heightdots, displacement, emission;
 let clickcapacitor = 0;
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -228,7 +228,9 @@ function init() {
   camera.add(new THREE.PointLight(0xffffff, 1));
 
   //SET VARIABLES
-  setAmplitude(2.0, 0.1);
+  amplitude = 2.0;
+  height = 0.1;
+  heightdots = 1.0;
 
   //SETUP RENDERER
   SetupRenderer();
@@ -276,6 +278,7 @@ function init() {
   });
   meshBlob1 = new THREE.Mesh(blob1, material1);
   // scene.add(meshBlob1);
+  meshBlob1.name = "AImeshBlob1";
   AIGroup.add(meshBlob1);
   meshBlob1.layers.enable(BLOOM_SCENE);
 
@@ -299,6 +302,7 @@ function init() {
     wireframeLinewidth: 3,
   });
   meshBlob2 = new THREE.Mesh(blob2, material2);
+  meshBlob2.name = "AImeshBlob2";
   // scene.add(meshBlob2);
   AIGroup.add(meshBlob2);
 
@@ -317,6 +321,7 @@ function init() {
   });
   meshCoin = new THREE.Mesh(coinGeometry, coinMaterial);
   meshCoin.rotation.set(-0.5, 0, 0);
+  meshCoin.name = "AImeshCoin";
   AIGroup.add(meshCoin);
 
   scene.add(AIGroup);
@@ -505,6 +510,13 @@ function animate(a) {
   meshCoin.rotation.y -= 0.004;
   meshCoin.rotation.x -= 0.002;
 
+  //AI Click Interaction
+  if (clickcapacitor > 0) {
+    clickcapacitor -= 0.01;
+    height = (Math.sin(clickcapacitor) * 0.2) + 0.1;
+    heightdots = (Math.sin(clickcapacitor) * 2) + 1;
+  }
+
   //Twinkle Stars
   // var starind = 0;
   // starsGroup.children.forEach((star) => {
@@ -592,12 +604,6 @@ function createSphereExTriangulated(r) {
   return geometry;
 }
 
-//Set Amplitude Function
-function setAmplitude(a, h) {
-  amplitude = a;
-  height = h;
-}
-
 //Animate Blobs Function
 function AnimateBlobs(a) {
   //Orbiting Dots
@@ -619,7 +625,7 @@ function AnimateBlobs(a) {
       vertex3.y * (amplitude / 10) + a * 0.0005,
       vertex3.z * (amplitude / 5)
     );
-    var ratio = perlin * 1 + 1;
+    var ratio = perlin * (heightdots) + 1;
     vertex3.multiplyScalar(ratio);
     positionAttribute3.setXYZ(vertexIndex, vertex3.x, vertex3.y, vertex3.z);
 
@@ -803,8 +809,16 @@ function initSectionInfo() {
   console.log(sectionInfo);
 }
 
-function onMouseDown() {
-  console.log("clicked");
+function onMouseDown(event) {
+  event.preventDefault();
+  mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+  raycaster.setFromCamera( mouse, camera );
+  var intersects = raycaster.intersectObjects( AIGroup.children ); 
+  if (intersects.length > 0) {
+    console.log(intersects);
+    clickcapacitor = 1;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
