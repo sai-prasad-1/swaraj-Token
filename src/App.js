@@ -19,9 +19,6 @@ import RoadMapCards from "./components/RoadMapCards";
 import a from "./assets/5.png";
 import b from "./assets/3.png";
 import c from "./assets/2.png";
-import d from "./assets/1.png";
-import e from "./assets/6.png";
-import f from "./assets/7.png";
 import glitch from "./assets/glitch.mp4";
 import orion from "./assets/Orions_realm.png";
 // import metamask from "./assets/icons/download.svg";
@@ -48,7 +45,7 @@ import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
 import twitter from "./assets/social-media-icons/twitter.svg";
-import whatsapp from "./assets/social-media-icons/whatsapp.svg";
+import linktree from "./assets/social-media-icons/linktree.svg";
 import FeatureCards from "./components/FeatureCards";
 import yahoofin from "./assets/News/Yahoo-Finance.png";
 import yahoonews from "./assets/News/yahoo-news-logo.png";
@@ -216,7 +213,7 @@ function App() {
         <div className="gridContainer1">
           <img src={logo} className="App-logo" alt="logo" />
           <div className="navigationTopBar">
-            <button> Home </button>
+            {/* <button> Home </button> */}
             <button> Tokenomics </button>
             <button onClick={() => (window.location.href = "#roadmap")}>
               {" "}
@@ -244,7 +241,7 @@ function App() {
               style={{ display: menuState ? "block" : "none" }}
               className="menu"
             >
-              <div className="item">Home</div>
+              {/* <div className="item">Home</div> */}
               <div className="item">Tokenomics</div>
               <div
                 onClick={() => (window.location.href = "#roadmap")}
@@ -330,10 +327,7 @@ function App() {
             would be the avatars in the metaverse with certain perks which can
             be customized and upgraded.
           </NFTCards>
-          <NFTCards
-            title="Orion Realm Land Series"
-            image={orion}
-          >
+          <NFTCards title="Orion Realm Land Series" image={orion}>
             Large Regions of devided into 5000 Virtual Land NFTs consisting of
             cities, forests, farmlands etc. They will be used to advertise,
             develop multilevel games, construct structures, hold events and
@@ -590,15 +584,25 @@ function App() {
             SWARAJ COIN ©2022 All Rights Reserved
           </div>
           <div id="contactUs" className="footerSocial">
-            <img src={telegram} className="socialIcons" alt="telegram" />
-            <img src={facebook} className="socialIcons" alt="facebook" />
-            <img src={instagram} className="socialIcons" alt="instagram" />
-            <img src={twitter} className="socialIcons" alt="twitter" />
-            <img src={whatsapp} className="socialIcons" alt="whatsapp" />
+            <a href="https://t.me/swarajcoin">
+              <img src={telegram} className="socialIcons" alt="telegram" />
+            </a>
+            <a href="https://www.facebook.com/swarajcoin">
+              <img src={facebook} className="socialIcons" alt="facebook" />
+            </a>
+            <a href="https://www.instagram.com/swarajcoinofficial/">
+              <img src={instagram} className="socialIcons" alt="instagram" />
+            </a>
+            <a href="https://twitter.com/swarajcoin">
+              <img src={twitter} className="socialIcons" alt="twitter" />
+            </a>
+            <a href="https://linktr.ee/swarajcoinofficial">
+              <img src={linktree} className="socialIcons" alt="linktree" />
+            </a>
           </div>
           <div className="footerTerms">
-            <div className="leftCol">Terms&conditions</div>
-            <div className="rightCol">Privacy Policy</div>
+            {/* <div className="leftCol">Terms&conditions</div>
+            <div className="rightCol">Privacy Policy</div> */}
           </div>
         </div>
       </footer>
