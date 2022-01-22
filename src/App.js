@@ -216,8 +216,8 @@ function App() {
           <div className="navigationTopBar">
             <button> Home </button>
             <button> Tokenomics </button>
-            <button> RoadMap </button>
-            <button> Contact Us </button>
+            <button onClick={() => window.location.href="#roadmap"}> RoadMap </button>
+            <button onClick={() => window.location.href="#contactUs"}> Contact Us </button>
           </div>
           <div className="mobileNav">
             <img
@@ -238,8 +238,10 @@ function App() {
             >
               <div className="item">Home</div>
               <div className="item">Tokenomics</div>
-              <div className="item">RoadMap</div>
-              <div className="item">Contact Us</div>
+              <div onClick={() => window.location.href="#roadmap"} className="item">
+                RoadMap
+              </div>
+              <div onClick={() => window.location.href="#contactUs"} className="item">Contact Us</div>
             </div>
           </div>
           <div className="heroTitleContainer">
@@ -476,7 +478,7 @@ function App() {
 
       <section id="section6" className="roadmapSection">
         {/* RoadMap */}
-        <h2 className="roboto">The RoadMap</h2>
+        <h2 id="roadmap" className="roboto">The RoadMap</h2>
         <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <RoadMapCards phase={phase1}></RoadMapCards>
@@ -528,7 +530,7 @@ function App() {
       </section>
       <footer id="section9">
         {/* Footer */}
-        <div className="footerGrid">
+        <div  className="footerGrid">
           <div className="footerLogo">
             <img src={logo} className="logo" alt="logo" />
             <h2>SWARAJ COIN</h2>
@@ -563,7 +565,7 @@ function App() {
           <div className="footerCopyright">
             SWARAJ COIN ©2022 All Rights Reserved
           </div>
-          <div className="footerSocial">
+          <div id="contactUs" className="footerSocial">
             <img src={telegram} className="socialIcons" alt="telegram" />
             <img src={facebook} className="socialIcons" alt="facebook" />
             <img src={instagram} className="socialIcons" alt="instagram" />
