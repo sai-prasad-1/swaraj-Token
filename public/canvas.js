@@ -371,9 +371,9 @@ function init() {
   // window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: false });
   //on mouse down event capture
-  if (!isMobile()) {
+  // if (!isMobile()) {
     window.addEventListener("mousedown", onMouseDown, false);
-  }
+  // }
   console.log(renderer.info);
 
   animate();
@@ -810,7 +810,6 @@ function initSectionInfo() {
 }
 
 function onMouseDown(event) {
-  event.preventDefault();
   mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
   raycaster.setFromCamera( mouse, camera );
