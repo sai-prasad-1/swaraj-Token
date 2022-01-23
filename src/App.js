@@ -280,7 +280,7 @@ function App() {
       </header>
       <section id="section2" className="videoSection">
         {/* Video */}
-        <Vimeo video="669116664" width="100%" height={screenWidth} autoplay />
+        <Vimeo className="video" video="669116664" width={screenWidth} height={screenWidth}  />
         {/* <ReactPlayer
           width={screenWidth}
           className="video"
