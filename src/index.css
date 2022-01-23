@@ -353,8 +353,8 @@ footer {
   letter-spacing: 0em;
 }
 .FeatureCard > img {
-  height: 150px;
-  margin-top: 10px;
+  height: 250px;
+  margin-top: 0px;
 }
 .FeatureCard > p {
   color: #aaa;

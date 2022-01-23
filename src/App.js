@@ -41,6 +41,7 @@ import feature9 from "./assets/features/09.png";
 import diagram2 from "./assets/features/61";
 import diagram3 from "./assets/features/62";
 import run_gif from "./assets/run.gif";
+import run_gif2 from "./assets/run2.gif";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
@@ -344,6 +345,7 @@ function App() {
       <section id="section4" className="landscapeSection">
         {/* 3D Landscape */}
         <img src={run_gif} alt="run" />
+        <img src={run_gif2} alt="run" />
       </section>
       <section className="daoSection">
         <h2 class="roboto">Features of Swaraj World</h2>
