@@ -1,4 +1,5 @@
 import ReactPlayer from "react-player";
+import Vimeo from "@u-wave/react-vimeo";
 import { Link } from "react-router-dom";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
@@ -270,7 +271,7 @@ function App() {
             </span>
             <p>
               <button> Freedom Paper V2.1 </button>
-              <div id="orbClickInfo" class="clickOnOrb">
+              <div id="orbClickInfo" className="clickOnOrb">
                 Click on the Orb ⮞
               </div>
             </p>
@@ -280,15 +281,16 @@ function App() {
       </header>
       <section id="section2" className="videoSection">
         {/* Video */}
-        <ReactPlayer
-          width={screenWidth < 1000 ? screenWidth : 1000}
+        <Vimeo video="669116664" width="100%" height={screenWidth} autoplay />
+        {/* <ReactPlayer
+          width={screenWidth}
           className="video"
           url="https://vimeo.com/669116664"
-        />
+        /> */}
       </section>
       <section className="storySection">
         <h2>Story So Far</h2>
-        <div class="storyContainer">
+        <div className="storyContainer">
           <p>
             Some years ago, amid our own ongoing problems, a crisis of
             unforeseen <strong>magnitude</strong> arrived in our world. Driven
@@ -348,7 +350,7 @@ function App() {
         <img src={run_gif2} alt="run" />
       </section>
       <section className="daoSection">
-        <h2 class="roboto">Features of Swaraj World</h2>
+        <h2 className="roboto">Features of Swaraj World</h2>
         <div className="RoadMapScroll">
           <div className="RoadMapContainer">
             <FeatureCards2

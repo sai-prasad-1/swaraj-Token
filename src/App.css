@@ -210,13 +210,12 @@ section {
 .videoSection {
   text-align: center;
   letter-spacing: 0.1em;
-  margin-bottom: 200px;
+  margin-bottom: 0px;
 }
 .video {
   text-align: center;
   position: relative;
   z-index: 5;
-  left: calc(50% - 500px);
 }
 .daoSection {
   margin-top: 0px;

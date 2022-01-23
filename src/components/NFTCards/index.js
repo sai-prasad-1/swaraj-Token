@@ -4,7 +4,7 @@ function NFTCards(props) {
       <div className="NFTCard">
         <div>
           <div className="characterContainer">
-            <video className="glitchVideo" src ={props.glitch} autoplay/>
+            <video className="glitchVideo" src ={props.glitch} autoPlay/>
           </div>
           <h3>{props.title}</h3>
           <p>{props.children}</p>
