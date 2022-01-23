@@ -25,7 +25,7 @@ window.activeSection = () => {
   const pos = getScrollPos();
   for (let i = numberOfSections; i >= 1; i--) {
     if (pos > getTop(`section${i}`)) {
-      console.log(`section${i}`);
+      // console.log(`section${i}`);
       return `section${i}`;
       break;
     }
@@ -35,7 +35,11 @@ window.activeSectionIndex = () => {
   const pos = getScrollPos();
   for (let i = numberOfSections; i >= 1; i--) {
     if (pos > getTop(`section${i}`)) {
-      return i - 1;
+      if (i != null) {
+        return i - 1;
+      } else {
+        return 0;
+      }
     }
   }
 };
@@ -44,6 +48,7 @@ window.activeSectionIndex = () => {
 ///////////////////////////////////////////////////////////////////////////////
 let bloomComposer, finalComposer;
 var amplitude, height, heightdots, displacement, emission;
+var audioheight = 0;
 let clickcapacitor = 0;
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -56,6 +61,7 @@ var dotsCount = 0;
 var incrementingangle = 0;
 let sectionInfo;
 let material1, material2, starmaterial, coinMaterial;
+var orbClicked = false;
 const darkMaterial = new THREE.MeshBasicMaterial({ color: "black" });
 const dotsMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,
@@ -201,6 +207,58 @@ const keyframes = {
   ],
 };
 
+//Audio Variables
+let audio, context, src, analyser, bufferLength, dataArray;
+let audioCues = {
+  sectionAudio: [
+    {
+      __filename: "/assets/audio/001.mp3",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "/assets/audio/002.mp3",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+    {
+      __filename: "",
+      played: false,
+      src: null
+    },
+  ]
+}
+
 //Get Section Start and End Positions
 initSectionInfo();
 
@@ -234,6 +292,12 @@ function init() {
 
   //SETUP RENDERER
   SetupRenderer();
+
+  //Load Audio
+  if (!isMobile())
+  {
+    initAudio();
+  }
 
   //Load texture
   const TextureLoader = new THREE.TextureLoader();
@@ -381,6 +445,30 @@ function init() {
   if (!isMobile()) AIGroup.position.x = 4;
 }
 
+function initAudio() {
+  audio = [];
+  context = new AudioContext();
+  analyser = context.createAnalyser();
+  analyser.connect(context.destination);
+  analyser.fftSize = 256;
+  for (let i = 0; i < audioCues.sectionAudio.length; i++) {
+    console.log("Loading audio for section " + i);
+    var f = audioCues.sectionAudio[i].__filename;
+    if (f != "") {
+      var a = new Audio(f);
+      a.load();
+      audioCues.sectionAudio[i].src = context.createMediaElementSource(a);
+      audioCues.sectionAudio[i].src.connect(analyser);
+      audio.push(a);
+    }
+  }
+  console.log(audio);
+  console.log(audioCues);
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+  console.log(bufferLength);
+}
+
 //Setup Renderer Function
 function SetupRenderer() {
   ///////////////////////////////////////////////////////////////////////////////
@@ -516,6 +604,9 @@ function animate(a) {
     height = (Math.sin(clickcapacitor) * 0.2) + 0.1;
     heightdots = (Math.sin(clickcapacitor) * 2) + 1;
   }
+  if (audioheight > 0) {
+    height = audioheight;
+  }
 
   //Twinkle Stars
   // var starind = 0;
@@ -606,6 +697,15 @@ function createSphereExTriangulated(r) {
 
 //Animate Blobs Function
 function AnimateBlobs(a) {
+  if (!isMobile() && (audio != null)) {
+    analyser.getByteFrequencyData(dataArray);
+    var sum = 0;
+    for (var i = 0; i < bufferLength; i++) {
+      sum += dataArray[i];
+    }
+    audioheight = (sum / bufferLength) / 100;
+  }
+
   //Orbiting Dots
   const basePositionAttribute3 =
     meshBlob3.geometry.getAttribute("basePosition");
@@ -717,30 +817,57 @@ function onScroll() {
       }
       scrollpos = getScrollPos();
     }
-    if(document.getElementById("orbClickInfo")){
-      setTimeout(()=>{
-        document.getElementById("orbClickInfo").outerHTML="";
-      },4000)
-    }
+    // if(document.getElementById("orbClickInfo")){
+    //   setTimeout(()=>{
+    //     document.getElementById("orbClickInfo").outerHTML="";
+    //   },4000)
+    // }
   }
   // console.log(getScrollPos());
+  // console.log(audioCues);
   setAIState();
 }
 
 function setAIState() {
-  const scrollPos = getScrollPos();
-  const sectionIndex = window.activeSectionIndex();
+  var scrollPos = getScrollPos();
+  var sectionIndex = window.activeSectionIndex();
+  if (!isMobile()) {
+    if (sectionIndex == undefined) sectionIndex = 0;
+    // console.log(sectionIndex);
+    playAIAudio(sectionIndex);
+  }
   if (!sectionInfo[sectionIndex]) return;
   var relScrollPos = scrollPos - sectionInfo[sectionIndex].start; // position relative to the current section
-  var height =
+  var secheight =
     sectionInfo[sectionIndex + 1].start - sectionInfo[sectionIndex].start;
-  var multiplier = relScrollPos / height;
+  var multiplier = relScrollPos / secheight;
   applyKeyframe(sectionIndex, multiplier);
 }
 
+function playAIAudio(index) {
+  if (context.state == "suspended") { initAudio();}
+
+  if (audio != null && orbClicked) {
+    if (!audioCues.sectionAudio[index]) {
+      console.log(audioCues);
+      return;
+    }
+    if (!audioCues.sectionAudio[index].played) {
+      if (audio[index] != null) {
+        // console.log(audio[index]);
+        audio[index].play();
+        console.log("playing audio " + index);
+      } else {
+        console.log("audio " + index + " is null");
+      }
+      audioCues.sectionAudio[index].played = true;
+    }
+  }
+}
+
 function applyKeyframe(index, position) {
-  console.log(index);
-  console.log(keyframes.sectionKeyframes[index]);
+  // console.log(index);
+  // console.log(keyframes.sectionKeyframes[index]);
   if (!isMobile()) {
     AIGroup.position.x = lerp(
       keyframes.sectionKeyframes[index].x,
@@ -785,7 +912,8 @@ function applyKeyframe(index, position) {
   );
   material1.opacity = 0.5 * (1 - opacity);
   var scale2 = (1 / (1 - opacity));
-  if (scale2 > 1.6) { scale2 = 1.6; }
+  if (scale2 > 1.7) { scale2 = 1.7; }
+  if (scale2 < 1) { scale2 = 1; }
   meshBlob2.material.opacity = (1 - opacity);
   meshCoin.scale.set(scale2, scale2, scale2);
 }
@@ -806,7 +934,7 @@ function initSectionInfo() {
     }
     sectionInfo.push(s);
   }
-  console.log(sectionInfo);
+  // console.log(sectionInfo);
 }
 
 function onMouseDown(event) {
@@ -815,8 +943,12 @@ function onMouseDown(event) {
   raycaster.setFromCamera( mouse, camera );
   var intersects = raycaster.intersectObjects( AIGroup.children ); 
   if (intersects.length > 0) {
-    console.log(intersects);
+    // console.log(intersects);
     clickcapacitor = 1;
+    orbClicked = true;
+    if (!isMobile()) {
+      setAIState();
+    }
   }
 }
 
