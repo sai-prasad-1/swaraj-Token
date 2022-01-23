@@ -158,19 +158,44 @@ export function Prologue() {
               SWARAJ COIN ©2022 All Rights Reserved
             </div>
             <div id="contactUs" className="footerSocial">
-              <a href="https://t.me/swarajcoin">
-                <img src={telegram} className="socialIcons" alt="telegram" />
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href="https://t.me/swarajcoin"
+              >
+                <img
+                  rel="noreferrer"
+                  src={telegram}
+                  className="socialIcons"
+                  alt="telegram"
+                />
               </a>
-              <a href="https://www.facebook.com/swarajcoin">
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href="https://www.facebook.com/swarajcoin"
+              >
                 <img src={facebook} className="socialIcons" alt="facebook" />
               </a>
-              <a href="https://www.instagram.com/swarajcoinofficial/">
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href="https://www.instagram.com/swarajcoinofficial/"
+              >
                 <img src={instagram} className="socialIcons" alt="instagram" />
               </a>
-              <a href="https://twitter.com/swarajcoin">
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href="https://twitter.com/swarajcoin"
+              >
                 <img src={twitter} className="socialIcons" alt="twitter" />
               </a>
-              <a href="https://linktr.ee/swarajcoinofficial">
+              <a
+                rel="noreferrer"
+                target="_blank"
+                href="https://linktr.ee/swarajcoinofficial"
+              >
                 <img src={linktree} className="socialIcons" alt="linktree" />
               </a>
             </div>

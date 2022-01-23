@@ -281,9 +281,9 @@ function App() {
       <section id="section2" className="videoSection">
         {/* Video */}
         <ReactPlayer
-          width={screenWidth < 600 ? screenWidth : 600}
+          width={screenWidth < 1000 ? screenWidth : 1000}
           className="video"
-          url="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+          url="https://vimeo.com/669116664"
         />
       </section>
       <section className="storySection">
@@ -531,19 +531,39 @@ function App() {
       <section id="section8" className="featuredSection">
         <h2 className="roboto">Featured On</h2>
         <div className="featuredOnLinks">
-          <a target="_blank" href="https://finance.yahoo.com/news/swaraj-set-launch-metaverse-gaming-142500745.html">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://finance.yahoo.com/news/swaraj-set-launch-metaverse-gaming-142500745.html"
+          >
             <img src={yahoofin} alt="Yahoo Finance" />
           </a>
-          <a target="_blank" href="https://news.yahoo.com/swaraj-set-launch-metaverse-gaming-142500745.html">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://news.yahoo.com/swaraj-set-launch-metaverse-gaming-142500745.html"
+          >
             <img src={yahoonews} alt="Yahoo News" />
           </a>
-          <a target="_blank" href="https://cryptonews.com/news/swaraj-set-launch-its-metaverse-gaming-ecosystem.htm">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://cryptonews.com/news/swaraj-set-launch-its-metaverse-gaming-ecosystem.htm"
+          >
             <img src={cryptonews} alt="Crypto News" />
           </a>
-          <a target="_blank" href="https://www.newsbtc.com/press-releases/swaraj-announces-the-launch-of-a-new-metaverse-gaming-project-and-its-token/">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://www.newsbtc.com/press-releases/swaraj-announces-the-launch-of-a-new-metaverse-gaming-project-and-its-token/"
+          >
             <img src={newsbtc} alt="NewsBTC" />
           </a>
-          <a target="_blank" href="https://cointelegraph.com/press-releases/swaraj-to-launch-their-metaverse-multi-utility-token-shortly">
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://cointelegraph.com/press-releases/swaraj-to-launch-their-metaverse-multi-utility-token-shortly"
+          >
             <img src={cointelegrah} alt="Cointelegraph" />
           </a>
         </div>
@@ -586,19 +606,40 @@ function App() {
             SWARAJ COIN ©2022 All Rights Reserved
           </div>
           <div id="contactUs" className="footerSocial">
-            <a target="_blank" href="https://t.me/swarajcoin">
-              <img src={telegram} className="socialIcons" alt="telegram" />
+            <a rel="noreferrer" target="_blank" href="https://t.me/swarajcoin">
+              <img
+                rel="noreferrer"
+                src={telegram}
+                className="socialIcons"
+                alt="telegram"
+              />
             </a>
-            <a target="_blank" href="https://www.facebook.com/swarajcoin">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://www.facebook.com/swarajcoin"
+            >
               <img src={facebook} className="socialIcons" alt="facebook" />
             </a>
-            <a target="_blank" href="https://www.instagram.com/swarajcoinofficial/">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://www.instagram.com/swarajcoinofficial/"
+            >
               <img src={instagram} className="socialIcons" alt="instagram" />
             </a>
-            <a target="_blank" href="https://twitter.com/swarajcoin">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://twitter.com/swarajcoin"
+            >
               <img src={twitter} className="socialIcons" alt="twitter" />
             </a>
-            <a target="_blank" href="https://linktr.ee/swarajcoinofficial">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://linktr.ee/swarajcoinofficial"
+            >
               <img src={linktree} className="socialIcons" alt="linktree" />
             </a>
           </div>

@@ -216,8 +216,7 @@ section {
   text-align: center;
   position: relative;
   z-index: 5;
-  width: 600px;
-  left: calc(50% - 300px);
+  left: calc(50% - 500px);
 }
 .daoSection {
   margin-top: 0px;
@@ -291,7 +290,12 @@ section {
     margin-left: calc(50% - 700px);
   }
 }
-
+@media screen and (max-width:1000px) {
+  .video {
+    position: relative;
+    left: 0;
+  }
+}
 @media screen and (max-width: 800px) {
   .clickOnOrb {
     display: none;
