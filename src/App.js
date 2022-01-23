@@ -1,4 +1,3 @@
-import ReactPlayer from "react-player";
 import Vimeo from "@u-wave/react-vimeo";
 import { Link } from "react-router-dom";
 import { useWindowWidth } from "@react-hook/window-size";
