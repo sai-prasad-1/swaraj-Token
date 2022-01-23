@@ -191,6 +191,12 @@ footer {
 .footerLogo > img {
   height: 60px;
 }
+.footerLogo > h2 {
+  background: -webkit-linear-gradient(left, #a64af7, #1daefd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 14px;
+}
 .footerLeft {
   grid-area: fleft;
   width: 300px;
