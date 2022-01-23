@@ -227,12 +227,12 @@ let audioCues = {
       src: null
     },
     {
-      __filename: "",
+      __filename: "/assets/audio/003.mp3",
       played: false,
       src: null
     },
     {
-      __filename: "",
+      __filename: "/assets/audio/004.mp3",
       played: false,
       src: null
     },
@@ -460,6 +460,8 @@ function initAudio() {
       audioCues.sectionAudio[i].src = context.createMediaElementSource(a);
       audioCues.sectionAudio[i].src.connect(analyser);
       audio.push(a);
+    } else {
+      audio.push(null);
     }
   }
   console.log(audio);
