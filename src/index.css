@@ -15,6 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
   background-color: #000;
+  overflow-x: hidden;
 }
 body::-webkit-scrollbar {
   width: 0.5em;
@@ -41,8 +42,8 @@ button {
   color: white;
   position: relative;
   z-index: 1;
-  font-size: 14px;
-  font-weight: 100;
+  font-size: 18px;
+  font-weight: 800;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   letter-spacing: 2px;
 }
@@ -129,7 +130,11 @@ button:hover:after {
   font-weight: 600;
   font-size: 15px;
 }
-
+.glitchVideo{
+  height:220px;
+  margin-left: 20px;
+  margin-bottom: -10px;
+}
 .characterMiddle {
   height: 220px;
   position: absolute;
@@ -154,11 +159,19 @@ button:hover:after {
 .characterContainer {
   margin-left: -25px;
 }
+.characterContainer > .image {
+  width:240px;
+  margin:10px;
+  margin-top:50px;
+  margin-bottom:10px;
+  margin-left:30px
+}
 
 footer {
   min-height: 300px;
   text-align: center;
   letter-spacing: 0em;
+  background-color: black;
 }
 
 .footerGrid {
@@ -169,7 +182,6 @@ footer {
     "fleft fleft flocation flocation fright fright"
     "fcopy fcopy fsocial fsocial fterms fterms";
   justify-items: center;
-  margin-bottom: 50px;
 }
 
 .footerLogo {
@@ -178,6 +190,12 @@ footer {
 }
 .footerLogo > img {
   height: 60px;
+}
+.footerLogo > h2 {
+  background: -webkit-linear-gradient(left, #a64af7, #1daefd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 14px;
 }
 .footerLeft {
   grid-area: fleft;
@@ -233,14 +251,49 @@ footer {
   margin-left: 10px;
   margin-right: 10px;
 }
-
-.RoadMapCard {
+.FeatureCard2 {
   background: linear-gradient(180deg, #17063c 0%, #1c0120 100%);
   height: auto;
+  width: auto;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 20px;
+  padding-top: 20px;
+  align-self: top;
+  letter-spacing: 0em;
+}
+.FeatureCard2 > div {
+  border: 1px solid #a64af7;
+  border-radius: 10px;
+  min-height: 400px;
+  width: 270px;
+  text-align: left;
+  padding-top: 0px;
+}
+.FeatureCard2 > div > h3 {
+  margin: 10px;
+  margin-top: -10px;
+  margin-bottom: 0px;
+  font-size: 23px;
+  text-align: center;
+}
+.FeatureCard2 > div > p {
+  color: #aaa;
+  text-align: justify;
+  margin: 20px;
+}
+.FeatureCard2 > div > img {
+  margin: 50px;
+  margin-left: 95px;
+}
+.RoadMapCard {
+  background: linear-gradient(180deg, #17063c 0%, #1c0120 100%);
+  height: 300px;
   width: 300px;
   margin: 10px;
   border-radius: 20px;
   padding: 20px;
+  padding-top: 20px;
   align-self: top;
   letter-spacing: 0em;
 }
@@ -248,15 +301,20 @@ footer {
   border: 1px solid #a64af7;
   border-radius: 10px;
   height: 300px;
+  min-height: 300px;
   width: 300px;
   text-align: left;
+  padding-top: 0px;
 }
 .RoadMapCard > div > h3 {
   margin: 10px;
+  margin-top: -10px;
+  margin-bottom: 0px;
   font-size: 25px;
 }
 .RoadMapCard > div > .task {
   margin-left: 10px;
+  width: 250px;
 }
 .RoadMapCard > div > .task {
   margin-left: 10px;
@@ -268,12 +326,12 @@ footer {
 }
 .status {
   height: 20px;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 800;
   /* Abs positioning makes it not take up vert space */
   position: relative;
-  left: 230px;
-  top: 200px;
+  left: 250px;
+  top: 290px;
   /* Rotate from top left corner (not default) */
   transform-origin: 0 0;
   transform: rotate(-90deg);
@@ -281,6 +339,7 @@ footer {
   text-shadow: -1px 1px 0 #a64af7, 1px 1px 0 #a64af7, 1px -1px 0 #a64af7,
     -1px -1px 0 #a64af7;
 }
+
 
 .FeatureCard {
   background: linear-gradient(180deg, #17063c 0%, #1c0120 100%);
@@ -294,8 +353,8 @@ footer {
   letter-spacing: 0em;
 }
 .FeatureCard > img {
-  height: 150px;
-  margin-top: 10px;
+  height: 250px;
+  margin-top: 0px;
 }
 .FeatureCard > p {
   color: #aaa;
@@ -506,7 +565,6 @@ footer {
       "fcopy"
       "fterms";
     justify-items: center;
-    margin-bottom: 50px;
   }
 
   .footerLogo {

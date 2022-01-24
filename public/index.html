@@ -5,12 +5,25 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Swaraj coin"
-    />
+    <meta name="description" content="Swaraj coin" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/708453/perlin.js"></script>
+    <script type="x-shader/x-vertex" id="vertexshader">
+      varying vec2 vUv;
+      void main() {
+      	vUv = uv;
+      	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
+      uniform sampler2D baseTexture;
+      uniform sampler2D bloomTexture;
+      varying vec2 vUv;
+      void main() {
+      	gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+      }
+    </script>
 
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -31,7 +44,6 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <canvas class="canvas" id="bg"></canvas>
-
     <div id="root"></div>
     <!--
       This HTML file is a template.

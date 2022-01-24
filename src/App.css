@@ -3,7 +3,20 @@ html {
 }
 .App {
   text-align: justify;
-  height: 100vh;
+  flex-basis: 50%;
+  height: 100%;
+  position: absolute;
+  width:100%;
+}
+
+section {
+  scroll-snap-align: center;
+}
+header{
+  scroll-snap-align: start;
+}
+footer{
+  scroll-snap-align:end;
 }
 .App-logo {
   height: 90px;
@@ -26,21 +39,27 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-    "logo logo logo logo logo logo  navigation navigation"
-    "title title  title title title title heroEmpty heroEmpty";
+  "logo logo logo logo logo logo  navigation navigation"
+    "title title  title title title heroEmpty heroEmpty heroEmpty";
 }
 .navigationTopBar {
   grid-area: navigation;
   margin-top: 20px;
 }
 .heroTitleContainer {
+  padding-left: 10px;
   grid-area: title;
   text-align: left;
-  margin-left: 70px;
+  margin-left: 60px;
   margin-top: 100px;
+  border-radius: 10px;
+  text-shadow: 0 0 20px #a64af7;
 }
 .heroEmpty {
+  letter-spacing: normal;
   grid-area: heroEmpty;
+  text-align: center;
+  color: #1974c9
 }
 section {
   min-height: 300px;
@@ -55,12 +74,36 @@ section {
   justify-content: flex-end;
   align-content: flex-end;
 }
-
+.landscapeSection{
+  height:calc(100vw * 9/16)
+}
+.landscapeSection > img {
+  position: absolute;
+  width:100vw ;
+}
 .partnerSection {
   text-align: center;
 }
 .partnerSection > h2 {
   font-size: 35px;
+}
+
+.storyContainer{
+  margin-left: 100px;
+  margin-right: 100px;
+  letter-spacing: normal;
+  text-align: justify;
+  font-size: 25px;
+  display: flex;
+  flex-direction: row
+}
+.storyContainer > p{
+  width:50%;
+  margin:10px;
+  color: #a64af7
+}
+.storyContainer > p > strong {
+  color:white;
 }
 
 .roadmapSection {
@@ -146,6 +189,15 @@ section {
 .featuresSection > h1 {
   font-size: 30px;
 }
+.storySection{
+  text-align: center;
+  background-color: #000c;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.storySection >h2{
+  font-size: 30px;
+}
 .featuresContainer {
   display: flex;
   flex-direction: row;
@@ -158,36 +210,151 @@ section {
 .videoSection {
   text-align: center;
   letter-spacing: 0.1em;
-  margin-bottom: 200px;
+  margin-bottom: 0px;
 }
 .video {
   text-align: center;
   position: relative;
   z-index: 5;
-  width: 600px;
-  left: calc(50% - 300px);
 }
 .daoSection {
-  margin: 100px;
   margin-top: 0px;
+  text-align: center;
 }
-.daoSection > img {
-  height: 200px;
-  margin: 100px 0px 100px 0px;
+.daoSection >h2{
+  font-size: 30px;
 }
-@media screen and (max-width: 1020px) {
+.diagramFrame{
+  background-color: #000c;
+  height: auto;
+  margin:10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  text-align: center;
+}
+.diagramFrame > img {
+  width:calc(50vw - 20px);
+}
+.diagram1{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.horizontalFlex {
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  width:100%;
 }
 
-@media screen and (max-width: 800px) {
-  .navigationTopBar {
-    display: none;
+.featuredSection{
+  text-align:center
+}
+.featuredOnLinks{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height: 50px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.featuredOnLinks > a > img {
+  height: 50px;
+  margin-top: 20px;
+}
+.partnerContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.partnerContainer > .empty {
+  width: 50%;
+  height: 400px;
+}
+.partnerLogos{
+  display: flex;
+  flex-direction: column;
+}
+.partnerLogos > img {
+  width: 300px;
+}
+.clickOnOrb {
+  position: absolute;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top:30px
+}
+@media screen and (min-width: 1200px) {
+  .featuresContainer{
+    margin-left: calc(50% - 700px);
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width:1000px) {
   .video {
     position: relative;
     left: 0;
   }
+}
+@media screen and (max-width: 800px) {
+  .clickOnOrb {
+    display: none;
+  }
+  .navigationTopBar {
+    display: none;
+  }
+  .storyContainer{
+    margin-left: 10px;
+    margin-right: 10px;
+    letter-spacing: normal;
+    text-align: justify;
+    font-size: 25px;
+    display: block;
+  }
+  .storyContainer > p{
+    width:calc(100% - 20px);
+    color: #a64af7
+  }
+}
+@media screen and (max-width: 600px) {
+  .partnerContainer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+  .partnerContainer > .empty {
+    width: 100%;
+    height: 300px;
+  }
+  .partnerLogos{
+    display: flex;
+    flex-direction: column;
+  }
+  .partnerLogos > img {
+    width: 250px;
+    margin-left: calc(50% - 125px);
+  }
+  
+  .video {
+    position: relative;
+    left: 0;
+  }
+  .horizontalFlex {
+    align-content: center;
+    display: block;
+    width:100%;
+  }
+  .diagramFrame{
+  background-color: #000;
+  height: auto;
+  text-align: center;
+}
+.diagramFrame > img {
+  width:100%;
+}
+.diagram1{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
   .cardContainer {
     margin-top: 200px;
     margin-right: 0px;
