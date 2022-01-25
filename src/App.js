@@ -183,7 +183,7 @@ function Story(props) {
           their home by their own magical calamity, <strong>the Elves</strong>{" "}
           and their peoples invaded our world instead. They seized control of
           ...
-          <a href="#"
+          <a href="/"
             style={{ cursor: "pointer", color: "#fff" }}
             onClick={props.onChange(false)}
           >
@@ -219,7 +219,7 @@ function Story(props) {
           and learn to live in peace, not a single one of us will survive this
           threat. <strong>Humans, Elves, Trolls, Fairies</strong>, we will all
           be wiped out.{" "}
-          <a href="#" style={{ cursor: "pointer", color: "#fff" }}>See less</a>
+          <a href="/" style={{ cursor: "pointer", color: "#fff" }}>See less</a>
         </p>
       </div>
     );
