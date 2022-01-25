@@ -9,11 +9,7 @@ import polygon_badge from "./assets/icons/polygon-badge.png";
 import infivr from "./assets/icons/infivr.png";
 import "./App.css";
 import Carousal from "./components/Carousal";
-import NFTCards from "./components/NFTCards";
 import RoadMapCards from "./components/RoadMapCards";
-import a from "./assets/5.png";
-import b from "./assets/3.png";
-import c from "./assets/2.png";
 import glitch from "./assets/glitch.mp4";
 import orion from "./assets/Orions_realm.png";
 // import metamask from "./assets/icons/download.svg";
@@ -35,8 +31,6 @@ import feature9 from "./assets/features/09.png";
 // import diagram1 from "./assets/features/G-tokens";
 import diagram2 from "./assets/features/61";
 import diagram3 from "./assets/features/62";
-import run_gif from "./assets/run.gif";
-import run_gif2 from "./assets/run2.gif";
 import telegram from "./assets/social-media-icons/telegram.svg";
 import instagram from "./assets/social-media-icons/instagram.svg";
 import facebook from "./assets/social-media-icons/facebook.svg";
@@ -48,7 +42,6 @@ import yahoonews from "./assets/News/yahoo-news-logo.png";
 import newsbtc from "./assets/News/newsbtc-logo.jpg";
 import cryptonews from "./assets/News/Cryptonews.png";
 import cointelegrah from "./assets/News/cointelegraph.png";
-import Deck from "./components/Deck";
 const phase1 = {
   title: "Phase 1: 2021",
   status: "DONE",
@@ -181,7 +174,7 @@ const phase10 = {
 };
 
 function Story(props) {
-  if (props.short == true) {
+  if (props.short === true) {
     return (
       <div className="storyContainerShort">
         <p>
@@ -190,7 +183,7 @@ function Story(props) {
           their home by their own magical calamity, <strong>the Elves</strong>{" "}
           and their peoples invaded our world instead. They seized control of
           ...
-          <a
+          <a href="#"
             style={{ cursor: "pointer", color: "#fff" }}
             onClick={props.onChange(false)}
           >
@@ -226,7 +219,7 @@ function Story(props) {
           and learn to live in peace, not a single one of us will survive this
           threat. <strong>Humans, Elves, Trolls, Fairies</strong>, we will all
           be wiped out.{" "}
-          <a style={{ cursor: "pointer", color: "#fff" }}>See less</a>
+          <a href="#" style={{ cursor: "pointer", color: "#fff" }}>See less</a>
         </p>
       </div>
     );
@@ -304,7 +297,7 @@ function App() {
             <div className="powered">
               Powered By
               <br />
-              <img src={polygon_badge} />
+              <img src={polygon_badge} alt="polygon" />
             </div>
             <p>
               <button> Freedom Paper V2.1 </button>
@@ -366,7 +359,7 @@ function App() {
           </div>
           <div className="deviants_animated"></div>
           <div className="deviants_square_frame">
-          <marquee direction="up" height="300">
+          {/* <marquee direction="up" height="300">
               <div></div>
               <div></div>
               <div></div>
@@ -379,7 +372,7 @@ function App() {
               <div></div>
               <div></div>
               <div></div>
-            </marquee>
+            </marquee> */}
           </div>
         </div>
         <div className="orionsrealm">

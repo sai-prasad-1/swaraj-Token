@@ -49,7 +49,7 @@ function RoadMapCards(props) {
     <div className="RoadMapCardFrame">
       <Timeline last={props.last}></Timeline>
       <animated.div
-      className="FeatureCard"
+      className="FeatureCard RoadMapCard"
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseMove={({ clientX, clientY }) => {
@@ -88,7 +88,7 @@ function RoadMapCards(props) {
           (x, y, s) =>
             `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
         ),
-      }} className="RoadMapCard">
+      }} >
         <div>
           <div className="status">{props.phase.status}</div>
           <h3>{props.phase.title}</h3>
