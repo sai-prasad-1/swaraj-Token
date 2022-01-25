@@ -25,6 +25,12 @@
       }
     </script>
 
+    <script>
+      window.onload = ()=>{
+        document.getElementById("loading").outerHTML=""
+      }
+    </script>
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -40,11 +46,44 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Swaraj Coin</title>
+    <style>
+        .loading_screen{
+          position: fixed;
+          top:0;
+          left:0;
+          width: 100%;
+          height: 100%;
+          z-index:99;
+          background-color: black;
+        }.loading_screen > div{
+          position: absolute;
+          top:calc(50% - 100px);
+          left:25%;
+        }
+          
+        
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <canvas class="canvas" id="bg"></canvas>
+    <!-- <canvas class="canvas" id="bg"></canvas> -->
     <div id="root"></div>
+    <div id="loading" class="loading_screen">
+      <div class="container">
+        <div class="cube">
+          <div class="sides">
+            <div class="top"></div>
+            <div class="right"></div>
+            <div class="bottom"></div>
+            <div class="left"></div>
+            <div class="front"></div>
+            <div class="back"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cursor-dot-outline"></div>
+    <div class="cursor-dot"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -55,6 +94,170 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script type="module" src="./canvas.js"></script>
+    <!-- <script type="module" src="./canvas.js"></script> -->
+    <script>
+      getTop = (element) => {
+        if (!element) return null;
+        return (
+          element.offsetTop +
+          (element.offsetParent && getTop(element.offsetParent))
+        );
+      };
+      window.onscroll = () => {
+        if (document.getElementsByClassName("timelineStops")) {
+          stops = document.getElementsByClassName("timelineStops");
+          lines = document.getElementsByClassName("scrollLine");
+          for (let i = 0; i < stops.length; i++) {
+            const stop = stops[i];
+            if (stops[i + 1]) {
+              const nextStop = stops[i + 1];
+              const line = lines[i];
+              if (getTop(nextStop) - window.scrollY > window.innerHeight / 2) {
+                line.style.height =
+                  20 +
+                  window.scrollY +
+                  window.innerHeight / 2 -
+                  getTop(stop) +
+                  "px";
+              } else {
+                line.style.height = 20 + getTop(nextStop) - getTop(stop) + "px";
+              }
+            }
+            if (getTop(stop) - window.scrollY < window.innerHeight / 2) {
+              stop.style.backgroundColor = "#1daefd";
+            } else {
+              stop.style.backgroundColor = "#a64af7";
+            }
+          }
+        } else console.log("Not found");
+      };
+
+      var cursor = {
+        delay: 2,
+        _x: 0,
+        _y: 0,
+        endX: window.innerWidth / 2,
+        endY: window.innerHeight / 2,
+        cursorVisible: true,
+        cursorEnlarged: false,
+        $dot: document.querySelector(".cursor-dot"),
+        $outline: document.querySelector(".cursor-dot-outline"),
+
+        init: function () {
+          // Set up element sizes
+          this.dotSize = this.$dot.offsetWidth;
+          this.outlineSize = this.$outline.offsetWidth;
+
+          this.setupEventListeners();
+          this.animateDotOutline();
+        },
+
+        //     updateCursor: function(e) {
+        //         var self = this;
+
+        //         console.log(e)
+
+        //         // Show the cursor
+        //         self.cursorVisible = true;
+        //         self.toggleCursorVisibility();
+
+        //         // Position the dot
+        //         self.endX = e.pageX;
+        //         self.endY = e.pageY;
+        //         self.$dot.style.top = self.endY + 'px';
+        //         self.$dot.style.left = self.endX + 'px';
+        //     },
+
+        setupEventListeners: function () {
+          var self = this;
+
+          // Anchor hovering
+          document.querySelectorAll("a").forEach(function (el) {
+            el.addEventListener("mouseover", function () {
+              self.cursorEnlarged = true;
+              self.toggleCursorSize();
+            });
+            el.addEventListener("mouseout", function () {
+              self.cursorEnlarged = false;
+              self.toggleCursorSize();
+            });
+          });
+
+          // Click events
+          document.addEventListener("mousedown", function () {
+            self.cursorEnlarged = true;
+            self.toggleCursorSize();
+          });
+          document.addEventListener("mouseup", function () {
+            self.cursorEnlarged = false;
+            self.toggleCursorSize();
+          });
+
+          document.addEventListener("mousemove", function (e) {
+            // Show the cursor
+            self.cursorVisible = true;
+            self.toggleCursorVisibility();
+
+            // Position the dot
+            self.endX = e.pageX;
+            self.endY = e.pageY;
+            self.$dot.style.top = self.endY + "px";
+            self.$dot.style.left = self.endX + "px";
+          });
+
+          // Hide/show cursor
+          document.addEventListener("mouseenter", function (e) {
+            self.cursorVisible = true;
+            self.toggleCursorVisibility();
+            self.$dot.style.opacity = 1;
+            self.$outline.style.opacity = 1;
+          });
+
+          document.addEventListener("mouseleave", function (e) {
+            self.cursorVisible = true;
+            self.toggleCursorVisibility();
+            self.$dot.style.opacity = 0;
+            self.$outline.style.opacity = 0;
+          });
+        },
+
+        animateDotOutline: function () {
+          var self = this;
+
+          self._x += (self.endX - self._x) / self.delay;
+          self._y += (self.endY - self._y) / self.delay;
+          self.$outline.style.top = self._y + "px";
+          self.$outline.style.left = self._x + "px";
+
+          requestAnimationFrame(this.animateDotOutline.bind(self));
+        },
+
+        toggleCursorSize: function () {
+          var self = this;
+
+          if (self.cursorEnlarged) {
+            self.$dot.style.transform = "translate(-50%, -50%) scale(0.75)";
+            self.$outline.style.transform = "translate(-50%, -50%) scale(1.5)";
+          } else {
+            self.$dot.style.transform = "translate(-50%, -50%) scale(1)";
+            self.$outline.style.transform = "translate(-50%, -50%) scale(1)";
+          }
+        },
+
+        toggleCursorVisibility: function () {
+          var self = this;
+
+          if (self.cursorVisible) {
+            self.$dot.style.opacity = 1;
+            self.$outline.style.opacity = 1;
+          } else {
+            self.$dot.style.opacity = 0;
+            self.$outline.style.opacity = 0;
+          }
+        },
+      };
+
+      cursor.init();
+    </script>
   </body>
 </html>

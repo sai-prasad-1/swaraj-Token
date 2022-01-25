@@ -4,17 +4,11 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { useTitle } from "react-use";
 import { useState } from "react";
 import logo from "./assets/icons/swaraj.png";
-import entertainment from "./assets/icons/entertainment.svg";
-import monetize from "./assets/icons/monetize.svg";
-import develop from "./assets/icons/develop.svg";
-import gameplay from "./assets/icons/gameplay.svg";
-import explore from "./assets/icons/explore.svg";
 import polygon from "./assets/icons/polygon.png";
 import polygon_badge from "./assets/icons/polygon-badge.png";
 import infivr from "./assets/icons/infivr.png";
-import personalization from "./assets/icons/personalization.svg";
 import "./App.css";
-import FeatureCards2 from "./components/FeatureCard2";
+import Carousal from "./components/Carousal";
 import NFTCards from "./components/NFTCards";
 import RoadMapCards from "./components/RoadMapCards";
 import a from "./assets/5.png";
@@ -54,6 +48,7 @@ import yahoonews from "./assets/News/yahoo-news-logo.png";
 import newsbtc from "./assets/News/newsbtc-logo.jpg";
 import cryptonews from "./assets/News/Cryptonews.png";
 import cointelegrah from "./assets/News/cointelegraph.png";
+import Deck from "./components/Deck";
 const phase1 = {
   title: "Phase 1: 2021",
   status: "DONE",
@@ -76,13 +71,6 @@ const phase2 = {
     { stat: "completed", text: "Private Sale" },
     { stat: "incomplete", text: "Website Launch v2" },
     { stat: "completed", text: "Code audit Completed" },
-  ],
-};
-
-const phase2continued = {
-  title: "Phase 2: Continued",
-  status: "IN-PROGRESS",
-  tasks: [
     { stat: "completed", text: "The Deviants NFT Drop" },
     { stat: "completed", text: "Presale" },
     { stat: "completed", text: "Coin Gecko & CoinMarketCap listing" },
@@ -100,12 +88,6 @@ const phase3 = {
     { stat: "incomplete", text: "Listing on CEX" },
     { stat: "incomplete", text: "Listing on Swaps" },
     { stat: "incomplete", text: "Aditional Game Studio Partnerships" },
-  ],
-};
-const phase3continued = {
-  title: "Phase 3: Continued",
-  status: "WAIT FOR IT",
-  tasks: [
     { stat: "incomplete", text: "Dedicated wallet for charity" },
     {
       stat: "incomplete",
@@ -148,13 +130,6 @@ const phase6 = {
       text: "Swaraj army reaching milestones & burn event",
     },
     { stat: "incomplete", text: "Building swaraj ecosystem" },
-  ],
-};
-
-const phase6continued = {
-  title: "Phase 6: Continued",
-  status: "WAIT FOR IT",
-  tasks: [
     { stat: "incomplete", text: "Voting rights to the people- G Token" },
     { stat: "incomplete", text: "Implement 1% Burn Tax on transactions" },
     { stat: "incomplete", text: "Swaraj Go Green Movement" },
@@ -205,8 +180,61 @@ const phase10 = {
   ],
 };
 
+function Story(props) {
+  if (props.short == true) {
+    return (
+      <div className="storyContainerShort">
+        <p>
+          Some years ago, amid our own ongoing problems, a crisis of unforeseen{" "}
+          <strong>magnitude</strong> arrived in our world. Driven away from
+          their home by their own magical calamity, <strong>the Elves</strong>{" "}
+          and their peoples invaded our world instead. They seized control of
+          ...
+          <a
+            style={{ cursor: "pointer", color: "#fff" }}
+            onClick={props.onChange(false)}
+          >
+            Read More
+          </a>
+        </p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="storyContainer">
+        <p>
+          Some years ago, amid our own ongoing problems, a crisis of unforeseen{" "}
+          <strong>magnitude</strong> arrived in our world. Driven away from
+          their home by their own magical calamity, <strong>the Elves</strong>{" "}
+          and their peoples invaded our world instead. They seized control of a{" "}
+          <strong>landmass</strong> and refused all the feeble attempts at
+          diplomacy, defending to the death their new home. They were determined
+          to control this <strong>"new world"</strong> the way they did theirs.
+          We retaliated, of course, trying to regain the land that they{" "}
+          <strong>stole</strong> from us. As powerful as I am, I felt I could
+          not sit back and do nothing.
+        </p>
+        <p>
+          {" "}
+          I tried to reason with both sides. Even used threats. I warned them of
+          my <strong>premonitions</strong>. Nothing worked. Politicians and
+          leaders on both sides were determined to use this conflict for their
+          own agendas. War could not be prevented.{" "}
+          <strong>A vivid dream</strong> came to me many times now, and I am
+          convinced the threat is real. There is something worse coming, much
+          worse. If we do not stop this pointless fighting, if we do not unite
+          and learn to live in peace, not a single one of us will survive this
+          threat. <strong>Humans, Elves, Trolls, Fairies</strong>, we will all
+          be wiped out.{" "}
+          <a style={{ cursor: "pointer", color: "#fff" }}>See less</a>
+        </p>
+      </div>
+    );
+  }
+}
 function App() {
   useTitle("Swaraj Coin");
+  const [short, setShort] = useState(true);
   const [menuState, toggleMenu] = useState(false);
   const screenWidth = useWindowWidth();
   return (
@@ -215,7 +243,7 @@ function App() {
         <div className="gridContainer1">
           <div className="App-logo">
             <img src={logo} alt="logo" />
-            <div className="logo-text">SWARAJ COIN</div>
+            <div className="logo-text"></div>
           </div>
           <div className="navigationTopBar">
             {/* <button> Home </button> */}
@@ -274,13 +302,15 @@ function App() {
             </span>
             <br />
             <div className="powered">
+              Powered By
+              <br />
               <img src={polygon_badge} />
             </div>
             <p>
               <button> Freedom Paper V2.1 </button>
-              <div id="orbClickInfo" className="clickOnOrb">
+              {/* <div id="orbClickInfo" className="clickOnOrb">
                 Click on the Orb ⮞
-              </div>
+              </div> */}
             </p>
           </div>
           <div className="heroEmpty"></div>
@@ -302,41 +332,13 @@ function App() {
       </section>
       <section className="storySection">
         <h2>Story So Far</h2>
-        <div className="storyContainer">
-          <p>
-            Some years ago, amid our own ongoing problems, a crisis of
-            unforeseen <strong>magnitude</strong> arrived in our world. Driven
-            away from their home by their own magical calamity,{" "}
-            <strong>the Elves</strong> and their peoples invaded our world
-            instead. They seized control of a <strong>landmass</strong> and
-            refused all the feeble attempts at diplomacy, defending to the death
-            their new home. They were determined to control this{" "}
-            <strong>"new world"</strong> the way they did theirs. We retaliated,
-            of course, trying to regain the land that they{" "}
-            <strong>stole</strong> from us. As powerful as I am, I felt I could
-            not sit back and do nothing.
-          </p>
-          <p>
-            {" "}
-            I tried to reason with both sides. Even used threats. I warned them
-            of my <strong>premonitions</strong>. Nothing worked. Politicians and
-            leaders on both sides were determined to use this conflict for their
-            own agendas. War could not be prevented.{" "}
-            <strong>A vivid dream</strong> came to me many times now, and I am
-            convinced the threat is real. There is something worse coming, much
-            worse. If we do not stop this pointless fighting, if we do not unite
-            and learn to live in peace, not a single one of us will survive this
-            threat. <strong>Humans, Elves, Trolls, Fairies</strong>, we will all
-            be wiped out.
-          </p>
-        </div>
+        <Story onChange={(value) => setShort(false)} short={short} />
         <Link to="/prologue">
           <button>Read Prologue</button>
         </Link>
       </section>
       <section id="section3" align="center" className="assetSection">
-        {/* Storyline missing assets */}
-        <div className="cardContainer">
+        {/* <div className="cardContainer">
           <NFTCards title="Deviant Series" characters={{ a: a, b: b, c: c }}>
             They are Cute, but vicious. These 10,000 animated characters NFTs
             would be the avatars in the metaverse with certain perks which can
@@ -354,49 +356,60 @@ function App() {
             these highly intelligent beings can be trained to interact with
             people, excecute specific commandsoutside the metaverse.
           </NFTCards>
-        </div>
-      </section>
-      <section id="section4" className="landscapeSection">
-        {/* 3D Landscape */}
-        <img src={run_gif} alt="run" />
-        <img src={run_gif2} alt="run" />
-      </section>
-      <section className="daoSection">
-        <h2 className="roboto">Features of Swaraj World</h2>
-        <div className="RoadMapScroll">
-          <div className="RoadMapContainer">
-            <FeatureCards2
-              icon={entertainment}
-              title="Entertainment"
-              text="Users can host events, social gatherings and network with fellow users bridging the real world and the virtual world."
-            ></FeatureCards2>
-            <FeatureCards2
-              icon={monetize}
-              title="Monetize"
-              text="Metaverse also provides an extensive array of mediums for advertising and provides opportunities to generate and trade NFTs in the marketplace or hold the NFTs as long-term assets."
-            ></FeatureCards2>
-            <FeatureCards2
-              icon={develop}
-              title="Develop"
-              text="Users can develop games, make artworks, build their own cities, and dream houses with easy-to-use built-in tools. Furthermore, professionals can used the pro-toolkit to enhance their development."
-            ></FeatureCards2>
-            <FeatureCards2
-              icon={gameplay}
-              title="Game Play"
-              text="Users can play PvP& P2E games & host game tournaments created by users as well as the games created by the community developers."
-            ></FeatureCards2>
-            <FeatureCards2
-              icon={explore}
-              title="Explore"
-              text="Discover the vast Metaverse by taking the journey of your lifetime.Get lost in a variety of settings, including jungles, seas, and more as you wander across the world."
-            ></FeatureCards2>
-            <FeatureCards2
-              icon={personalization}
-              title="Personalization"
-              text="Players can  be whoever they want to be and personalize their avatar and their lands by constructing whatever they envision."
-            ></FeatureCards2>
+        </div> */}
+        <div className="deviants">
+          <div className="deviants_text">
+            <h2>Meet the Deviants</h2>
+            They are Cute, but vicious.These 10,000 animated characters NFTs
+            would be the avatars in the metaverse with certain perks which can
+            be customized and upgraded
+          </div>
+          <div className="deviants_animated"></div>
+          <div className="deviants_square_frame">
+          <marquee direction="up" height="300">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </marquee>
+            <marquee direction="down" height="300">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </marquee>
           </div>
         </div>
+        <div className="orionsrealm">
+          <div className="oriontext">
+            <h2>Orion's Realm</h2>
+            Large Regions of devided into 5000 Virtual Land NFTs consisting of
+            cities, forests, farmlands etc. They will be used to advertise,
+            develop multilevel games, construct structures, hold events and
+            social gatherings and engage in commercial ventures such as..
+          </div>
+          <img src={orion} alt="orion" />
+        </div>
+        <div className="sentinel">
+          <video src={glitch} alt="video" autoPlay loop />
+          <div className="sentineltext">
+            <h2>Sentinel Series</h2>
+            00 Smart NFTs with AI capabilites. They possess governing rights
+            thus making them "Councilor" of certain areas in the metaverse. Also
+            these highly intelligent beings can be trained to interact with
+            people, excecute specific commandsoutside the metaverse.
+          </div>
+        </div>
+      </section>
+      {/* <section id="section4" className="landscapeSection">
+        <img src={run_gif} alt="run" />
+        <img src={run_gif2} alt="run" />
+      </section> */}
+      <section className="daoSection">
+        <h2 className="specialH2">Pushing The Limits To Extreme</h2>
+        <Carousal />
         {/* Dao NFT etx */}
         <div style={{ marginBottom: "300px" }} className="horizontalFlex">
           <div className="diagramFrame">
@@ -405,12 +418,12 @@ function App() {
           </div>
           <div className="diagramFrame">
             <img src={diagram3} className="diagram2" alt="diagram3" />
-            <h3>$G-TKN</h3>
+            <h3>$GTKN</h3>
           </div>
         </div>
       </section>
       <section id="section5" className="featuresSection">
-        <h1>Features Of Swaraj Coin</h1>
+        <h2>Features Of Swaraj Coin</h2>
         <div className="featuresContainer">
           <FeatureCards
             text="Multi-utility token based on the concept of self-governance."
@@ -511,22 +524,17 @@ function App() {
         <h2 id="roadmap" className="roboto">
           The RoadMap
         </h2>
-        <div className="RoadMapScroll">
-          <div className="RoadMapContainer">
-            <RoadMapCards phase={phase1}></RoadMapCards>
-            <RoadMapCards phase={phase2}></RoadMapCards>
-            <RoadMapCards phase={phase2continued}></RoadMapCards>
-            <RoadMapCards phase={phase3}></RoadMapCards>
-            <RoadMapCards phase={phase3continued}></RoadMapCards>
-            <RoadMapCards phase={phase4}></RoadMapCards>
-            <RoadMapCards phase={phase5}></RoadMapCards>
-            <RoadMapCards phase={phase6}></RoadMapCards>
-            <RoadMapCards phase={phase6continued}></RoadMapCards>
-            <RoadMapCards phase={phase7}></RoadMapCards>
-            <RoadMapCards phase={phase8}></RoadMapCards>
-            <RoadMapCards phase={phase9}></RoadMapCards>
-            <RoadMapCards phase={phase10}></RoadMapCards>
-          </div>
+        <div className="roadMapCardContainer">
+          <RoadMapCards phase={phase1}></RoadMapCards>
+          <RoadMapCards phase={phase2}></RoadMapCards>
+          <RoadMapCards phase={phase3}></RoadMapCards>
+          <RoadMapCards phase={phase4}></RoadMapCards>
+          <RoadMapCards phase={phase5}></RoadMapCards>
+          <RoadMapCards phase={phase6}></RoadMapCards>
+          <RoadMapCards phase={phase7}></RoadMapCards>
+          <RoadMapCards phase={phase8}></RoadMapCards>
+          <RoadMapCards phase={phase9}></RoadMapCards>
+          <RoadMapCards last={true} phase={phase10}></RoadMapCards>
         </div>
       </section>
       <section id="section7" className="partnerSection">

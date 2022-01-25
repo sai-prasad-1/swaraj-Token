@@ -1,6 +1,7 @@
 function FeatureCards2(props) {
+  const className= "FeatureCard2 level" +props.level 
   return (
-    <div className="FeatureCard2">
+    <div className={className}>
       <div>
         <img src={props.icon} alt="icon"/>
         <h3>{props.title}</h3>

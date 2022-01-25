@@ -26,7 +26,7 @@ footer {
   pointer-events: none;
   grid-area: logo;
 }
-.App-logo >img{
+.App-logo > img {
   height: 90px;
   width: 80px;
   margin-top: 20px;
@@ -78,8 +78,26 @@ footer {
 
 .powered > img {
   height: 35px;
-  margin-top: 40px;
+  margin-top: 10px;
 }
+.powered {
+  margin-top: 40px;
+  letter-spacing: normal;
+  text-shadow: 0 0 0px #fff;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 0px #fff;
+  }
+  50% {
+    text-shadow: 0 0 10px #fff;
+  }
+  100% {
+    text-shadow: 0 0 0px #fff;
+  }
+}
+
 .heroEmpty {
   letter-spacing: normal;
   grid-area: heroEmpty;
@@ -110,7 +128,8 @@ section {
   text-align: center;
 }
 .partnerSection > h2 {
-  font-size: 35px;
+  font-size: 50px;
+  font-weight: bolder;
 }
 
 .storyContainer {
@@ -131,16 +150,111 @@ section {
   color: white;
 }
 
+.storyContainerShort {
+  margin-left: 100px;
+  margin-right: 100px;
+  letter-spacing: normal;
+  text-align: justify;
+  font-size: 25px;
+}
+.storyContainerShort > p {
+  margin: 10px;
+  color: #a64af7;
+}
+.storyContainerShort > p > strong {
+  color: white;
+}
+
+.deviants {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.deviants_text {
+  height: auto;
+  width: 30%;
+  text-align: left;
+  line-height: 1.5em;
+  padding: 30px;
+  padding-top: 0px;
+  font-size: 25px;
+  letter-spacing: normal;
+}
+.deviants_animated {
+  background-color: #aaa;
+  width: 25%;
+}
+.deviants_square_frame {
+  width: 510px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.deviants_square_frame > marquee {
+  width:250px;
+  height: 400px;
+}
+.deviants_square_frame > marquee >div {
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  background-color: blueviolet;
+  border-radius: 20px;
+}
+
+.orionsrealm {
+  height: 400px;
+  margin: 100px;
+  margin-top: 40vh;
+  margin-bottom: 40vh;
+  display: flex;
+  flex-direction: row;
+}
+.orionsrealm >img {
+  height: 400px;
+  box-shadow: #1daefd 0 0 1px 1px;
+}
+.oriontext{
+  font-size: 25px;
+  text-align: left;
+  padding-top: 70px;
+}
+.sentinel {
+  height: 400px;
+  margin: 100px;
+  margin-top: 40vh;
+  margin-bottom: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.sentinel >video {
+  height: 400px;
+  box-shadow: #1daefd 0 0 1px 1px;
+}
+.sentineltext{
+  font-size: 25px;
+  text-align: left;
+  max-width: 50%;
+  padding-top: 70px;
+}
 .roadmapSection {
   text-align: center;
 }
 .roadmapSection > h2 {
-  font-size: 35px;
+  font-size: 50px;
+  font-weight: bolder;
 }
 
-.RoadMapContainer {
-  display: flex;
-  flex-direction: row;
+.roadMapCardContainer {
+  position: relative;
+  left: calc(50% - 300px);
 }
 .RoadMapScroll {
   overflow-x: scroll;
@@ -207,18 +321,43 @@ section {
   height: 30px;
 }
 
+.deck {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck > div {
+  background-color: white;
+  background-size: auto 85%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 45vh;
+  max-width: 300px;
+  height: 85vh;
+  max-height: 570px;
+  will-change: transform;
+  border-radius: 10px;
+  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4), 0 10px 10px -10px rgba(50, 50, 73, 0.3);
+}
 .featuresSection {
   text-align: center;
   letter-spacing: 0.1em;
 }
-.featuresSection > h1 {
-  font-size: 30px;
+.featuresSection > h2 {
+  font-size: 50px;
+  font-weight: bolder;
 }
 .storySection {
   text-align: center;
   background-color: #000c;
   padding-bottom: 50px;
   padding-top: 50px;
+  margin-bottom: 40vh;
 }
 .storySection > h2 {
   font-size: 50px;
@@ -248,7 +387,30 @@ section {
   text-align: center;
 }
 .daoSection > h2 {
-  font-size: 30px;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.specialH2{
+  font-family:'Helvetica';
+  color:rgba(255, 255, 255, .1);
+  background: linear-gradient(to right,     rgb(76, 217, 105), rgb(52, 170, 220),     rgb(88, 86, 217), rgb(255, 45, 83),       rgb(255, 45, 83), rgb(88, 86, 217),       rgb(52, 170, 220), rgb(76, 217, 105));
+  background-size: 400%;
+  -webkit-background-clip:text;
+  font-weight:900;
+  font-size:10em;
+  text-align:center;
+  animation:sTransition 10s linear infinite;
+}
+
+@keyframes sTransition{
+  0%{
+    background-position:0%;
+  }
+  
+  100%{
+    background-position:400%;
+  }
 }
 .diagramFrame {
   background-color: #000c;
@@ -284,6 +446,12 @@ section {
   justify-content: space-around;
   flex-wrap: wrap;
 }
+.featuredOnLinks >a {
+  background-color: #fff;
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+}
 .featuredOnLinks > a > img {
   height: 50px;
   margin-top: 20px;
@@ -300,8 +468,13 @@ section {
 .partnerLogos {
   display: flex;
   flex-direction: column;
+  background-color: #000;
+  box-shadow: #a64af7 0 0 10px 2px ;
+  height: 250px;
+  border-radius: 10px;
 }
 .partnerLogos > img {
+  margin: 20px;
   width: 300px;
 }
 .clickOnOrb {

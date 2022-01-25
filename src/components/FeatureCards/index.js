@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { useSpring, animated } from "react-spring";
-import ReactDOM from 'react-dom';
 
 function FeatureCards(props) {
   const ref = useRef();
