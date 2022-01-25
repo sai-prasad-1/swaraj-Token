@@ -6,17 +6,17 @@ html {
   flex-basis: 50%;
   height: 100%;
   position: absolute;
-  width:100%;
+  width: 100%;
 }
 
 section {
   scroll-snap-align: center;
 }
-header{
+header {
   scroll-snap-align: start;
 }
-footer{
-  scroll-snap-align:end;
+footer {
+  scroll-snap-align: end;
 }
 .App-logo {
   height: 90px;
@@ -25,6 +25,26 @@ footer{
   margin-left: 70px;
   pointer-events: none;
   grid-area: logo;
+}
+.App-logo >img{
+  height: 90px;
+  width: 80px;
+  margin-top: 20px;
+  margin-left: 70px;
+  pointer-events: none;
+  position: absolute;
+}
+.logo-text {
+  width: 300px;
+  position: absolute;
+  top: 75px;
+  font-size: 30px;
+  letter-spacing: normal;
+  font-weight: bolder;
+  margin-left: 160px;
+  background: -webkit-linear-gradient(left, #a64af7, #1daefd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .App-header {
@@ -39,7 +59,7 @@ footer{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas:
-  "logo logo logo logo logo logo  navigation navigation"
+    "logo logo logo logo logo logo  navigation navigation"
     "title title  title title title heroEmpty heroEmpty heroEmpty";
 }
 .navigationTopBar {
@@ -55,11 +75,16 @@ footer{
   border-radius: 10px;
   text-shadow: 0 0 20px #a64af7;
 }
+
+.powered > img {
+  height: 35px;
+  margin-top: 40px;
+}
 .heroEmpty {
   letter-spacing: normal;
   grid-area: heroEmpty;
   text-align: center;
-  color: #1974c9
+  color: #1974c9;
 }
 section {
   min-height: 300px;
@@ -74,12 +99,12 @@ section {
   justify-content: flex-end;
   align-content: flex-end;
 }
-.landscapeSection{
-  height:calc(100vw * 9/16)
+.landscapeSection {
+  height: calc(100vw * 9 / 16);
 }
 .landscapeSection > img {
   position: absolute;
-  width:100vw ;
+  width: 100vw;
 }
 .partnerSection {
   text-align: center;
@@ -88,22 +113,22 @@ section {
   font-size: 35px;
 }
 
-.storyContainer{
+.storyContainer {
   margin-left: 100px;
   margin-right: 100px;
   letter-spacing: normal;
   text-align: justify;
   font-size: 25px;
   display: flex;
-  flex-direction: row
+  flex-direction: row;
 }
-.storyContainer > p{
-  width:50%;
-  margin:10px;
-  color: #a64af7
+.storyContainer > p {
+  width: 50%;
+  margin: 10px;
+  color: #a64af7;
 }
 .storyContainer > p > strong {
-  color:white;
+  color: white;
 }
 
 .roadmapSection {
@@ -189,14 +214,15 @@ section {
 .featuresSection > h1 {
   font-size: 30px;
 }
-.storySection{
+.storySection {
   text-align: center;
   background-color: #000c;
   padding-bottom: 50px;
   padding-top: 50px;
 }
-.storySection >h2{
-  font-size: 30px;
+.storySection > h2 {
+  font-size: 50px;
+  font-weight: bolder;
 }
 .featuresContainer {
   display: flex;
@@ -221,22 +247,22 @@ section {
   margin-top: 0px;
   text-align: center;
 }
-.daoSection >h2{
+.daoSection > h2 {
   font-size: 30px;
 }
-.diagramFrame{
+.diagramFrame {
   background-color: #000c;
   height: auto;
-  margin:10px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
   text-align: center;
 }
 .diagramFrame > img {
-  width:calc(50vw - 20px);
+  width: calc(50vw - 20px);
 }
-.diagram1{
+.diagram1 {
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -244,16 +270,16 @@ section {
   align-content: center;
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
 }
 
-.featuredSection{
-  text-align:center
+.featuredSection {
+  text-align: center;
 }
-.featuredOnLinks{
+.featuredOnLinks {
   display: flex;
   flex-direction: row;
-  width:100%;
+  width: 100%;
   height: 50px;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -262,7 +288,7 @@ section {
   height: 50px;
   margin-top: 20px;
 }
-.partnerContainer{
+.partnerContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -271,7 +297,7 @@ section {
   width: 50%;
   height: 400px;
 }
-.partnerLogos{
+.partnerLogos {
   display: flex;
   flex-direction: column;
 }
@@ -282,14 +308,14 @@ section {
   position: absolute;
   font-size: 20px;
   margin-left: 10px;
-  margin-top:30px
+  margin-top: 30px;
 }
 @media screen and (min-width: 1200px) {
-  .featuresContainer{
+  .featuresContainer {
     margin-left: calc(50% - 700px);
   }
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width: 1000px) {
   .video {
     position: relative;
     left: 0;
@@ -302,7 +328,7 @@ section {
   .navigationTopBar {
     display: none;
   }
-  .storyContainer{
+  .storyContainer {
     margin-left: 10px;
     margin-right: 10px;
     letter-spacing: normal;
@@ -310,13 +336,13 @@ section {
     font-size: 25px;
     display: block;
   }
-  .storyContainer > p{
-    width:calc(100% - 20px);
-    color: #a64af7
+  .storyContainer > p {
+    width: calc(100% - 20px);
+    color: #a64af7;
   }
 }
 @media screen and (max-width: 600px) {
-  .partnerContainer{
+  .partnerContainer {
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
@@ -325,7 +351,7 @@ section {
     width: 100%;
     height: 300px;
   }
-  .partnerLogos{
+  .partnerLogos {
     display: flex;
     flex-direction: column;
   }
@@ -333,7 +359,7 @@ section {
     width: 250px;
     margin-left: calc(50% - 125px);
   }
-  
+
   .video {
     position: relative;
     left: 0;
@@ -341,20 +367,20 @@ section {
   .horizontalFlex {
     align-content: center;
     display: block;
-    width:100%;
+    width: 100%;
   }
-  .diagramFrame{
-  background-color: #000;
-  height: auto;
-  text-align: center;
-}
-.diagramFrame > img {
-  width:100%;
-}
-.diagram1{
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
+  .diagramFrame {
+    background-color: #000;
+    height: auto;
+    text-align: center;
+  }
+  .diagramFrame > img {
+    width: 100%;
+  }
+  .diagram1 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
   .cardContainer {
     margin-top: 200px;
     margin-right: 0px;
@@ -399,5 +425,3 @@ section {
     width: calc(100vw - 20px);
   }
 }
-
-

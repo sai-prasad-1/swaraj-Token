@@ -10,6 +10,7 @@ import develop from "./assets/icons/develop.svg";
 import gameplay from "./assets/icons/gameplay.svg";
 import explore from "./assets/icons/explore.svg";
 import polygon from "./assets/icons/polygon.png";
+import polygon_badge from "./assets/icons/polygon-badge.png";
 import infivr from "./assets/icons/infivr.png";
 import personalization from "./assets/icons/personalization.svg";
 import "./App.css";
@@ -212,7 +213,10 @@ function App() {
     <div className="App">
       <header id="section1" className="App-header">
         <div className="gridContainer1">
-          <img src={logo} className="App-logo" alt="logo" />
+          <div className="App-logo">
+            <img src={logo} alt="logo" />
+            <div className="logo-text">SWARAJ COIN</div>
+          </div>
           <div className="navigationTopBar">
             {/* <button> Home </button> */}
             <button> Tokenomics </button>
@@ -268,6 +272,10 @@ function App() {
               <br /> Built On The Concept Of
               <span className="colorWhite"> Self Governance</span>.
             </span>
+            <br />
+            <div className="powered">
+              <img src={polygon_badge} />
+            </div>
             <p>
               <button> Freedom Paper V2.1 </button>
               <div id="orbClickInfo" className="clickOnOrb">
@@ -280,7 +288,12 @@ function App() {
       </header>
       <section id="section2" className="videoSection">
         {/* Video */}
-        <Vimeo className="video" video="669116664" width={screenWidth} height={screenWidth}  />
+        <Vimeo
+          className="video"
+          video="669116664"
+          width={screenWidth}
+          height={screenWidth}
+        />
         {/* <ReactPlayer
           width={screenWidth}
           className="video"
@@ -318,18 +331,18 @@ function App() {
           </p>
         </div>
         <Link to="/prologue">
-          <button>Prologue</button>
+          <button>Read Prologue</button>
         </Link>
       </section>
       <section id="section3" align="center" className="assetSection">
         {/* Storyline missing assets */}
         <div className="cardContainer">
-          <NFTCards title="Deviants Series" characters={{ a: a, b: b, c: c }}>
+          <NFTCards title="Deviant Series" characters={{ a: a, b: b, c: c }}>
             They are Cute, but vicious. These 10,000 animated characters NFTs
             would be the avatars in the metaverse with certain perks which can
             be customized and upgraded.
           </NFTCards>
-          <NFTCards title="Orion Realm Land Series" image={orion}>
+          <NFTCards title="Orion's Realm Land Series" image={orion}>
             Large Regions of devided into 5000 Virtual Land NFTs consisting of
             cities, forests, farmlands etc. They will be used to advertise,
             develop multilevel games, construct structures, hold events and

@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope&family=Roboto&display=swap");
+@font-face {
+  font-family: Helvetica;
+  src: url(./assets/fonts/Helvetica.ttf);
+}
 .canvas {
   position: fixed;
   top: 0;
@@ -9,13 +13,14 @@
 }
 body {
   margin: 0;
-  font-family: "Manrope", sans-serif;
+  font-family: Helvetica, sans-serif;
   letter-spacing: 0.2rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
   background-color: #000;
   overflow-x: hidden;
+  cursor: url("./assets/pointer.png"), auto;
 }
 body::-webkit-scrollbar {
   width: 0.5em;
@@ -25,7 +30,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .roboto {
-  font-family: "Roboto" sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 button {
@@ -126,7 +131,7 @@ button:hover:after {
   text-align: justify;
   padding: 10px;
   letter-spacing: 0rem;
-  color: #959595;
+  color: #ddd;
   font-weight: 600;
   font-size: 15px;
 }
